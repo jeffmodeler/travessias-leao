@@ -542,11 +542,11 @@
   .pagina-desktop {
     position: absolute;
     inset: 0;
-    padding: 25mm 96px;       /* topo/base e laterais com mesma respiração */
+    padding: 14mm 84px;       /* topo/base reduzidos para garantir fit */
     overflow: hidden;          /* sem scroll — leitura paginada */
     font-family: var(--fonte-texto);
-    font-size: 15px;
-    line-height: 1.75;
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--tinta);
     letter-spacing: 0.005em;
     opacity: 0;
