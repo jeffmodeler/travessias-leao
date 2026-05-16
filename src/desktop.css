@@ -532,7 +532,7 @@
   }
   .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
 
-  /* Páginas da carta no painel — margem 20mm topo/base (≈ 76px), lateral livro */
+  /* Páginas da carta no painel — margem 20mm topo/base + espaçamento generoso */
   .paginas-viewport-desktop {
     flex: 1;
     overflow: hidden;
@@ -543,12 +543,13 @@
   .pagina-desktop {
     position: absolute;
     inset: 0;
-    padding: 0 88px 0 80px;   /* margem lateral generosa, tipo livro */
-    overflow: hidden;          /* sem scroll — leitura cabe na tela */
+    padding: 0 96px 0 88px;   /* margem lateral generosa, tipo livro */
+    overflow-y: auto;          /* scroll dentro da página se necessário */
     font-family: var(--fonte-texto);
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.85;
     color: var(--tinta);
+    letter-spacing: 0.005em;
     opacity: 0;
     pointer-events: none;
     transform: translateX(30px);
@@ -558,6 +559,10 @@
   }
   .pagina-desktop.ativa { opacity: 1; pointer-events: auto; transform: translateX(0); }
   .pagina-desktop.fora-esquerda { opacity: 0; transform: translateX(-30px); }
+  .pagina-desktop { scrollbar-width: thin; scrollbar-color: var(--cinza-claro) transparent; }
+  .pagina-desktop::-webkit-scrollbar { width: 6px; }
+  .pagina-desktop::-webkit-scrollbar-track { background: transparent; }
+  .pagina-desktop::-webkit-scrollbar-thumb { background: var(--cinza-claro); border-radius: 3px; }
 
   /* ------------------------------------------------------------------
      COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
@@ -643,8 +648,8 @@
   .painel.painel-cover-ativa .painel-info { opacity: 0; }
   .painel-info { transition: opacity 0.3s; }
 
-  .pagina-desktop p { margin-bottom: 1em; }
-  .pagina-desktop p + p { text-indent: 1.6em; margin-top: -0.2em; }
+  .pagina-desktop p { margin-bottom: 1.2em; }
+  .pagina-desktop p + p { text-indent: 1.6em; margin-top: 0; }
   .pagina-desktop p.sem-indent { text-indent: 0 !important; }
   .pagina-desktop em, .pagina-desktop i { font-style: italic; color: var(--tinta-suave); }
 
@@ -661,11 +666,11 @@
   .pagina-desktop .citacao {
     font-family: var(--fonte-titulo);
     font-style: italic;
-    font-size: 17px;
-    line-height: 1.45;
+    font-size: 19px;
+    line-height: 1.5;
     color: var(--tinta);
-    margin: 22px 0 22px 16px;
-    padding-left: 18px;
+    margin: 32px 0 32px 20px;
+    padding-left: 22px;
     border-left: 2px solid var(--mel);
   }
   .pagina-desktop .citacao-atribuicao {
