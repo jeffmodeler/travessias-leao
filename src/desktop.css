@@ -532,12 +532,12 @@
   }
   .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
 
-  /* Páginas da carta no painel — margens editoriais generosas */
+  /* Páginas da carta no painel — margens editoriais generosas (top + bottom também) */
   .paginas-viewport-desktop {
     flex: 1;
     overflow: hidden;
     position: relative;
-    padding: 36px 0 28px;
+    padding: 56px 0 48px;     /* respiro vertical generoso */
   }
 
   .pagina-desktop {
