@@ -532,22 +532,24 @@
   }
   .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
 
-  /* Páginas da carta no painel — margem 20mm topo/base + espaçamento generoso */
+  /* Páginas da carta no painel — espaçamento simétrico (laterais + topo + base) */
   .paginas-viewport-desktop {
     flex: 1;
     overflow: hidden;
     position: relative;
-    padding: 20mm 0;
   }
 
   .pagina-desktop {
     position: absolute;
     inset: 0;
-    padding: 0 96px 0 88px;   /* margem lateral generosa, tipo livro */
-    overflow-y: auto;          /* scroll dentro da página se necessário */
+    padding: 25mm 96px;       /* topo/base e laterais com mesma respiração */
+    overflow: hidden;          /* sem scroll — leitura paginada */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* texto verticalmente centralizado */
     font-family: var(--fonte-texto);
-    font-size: 16px;
-    line-height: 1.85;
+    font-size: 15px;
+    line-height: 1.75;
     color: var(--tinta);
     letter-spacing: 0.005em;
     opacity: 0;
@@ -559,10 +561,6 @@
   }
   .pagina-desktop.ativa { opacity: 1; pointer-events: auto; transform: translateX(0); }
   .pagina-desktop.fora-esquerda { opacity: 0; transform: translateX(-30px); }
-  .pagina-desktop { scrollbar-width: thin; scrollbar-color: var(--cinza-claro) transparent; }
-  .pagina-desktop::-webkit-scrollbar { width: 6px; }
-  .pagina-desktop::-webkit-scrollbar-track { background: transparent; }
-  .pagina-desktop::-webkit-scrollbar-thumb { background: var(--cinza-claro); border-radius: 3px; }
 
   /* ------------------------------------------------------------------
      COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
