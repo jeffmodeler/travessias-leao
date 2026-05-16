@@ -436,12 +436,12 @@
 
   /* Fechamento */
   .fechamento {
-    margin-top: 28px;
+    margin-top: 8px;
     text-align: right;          /* nome e meta alinhados à direita */
   }
   .fechamento-ornamento {
     text-align: center;
-    margin: 26px 0 22px;
+    margin: 10px 0 8px;
     color: var(--mel);
     letter-spacing: 0.9em;
     font-size: 11px;
@@ -450,12 +450,13 @@
     font-family: var(--fonte-titulo);
     font-weight: 300;
     font-style: italic;
-    font-size: 30px;
+    font-size: 26px;
     letter-spacing: 0.005em;
     color: var(--tinta);
     line-height: 1.05;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
+  .pagina-leitura p:last-of-type { margin-bottom: 0; }
   .assinatura-meta {
     font-family: var(--fonte-meta);
     font-size: 9px;

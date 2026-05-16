@@ -544,9 +544,6 @@
     inset: 0;
     padding: 25mm 96px;       /* topo/base e laterais com mesma respiração */
     overflow: hidden;          /* sem scroll — leitura paginada */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;   /* texto verticalmente centralizado */
     font-family: var(--fonte-texto);
     font-size: 15px;
     line-height: 1.75;
@@ -646,9 +643,10 @@
   .painel.painel-cover-ativa .painel-info { opacity: 0; }
   .painel-info { transition: opacity 0.3s; }
 
-  .pagina-desktop p { margin-bottom: 1.2em; }
+  .pagina-desktop p { margin-bottom: 1em; }
   .pagina-desktop p + p { text-indent: 1.6em; margin-top: 0; }
   .pagina-desktop p.sem-indent { text-indent: 0 !important; }
+  .pagina-desktop p:last-of-type { margin-bottom: 0; }  /* sem gap antes do fechamento */
   .pagina-desktop em, .pagina-desktop i { font-style: italic; color: var(--tinta-suave); }
 
   .pagina-desktop.primeira p:first-child::first-letter {
@@ -693,12 +691,12 @@
   }
 
   .pagina-desktop .fechamento {
-    margin-top: 24px;
+    margin-top: 8px;            /* gap pequeno entre fim do texto e ornamento */
     text-align: right;          /* nome e meta alinhados à direita */
   }
   .pagina-desktop .fechamento-ornamento {
     text-align: center;
-    margin: 22px 0 18px;
+    margin: 10px 0 8px;         /* ornamento compacto */
     color: var(--mel);
     letter-spacing: 1em;
     font-size: 12px;
@@ -707,11 +705,11 @@
     font-family: var(--fonte-titulo);
     font-weight: 300;
     font-style: italic;
-    font-size: 30px;
+    font-size: 28px;
     letter-spacing: 0.005em;
     color: var(--tinta);
     line-height: 1.05;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
   .pagina-desktop .assinatura-meta {
     font-family: var(--fonte-meta);
