@@ -1,0 +1,2978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- ==========================================================================
+     BLOCO 01 — HEAD / META
+     ========================================================================== -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
+<meta name="theme-color" content="#1E2A38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Travessias — dez cartas escritas a partir da escuta de mulheres reais. Por Renata Leão.">
+<title>Travessias — cartas de mulheres reais</title>
+
+<style>
+/* ==========================================================================
+   TRAVESSIAS — cartas de mulheres reais
+   Design Tokens — compartilhado entre mobile e desktop
+   --------------------------------------------------------------------------
+   BLOCO 01 — @font-face
+   BLOCO 02 — Tokens · paleta de cores
+   BLOCO 03 — Tokens · tipografia e breakpoint
+   BLOCO 04 — Reset mínimo + base do body
+   BLOCO 05 — Compartilhado · variante "Abertura" (Renata)
+   BLOCO 06 — Compartilhado · bloco de contato (na abertura)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   BLOCO 01 — @font-face
+   ========================================================================== */
+
+@font-face { font-family: 'Caveat'; font-weight: 400; src: url('../fonts/caveat-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 500; src: url('../fonts/caveat-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 600; src: url('../fonts/caveat-latin-600-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 700; src: url('../fonts/caveat-latin-700-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Fraunces'; font-weight: 300; src: url('../fonts/fraunces-latin-300-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; src: url('../fonts/fraunces-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; font-style: italic; src: url('../fonts/fraunces-latin-400-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; src: url('../fonts/fraunces-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; font-style: italic; src: url('../fonts/fraunces-latin-500-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-600-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 700; src: url('../fonts/fraunces-latin-700-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Lora'; font-weight: 400; src: url('../fonts/lora-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 400; font-style: italic; src: url('../fonts/lora-latin-400-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 500; src: url('../fonts/lora-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 500; font-style: italic; src: url('../fonts/lora-latin-500-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 600; src: url('../fonts/lora-latin-600-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Inter'; font-weight: 300; src: url('../fonts/inter-latin-300-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('../fonts/inter-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('../fonts/inter-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-600-normal.woff2') format('woff2'); font-display: block; }
+
+
+/* ==========================================================================
+   BLOCO 02 — Tokens · paleta de cores
+   ========================================================================== */
+
+:root {
+  --creme:        #FAF7F2;
+  --creme-escuro: #F2ECE0;
+  --tinta:        #1E2A38;
+  --tinta-suave:  #2C3849;
+  --terra:        #A84A2A;
+  --mel:          #C89B4A;
+  --oliva:        #5C6B4E;
+  --carvao:       #3A3A3A;
+  --cinza:        #8A8578;
+  --cinza-claro:  #C4BFB4;
+}
+
+
+/* ==========================================================================
+   BLOCO 03 — Tokens · tipografia e breakpoint
+   ========================================================================== */
+
+:root {
+  --fonte-titulo: 'Fraunces', Georgia, serif;
+  --fonte-texto:  'Lora', Georgia, serif;
+  --fonte-mao:    'Caveat', cursive;
+  --fonte-meta:   'Inter', -apple-system, sans-serif;
+
+  --bp-desktop: 960px;
+}
+
+
+/* ==========================================================================
+   BLOCO 04 — Reset mínimo + base do body
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a, a:visited { color: inherit; text-decoration: none; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--fonte-texto);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--tinta);
+  color: var(--tinta);
+}
+
+
+/* ==========================================================================
+   BLOCO 05 — Compartilhado · variante "Abertura" (Renata)
+   --------------------------------------------------------------------------
+   Aplicada nos elementos com classe .abertura (card mobile, item lateral,
+   preview desktop e painel). Sinaliza visualmente que essa entrada é a
+   apresentação da autora, não uma carta numerada.
+   ========================================================================== */
+
+/* Card mobile · faixa lateral cor mel (abertura) ou terra (prefácio) */
+.card.abertura  { border-left: 3px solid var(--mel); }
+.card.prefacio  { border-left: 3px solid var(--terra); }
+.card.abertura  .card-numero { color: var(--mel);   letter-spacing: .14em; }
+.card.prefacio  .card-numero { color: var(--terra); letter-spacing: .14em; }
+
+/* Preview desktop · borda mel (abertura) / terra (prefácio) para diferenciar */
+.preview.abertura .preview-inner { box-shadow: inset 0 0 0 1px rgba(200, 155, 74, .35); }
+.preview.prefacio .preview-inner { box-shadow: inset 0 0 0 1px rgba(168,  74, 42, .35); }
+.preview.abertura .preview-carta { color: var(--mel); }
+.preview.prefacio .preview-carta { color: var(--terra); }
+
+/* Aviso de texto provisório (no prefácio, removível) */
+.aviso-provisorio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 1.6rem;
+  padding: 10px 14px;
+  border: 1px dashed var(--terra);
+  border-radius: 4px;
+  background: rgba(168, 74, 42, 0.06);
+  font-family: var(--fonte-meta);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--carvao);
+}
+.aviso-tag {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  background: var(--terra);
+  color: var(--creme);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.aviso-msg { color: var(--tinta-suave); }
+
+
+/* ==========================================================================
+   BLOCO 06 — Compartilhado · marca d'água sutil no fundo azul
+   --------------------------------------------------------------------------
+   Cross-hatch diagonal em mel a ~2% de opacidade. Aplicado nos containers
+   de cor --tinta (lista mobile, lateral desktop, central desktop). Não
+   interfere em legibilidade, dá textura editorial sem peso visual.
+   ========================================================================== */
+
+:root {
+  --tinta-textura:
+    repeating-linear-gradient(-45deg, rgba(200,155,74,0.022) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(45deg,  rgba(200,155,74,0.018) 0 1px, transparent 1px 26px);
+}
+
+.tinta-textura {
+  background-color: var(--tinta);
+  background-image: var(--tinta-textura);
+}
+
+
+/* ==========================================================================
+   BLOCO 07 — Compartilhado · modal "Faça parte"
+   --------------------------------------------------------------------------
+   Popup central para o formulário de contato. Acionado por triggers em
+   mobile (.cta-participar) e desktop (.participar-trigger). Submit abre
+   Instagram em nova aba.
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, background 0.35s;
+  z-index: 20;
+}
+.modal-overlay.aberto {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(10,16,24,0.7);
+}
+
+.modal-participar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(460px, 92vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--creme);
+  background-image:
+    radial-gradient(ellipse at 85% 0%, rgba(200,155,74,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(168,74,42,0.05) 0%, transparent 50%);
+  border-radius: 6px;
+  padding: 44px 38px 36px;
+  transform: translate(-50%, -48%) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2,0.85,0.3,1);
+  z-index: 21;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+}
+.modal-participar.aberto {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(30,42,56,0.15);
+  border-radius: 50%;
+  color: var(--tinta);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.modal-fechar:hover {
+  background: var(--tinta);
+  color: var(--creme);
+  border-color: var(--tinta);
+}
+
+.modal-rotulo {
+  font-family: var(--fonte-meta);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--mel);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.modal-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  color: var(--tinta);
+  margin-bottom: 14px;
+}
+.modal-texto {
+  font-family: var(--fonte-texto);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--carvao);
+  margin-bottom: 24px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.modal-rotulo-campo {
+  font-family: var(--fonte-meta);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(30,42,56,0.04);
+  border: 1px solid rgba(30,42,56,0.18);
+  border-radius: 3px;
+  font-family: var(--fonte-meta);
+  font-size: 13px;
+  color: var(--tinta);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.modal-form input:focus,
+.modal-form textarea:focus {
+  border-color: var(--mel);
+  background: var(--creme);
+  box-shadow: 0 0 0 3px rgba(200,155,74,0.12);
+}
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+  color: var(--cinza);
+  font-style: italic;
+}
+
+.modal-submit {
+  margin-top: 4px;
+  padding: 13px 18px;
+  background: var(--tinta);
+  border: none;
+  border-radius: 3px;
+  font-family: var(--fonte-meta);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--creme);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.modal-submit:hover { background: var(--terra); }
+.modal-submit:active { transform: scale(0.985); }
+
+.modal-nota {
+  font-family: var(--fonte-meta);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--cinza);
+  text-align: center;
+  margin-top: 4px;
+}
+.modal-nota strong {
+  color: var(--terra);
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   BLOCO 08 — Compartilhado · bloco de contato (no fim de cada carta)
+   ========================================================================== */
+
+.contato {
+  margin: 1.8rem 0 1.4rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: 1px solid rgba(200, 155, 74, .35);
+  border-radius: 4px;
+  background: rgba(200, 155, 74, .06);
+}
+
+.contato-titulo {
+  font-family: var(--fonte-meta);
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--mel);
+  margin-bottom: .7rem;
+}
+
+.contato-linha {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+  font-family: var(--fonte-meta);
+  font-size: .9rem;
+  line-height: 1.55;
+  padding: .15rem 0;
+  color: var(--carvao);
+  flex-wrap: wrap;
+}
+
+.contato-rotulo {
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  min-width: 5.5rem;
+}
+
+.contato-linha a {
+  color: var(--terra);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease;
+  word-break: break-all;
+}
+.contato-linha a:hover {
+  border-bottom-color: var(--terra);
+}
+
+/* ==========================================================================
+   TRAVESSIAS — versão MOBILE (< 960px)
+   ========================================================================== */
+
+@media (max-width: 959px) {
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* ------------------------------------------------------------------
+     LISTA (tela inicial)
+     ------------------------------------------------------------------ */
+  .tela-lista {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+    color: var(--creme);
+    padding: 56px 24px 40px;
+  }
+
+  .lista-header { margin-bottom: 36px; }
+
+  .lista-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-size: 56px;
+    letter-spacing: 0.06em;
+    line-height: 0.95;
+    color: var(--creme);
+    margin-bottom: 6px;
+  }
+
+  .lista-subtitulo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--mel);
+    margin-bottom: 18px;
+  }
+
+  .lista-fio {
+    width: 40px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.5;
+    margin-bottom: 22px;
+  }
+
+  .lista-intro {
+    font-family: var(--fonte-texto);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--creme);
+    opacity: 0.8;
+    max-width: 340px;
+  }
+
+  .lista-secao {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    margin: 40px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lista-secao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(200,155,74,0.18);
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 14px; }
+
+  .card {
+    background: rgba(250,247,242,0.03);
+    border: 1px solid rgba(200,155,74,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    cursor: pointer;
+    transition: transform 0.25s, border-color 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card:active { transform: scale(0.98); border-color: rgba(200,155,74,0.4); }
+
+  .card-foto {
+    width: 112px;
+    height: 140px;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    display: block;
+    background: #111;
+  }
+
+  .card-info {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .card-numero {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--terra);
+    text-transform: uppercase;
+  }
+
+  .card-nome {
+    font-family: var(--fonte-titulo);
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--creme);
+    line-height: 1.1;
+    margin: 6px 0 4px;
+  }
+
+  .card-meta {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    margin-bottom: 8px;
+  }
+
+  .card-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--creme);
+    opacity: 0.75;
+  }
+
+  /* ------------------------------------------------------------------
+     CTA "Faça parte" (mobile · card grande no fim da lista)
+     ------------------------------------------------------------------ */
+  .cta-participar {
+    display: block;
+    margin: 40px 0 0;
+    padding: 22px 22px 24px;
+    background: rgba(200,155,74,0.06);
+    border: 1px solid rgba(200,155,74,0.3);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--creme);
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .cta-participar:active { transform: scale(0.98); }
+  .cta-participar:hover {
+    background: rgba(200,155,74,0.1);
+    border-color: rgba(200,155,74,0.55);
+  }
+
+  .cta-rotulo {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 10px;
+  }
+
+  .cta-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--creme);
+    margin-bottom: 10px;
+  }
+
+  .cta-texto {
+    font-family: var(--fonte-texto);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--creme);
+    opacity: 0.8;
+    margin-bottom: 14px;
+  }
+
+  .cta-link {
+    font-family: var(--fonte-meta);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--mel);
+    word-break: break-all;
+  }
+
+  .lista-rodape {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(200,155,74,0.15);
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.9;
+    text-align: center;
+  }
+  .lista-rodape span { color: var(--mel); }
+
+  /* ------------------------------------------------------------------
+     TELA DA CARTA
+     ------------------------------------------------------------------ */
+  .tela-carta {
+    position: fixed;
+    inset: 0;
+    background: var(--creme);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.85, 0.3, 1);
+    overflow: hidden;
+  }
+  .tela-carta.aberta { transform: translateX(0); }
+
+  .carta-topo {
+    flex-shrink: 0;
+    padding: 14px 18px;
+    padding-top: calc(14px + env(safe-area-inset-top, 0));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--creme);
+    border-bottom: 1px solid rgba(92,107,78,0.12);
+  }
+
+  .btn-voltar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,78,0.3);
+    background: transparent;
+    color: var(--tinta);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-voltar:active { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+
+  .carta-topo-titulo {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terra);
+    font-weight: 500;
+  }
+
+  .carta-topo-selo {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  /* Viewport de páginas */
+  .paginas-viewport-mobile {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: var(--creme);
+  }
+
+  /* Padding editorial das páginas de leitura (margens generosas como em livro) */
+  .pagina-mobile.pagina-leitura {
+    padding: 36px 36px 40px;
+  }
+
+  .pagina-mobile {
+    position: absolute;
+    inset: 0;
+    padding: 24px 24px 20px;
+    overflow: hidden;            /* sem scroll — leitura cabe na tela */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(30px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .pagina-mobile.ativa  { opacity: 1; pointer-events: auto; transform: translateX(0); }
+  .pagina-mobile.fora-esquerda { transform: translateX(-30px); }
+
+  /* Página de abertura */
+  .pagina-abertura { display: flex; flex-direction: column; padding: 0; }
+
+  /* Variante prefácio: oculta foto facial (texto provisório) */
+  .pagina-abertura.carta-prefacio .abertura-foto { display: none; }
+  .pagina-abertura.carta-prefacio {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(168,74,42,0.3) 0%, transparent 60%),
+      linear-gradient(180deg, var(--tinta) 0%, var(--tinta-suave) 100%);
+  }
+  .pagina-abertura.carta-prefacio .abertura-info {
+    color: var(--creme);
+  }
+
+  .abertura-foto {
+    width: 100%;
+    height: 55vh;
+    height: 55dvh;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.04);
+    display: block;
+    background: var(--tinta);
+    flex-shrink: 0;
+  }
+
+  .abertura-info { padding: 24px 24px 0; flex: 1; }
+
+  .abertura-numero {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--terra);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .abertura-saudacao {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: 0.005em;
+    color: var(--tinta);
+    margin-bottom: 16px;
+  }
+
+  .abertura-fio { width: 44px; height: 1px; background: var(--terra); margin-bottom: 16px; }
+
+  .abertura-meta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+  .abertura-meta span { color: var(--tinta); }
+
+  .abertura-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--oliva);
+    max-width: 320px;
+  }
+
+  .abertura-swipe-dica {
+    margin-top: 24px;
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    opacity: 0.7;
+  }
+  .abertura-swipe-dica::after { content: ' →'; color: var(--terra); font-size: 14px; letter-spacing: 0; }
+
+  /* Texto de leitura */
+  .pagina-leitura {
+    font-family: var(--fonte-texto);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--tinta);
+  }
+
+  .pagina-leitura p { margin-bottom: 1em; }
+  .pagina-leitura p + p { text-indent: 1.4em; margin-top: -0.2em; }
+  .pagina-leitura p.sem-indent { text-indent: 0 !important; }
+  .pagina-leitura em, .pagina-leitura i { font-style: italic; color: var(--tinta-suave); }
+
+  .pagina-leitura.primeira p:first-child::first-letter {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 4em;
+    float: left;
+    line-height: 0.85;
+    margin: 0.05em 0.1em 0 0;
+    color: var(--terra);
+  }
+
+  /* Citação e diálogo */
+  .citacao {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--tinta);
+    margin: 22px 0 22px 12px;
+    padding-left: 16px;
+    border-left: 2px solid var(--mel);
+  }
+  .citacao-atribuicao {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    font-style: normal;
+  }
+
+  .dialogo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--oliva);
+    margin: 14px 0 14px 16px;
+    padding-left: 12px;
+    border-left: 1px solid var(--oliva);
+    line-height: 1.5;
+  }
+
+  /* Fechamento */
+  .fechamento {
+    margin-top: 28px;
+    text-align: right;          /* nome e meta alinhados à direita */
+  }
+  .fechamento-ornamento {
+    text-align: center;
+    margin: 26px 0 22px;
+    color: var(--mel);
+    letter-spacing: 0.9em;
+    font-size: 11px;
+  }
+  .assinatura {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: 0.005em;
+    color: var(--tinta);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .assinatura-meta {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.9;
+  }
+  .assinatura-meta span { color: var(--terra); }
+
+  /* Navegação inferior */
+  .carta-nav-mobile {
+    flex-shrink: 0;
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--creme);
+    border-top: 1px solid rgba(92,107,78,0.12);
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,78,0.3);
+    background: transparent;
+    color: var(--tinta);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s;
+  }
+  .nav-btn:active:not(:disabled) { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+  .nav-btn:disabled { opacity: 0.25; }
+
+  .nav-centro { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+  .nav-pontos { display: flex; gap: 6px; }
+  .nav-ponto {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cinza-claro);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .nav-ponto.ativo { background: var(--terra); transform: scale(1.4); }
+
+  .nav-pagina {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    font-variant-numeric: tabular-nums;
+  }
+  .nav-pagina span { color: var(--terra); }
+
+  /* Esconder elementos desktop */
+  .palco-desktop { display: none !important; }
+
+  /* Bloquear rolagem do body quando carta aberta */
+  body.carta-aberta { overflow: hidden; position: fixed; width: 100%; }
+
+} /* fim @media mobile */
+
+/* ==========================================================================
+   TRAVESSIAS — versão DESKTOP (≥ 960px)
+   Coluna lateral + hover com preview + painel deslizante
+   ========================================================================== */
+
+@media (min-width: 960px) {
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Esconder elementos mobile */
+  .tela-lista,
+  .tela-carta { display: none !important; }
+
+  /* ------------------------------------------------------------------
+     PALCO PRINCIPAL
+     ------------------------------------------------------------------ */
+  .palco-desktop {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    background: var(--tinta);
+    color: var(--creme);
+    overflow: hidden;
+  }
+
+  /* ------------------------------------------------------------------
+     COLUNA LATERAL (NOMES) — 11 itens cabem sem rolagem em viewport >= 720px
+     Layout em três faixas: header (fixo) · lista (flex:1) · rodapé (fixo)
+     ------------------------------------------------------------------ */
+  .lateral {
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+    border-right: 1px solid rgba(200,155,74,0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 36px 28px;
+    position: relative;
+    z-index: 3;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .lateral-header {
+    flex-shrink: 0;
+    margin-bottom: 18px;
+  }
+
+  .lateral-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-size: 40px;
+    letter-spacing: 0.06em;
+    line-height: 0.95;
+    color: var(--creme);
+    margin-bottom: 8px;
+  }
+
+  .lateral-subtitulo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mel);
+    margin-bottom: 14px;
+  }
+
+  .lateral-fio {
+    width: 40px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.5;
+  }
+
+  /* Lista de cartas — 11 itens distribuídos equitativamente, sem scroll */
+  .cartas-lista {
+    list-style: none;
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+  }
+
+  .carta-item {
+    flex: 1 1 0;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2px 0;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+    border-bottom: 1px solid rgba(200,155,74,0.08);
+  }
+  .carta-item:last-child { border-bottom: none; }
+  .carta-item:hover { transform: translateX(6px); }
+
+  .carta-numero {
+    font-family: var(--fonte-meta);
+    font-size: 8.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--terra);
+    display: block;
+    margin-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .carta-nome-lateral {
+    font-family: var(--fonte-titulo);
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--creme);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    transition: color 0.3s;
+  }
+
+  .carta-item:hover .carta-nome-lateral { color: var(--mel); }
+  .carta-item:hover .carta-numero { color: var(--mel); }
+  .carta-item.ativa .carta-nome-lateral { color: var(--mel); }
+  .carta-item.ativa .carta-numero { color: var(--mel); }
+
+  /* Variantes destacadas no sidebar */
+  .carta-item.abertura .carta-numero { color: var(--mel);   font-style: normal; }
+  .carta-item.prefacio .carta-numero { color: var(--terra); font-style: normal; }
+
+  /* ------------------------------------------------------------------
+     TRIGGER "Faça parte" — botão clicável no sidebar (abre modal)
+     Estilizado como uma carta-item, mas com destaque mel
+     ------------------------------------------------------------------ */
+  .participar-trigger {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 16px;
+    margin-top: 12px;
+    background: linear-gradient(180deg,
+                  rgba(200,155,74,0.18) 0%,
+                  rgba(200,155,74,0.06) 100%);
+    border: 1px solid rgba(200,155,74,0.55);
+    border-radius: 4px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s, border-color 0.25s;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+  .participar-trigger:hover {
+    background: linear-gradient(180deg,
+                  rgba(200,155,74,0.30) 0%,
+                  rgba(200,155,74,0.12) 100%);
+    border-color: var(--mel);
+    transform: translateX(4px);
+  }
+  .participar-trigger-numero {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 4px;
+  }
+  .participar-trigger-nome {
+    font-family: var(--fonte-titulo);
+    font-size: 18px;
+    color: var(--creme);
+    font-weight: 400;
+    line-height: 1.05;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .participar-trigger-seta {
+    color: var(--mel);
+    font-size: 14px;
+    transition: transform 0.25s;
+  }
+  .participar-trigger:hover .participar-trigger-seta {
+    transform: translateX(3px);
+  }
+
+  .lateral-rodape {
+    flex-shrink: 0;
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.7;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(200,155,74,0.12);
+    text-align: center;
+  }
+  .lateral-rodape span { color: var(--mel); }
+
+  /* ------------------------------------------------------------------
+     ÁREA CENTRAL (HERO + PREVIEWS)
+     ------------------------------------------------------------------ */
+  .central {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+  }
+
+  /* Hero inicial */
+  .hero {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--creme);
+    text-align: center;
+    padding: 0 80px;
+    opacity: 1;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .palco-desktop.has-hover .hero,
+  .palco-desktop.has-open .hero { opacity: 0; }
+
+  .hero-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    /* "TRAVESSIAS" tem 10 letras — clamp ajusta entre 1280px e 1920px+ */
+    font-size: clamp(82px, 9vw, 140px);
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    color: var(--creme);
+    margin-bottom: 24px;
+  }
+
+  .hero-sub {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--mel);
+    margin-bottom: 40px;
+  }
+
+  .hero-fio {
+    width: 60px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.5;
+    margin-bottom: 32px;
+  }
+
+  .hero-texto {
+    font-family: var(--fonte-texto);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--creme);
+    opacity: 0.8;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+
+  .hero-dica {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    opacity: 0.7;
+  }
+  .hero-dica::before, .hero-dica::after { content: "·"; margin: 0 14px; color: var(--mel); }
+
+  /* Previews por hover */
+  .previews {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .preview {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .preview.visible { opacity: 1; }
+
+  .preview-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 0 80px;
+    max-width: 100%;
+  }
+
+  .preview-foto {
+    width: 340px;
+    height: 480px;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 10px 20px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+
+  .preview-texto { max-width: 340px; color: var(--creme); }
+
+  .preview-carta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 16px;
+  }
+
+  .preview-nome {
+    font-family: var(--fonte-mao);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--creme);
+    margin-bottom: 20px;
+  }
+
+  .preview-fio {
+    width: 40px;
+    height: 1px;
+    background: var(--terra);
+    margin-bottom: 20px;
+  }
+
+  .preview-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--creme);
+    opacity: 0.85;
+    margin-bottom: 24px;
+  }
+
+  .preview-cta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.85;
+  }
+  .preview-cta::after { content: "→"; font-size: 14px; }
+
+  /* ------------------------------------------------------------------
+     PAINEL DESLIZANTE
+     ------------------------------------------------------------------ */
+  .painel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s, background 0.4s;
+    z-index: 10;
+  }
+  .painel-overlay.aberto {
+    opacity: 1;
+    pointer-events: auto;
+    background: rgba(10,16,24,0.55);
+  }
+
+  .painel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 66%;
+    max-width: 1100px;
+    background: var(--creme);
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.25,0.85,0.3,1);
+    z-index: 11;
+    box-shadow: -40px 0 80px rgba(0,0,0,0.3);
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    overflow: hidden;
+  }
+  .painel.aberto { transform: translateX(0); }
+
+  /* Foto + info */
+  .painel-foto {
+    position: relative;
+    background: var(--tinta);
+    overflow: hidden;
+  }
+  .painel-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.04);
+    display: block;
+  }
+  .painel-foto-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(30,42,56,0) 50%, rgba(30,42,56,0.75) 100%);
+    pointer-events: none;
+  }
+
+  /* Variante prefácio: oculta foto facial e mostra textura editorial */
+  .painel.painel-prefacio .painel-foto img { display: none; }
+  .painel.painel-prefacio .painel-foto {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(168,74,42,0.4) 0%, transparent 60%),
+      linear-gradient(180deg, var(--tinta) 0%, var(--tinta-suave) 100%);
+  }
+  .painel.painel-prefacio .painel-foto::before {
+    content: "T";
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-size: 460px;
+    line-height: 1;
+    color: var(--terra);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .painel-info {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 36px;
+    color: var(--creme);
+    z-index: 2;
+  }
+  .painel-numero {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 12px;
+  }
+  .painel-saudacao {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: 0.005em;
+    color: var(--creme);
+    margin-bottom: 16px;
+  }
+  .painel-meta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.85;
+    line-height: 1.9;
+  }
+  .painel-meta span { color: var(--mel); }
+
+  /* Conteúdo da carta */
+  .painel-carta {
+    display: flex;
+    flex-direction: column;
+    background: var(--creme);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .painel-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 56px 20px;
+    border-bottom: 1px solid rgba(92,107,78,0.15);
+    flex-shrink: 0;
+  }
+  .painel-topo-nome {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terra);
+    font-weight: 500;
+  }
+  .painel-topo-selo {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .painel-fechar {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(92,107,78,0.3);
+    color: var(--tinta);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.2s, border-color 0.2s;
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+
+  /* Páginas da carta no painel — margens editoriais generosas */
+  .paginas-viewport-desktop {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    padding: 36px 0 28px;
+  }
+
+  .pagina-desktop {
+    position: absolute;
+    inset: 0;
+    padding: 0 88px 0 80px;   /* margem lateral generosa, tipo livro */
+    overflow: hidden;          /* sem scroll — leitura cabe na tela */
+    font-family: var(--fonte-texto);
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--tinta);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(30px);
+    transition: opacity 0.35s, transform 0.35s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cinza-claro) transparent;
+  }
+  .pagina-desktop.ativa { opacity: 1; pointer-events: auto; transform: translateX(0); }
+  .pagina-desktop.fora-esquerda { opacity: 0; transform: translateX(-30px); }
+
+  /* ------------------------------------------------------------------
+     COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
+     Aparece como primeira página de toda carta no painel desktop.
+     Ao clicar "Ler carta →" avança para a 1ª página de texto.
+     ------------------------------------------------------------------ */
+  .pagina-desktop.pagina-cover {
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+    padding: 0 64px;
+    display: flex;
+    align-items: center;
+    color: var(--creme);
+  }
+  .cover-inner {
+    width: 100%;
+    max-width: 460px;
+  }
+  .cover-rotulo {
+    font-family: var(--fonte-meta);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--mel);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .cover-saudacao {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 52px;
+    line-height: 1.02;
+    letter-spacing: 0.005em;
+    color: var(--creme);
+    margin-bottom: 24px;
+  }
+  .cover-fio {
+    width: 56px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.55;
+    margin-bottom: 28px;
+  }
+  .cover-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--creme);
+    opacity: 0.85;
+    margin-bottom: 36px;
+  }
+  .cover-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-family: var(--fonte-meta);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--mel);
+    font-weight: 600;
+    cursor: pointer;
+    transition: gap 0.25s, color 0.2s;
+  }
+  .cover-cta:hover {
+    color: var(--terra);
+    gap: 18px;
+  }
+  .cover-cta span { font-size: 14px; }
+
+  /* Variante prefácio na cover — sutilmente diferente (terra) */
+  .pagina-cover.pagina-prefacio .cover-rotulo,
+  .painel-prefacio .pagina-cover .cover-rotulo {
+    color: var(--terra);
+  }
+
+  /* Quando a cover está ativa, esconde info sobre a foto (sem duplicação) */
+  .painel.painel-cover-ativa .painel-info { opacity: 0; }
+  .painel-info { transition: opacity 0.3s; }
+
+  .pagina-desktop p { margin-bottom: 1em; }
+  .pagina-desktop p + p { text-indent: 1.6em; margin-top: -0.2em; }
+  .pagina-desktop p.sem-indent { text-indent: 0 !important; }
+  .pagina-desktop em, .pagina-desktop i { font-style: italic; color: var(--tinta-suave); }
+
+  .pagina-desktop.primeira p:first-child::first-letter {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 4em;
+    float: left;
+    line-height: 0.85;
+    margin: 0.05em 0.1em 0 0;
+    color: var(--terra);
+  }
+
+  .pagina-desktop .citacao {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--tinta);
+    margin: 22px 0 22px 16px;
+    padding-left: 18px;
+    border-left: 2px solid var(--mel);
+  }
+  .pagina-desktop .citacao-atribuicao {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    font-style: normal;
+  }
+  .pagina-desktop .dialogo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--oliva);
+    margin: 14px 0 14px 28px;
+    padding-left: 14px;
+    border-left: 1px solid var(--oliva);
+    line-height: 1.5;
+  }
+
+  .pagina-desktop .fechamento {
+    margin-top: 24px;
+    text-align: right;          /* nome e meta alinhados à direita */
+  }
+  .pagina-desktop .fechamento-ornamento {
+    text-align: center;
+    margin: 22px 0 18px;
+    color: var(--mel);
+    letter-spacing: 1em;
+    font-size: 12px;
+  }
+  .pagina-desktop .assinatura {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: 0.005em;
+    color: var(--tinta);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .pagina-desktop .assinatura-meta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.9;
+  }
+  .pagina-desktop .assinatura-meta span { color: var(--terra); }
+
+  /* Navegação do painel */
+  .painel-nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 56px 24px;
+    border-top: 1px solid rgba(92,107,78,0.15);
+    background: var(--creme);
+  }
+
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,78,0.35);
+    background: transparent;
+    color: var(--tinta);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+  }
+  .nav-btn:not(:disabled):hover { background: var(--terra); color: var(--creme); border-color: var(--terra); transform: scale(1.05); }
+  .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  .nav-indicador {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .nav-pontos { display: flex; gap: 8px; }
+  .nav-ponto {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cinza-claro);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .nav-ponto.ativo { background: var(--terra); transform: scale(1.3); }
+  .nav-ponto:hover { background: var(--mel); }
+
+  .nav-pagina {
+    font-variant-numeric: tabular-nums;
+    color: var(--cinza);
+  }
+  .nav-pagina span { color: var(--terra); }
+
+} /* fim @media desktop */
+
+</style>
+
+</head>
+<body>
+
+<!-- ==========================================================================
+     BLOCO 02 — MOBILE · Tela Lista (< 960px)
+     Renderizado sempre no DOM; ocultado via CSS no desktop
+     ========================================================================== -->
+
+<div class="tela-lista">
+  <header class="lista-header">
+    <h1 class="lista-titulo">Travessias</h1>
+    <div class="lista-subtitulo">cartas de mulheres reais</div>
+    <div class="lista-fio"></div>
+    <p class="lista-intro">
+      Dez mulheres escrevem para si mesmas. Cartas sobre memória, corpo,
+      ancestralidade, coragem — e o caminho coletivo de quem atravessa junto.
+    </p>
+  </header>
+
+  <div class="lista-secao">Cartas · volume 01</div>
+
+  <!-- Cards renderizados por BLOCO 06 (script de template) -->
+  <div class="cards" id="cards-mobile"></div>
+
+  <!-- BLOCO 02b — CTA "Faça parte" (mobile · abre o mesmo modal) -->
+  <button type="button" class="cta-participar" id="abrir-participar-mobile">
+    <div class="cta-rotulo">Faça parte</div>
+    <div class="cta-titulo">Sua história importa</div>
+    <p class="cta-texto">
+      Travessias nasce da escuta. Se você tem uma carta — para si mesma
+      ou para outra mulher — converse comigo no Instagram.
+    </p>
+    <div class="cta-link">@renataleaofotografia →</div>
+  </button>
+
+  <footer class="lista-rodape">
+    Volume 01 · 2025<br>
+    Por <span>Renata Leão</span>
+  </footer>
+</div>
+
+<!-- ==========================================================================
+     BLOCO 03 — MOBILE · Tela Carta (fullscreen com swipe)
+     ========================================================================== -->
+
+<div class="tela-carta" id="tela-carta">
+  <div class="carta-topo">
+    <button class="btn-voltar" id="btn-voltar" aria-label="Voltar">←</button>
+    <div class="carta-topo-titulo" id="carta-topo-nome"></div>
+    <div class="carta-topo-selo">Abril · 2025</div>
+  </div>
+
+  <div class="paginas-viewport-mobile" id="paginas-viewport-mobile"></div>
+
+  <div class="carta-nav-mobile">
+    <button class="nav-btn" id="btn-ant" aria-label="Página anterior">←</button>
+    <div class="nav-centro">
+      <div class="nav-pontos" id="nav-pontos-mobile"></div>
+      <div class="nav-pagina">
+        <span id="pag-atual-mobile">01</span> / <span id="pag-total-mobile">01</span>
+      </div>
+    </div>
+    <button class="nav-btn" id="btn-prox" aria-label="Próxima página">→</button>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     BLOCO 04 — DESKTOP · Palco (≥ 960px)
+     Coluna lateral + hero central + previews em hover
+     ========================================================================== -->
+
+<div class="palco-desktop" id="palco-desktop">
+
+  <!-- Coluna lateral · índice de cartas -->
+  <aside class="lateral">
+    <div class="lateral-header">
+      <h1 class="lateral-titulo">Travessias</h1>
+      <div class="lateral-subtitulo">cartas de mulheres reais</div>
+      <div class="lateral-fio"></div>
+    </div>
+
+    <!-- Lista renderizada por BLOCO 06 -->
+    <ol class="cartas-lista" id="cartas-lista"></ol>
+
+    <!-- BLOCO 04b — Trigger "Faça parte" (abre modal ao clicar) -->
+    <button type="button" class="participar-trigger" id="abrir-participar">
+      <span class="participar-trigger-numero">Participe</span>
+      <span class="participar-trigger-nome">Faça parte <span class="participar-trigger-seta" aria-hidden="true">→</span></span>
+    </button>
+
+    <div class="lateral-rodape">
+      Volume 01 · 2025<br>
+      Por <span>Renata Leão</span>
+    </div>
+  </aside>
+
+  <!-- Área central · hero + previews -->
+  <main class="central">
+    <div class="hero">
+      <div class="hero-titulo">TRAVESSIAS</div>
+      <div class="hero-sub">cartas de mulheres reais</div>
+      <div class="hero-fio"></div>
+      <p class="hero-texto">
+        Dez mulheres escrevem para si mesmas.<br>
+        Cartas sobre memória, corpo, ancestralidade,<br>
+        coragem — e o caminho coletivo de quem atravessa junto.
+      </p>
+      <div class="hero-dica">passe o cursor sobre um nome</div>
+    </div>
+
+    <!-- Previews renderizados por BLOCO 06 -->
+    <div class="previews" id="previews"></div>
+  </main>
+
+</div>
+
+<!-- ==========================================================================
+     BLOCO 05 — DESKTOP · Painel Deslizante (carta aberta)
+     ========================================================================== -->
+
+<div class="painel-overlay" id="painel-overlay"></div>
+<aside class="painel" id="painel" aria-hidden="true">
+  <button class="painel-fechar" id="btn-fechar" aria-label="Fechar carta">✕</button>
+
+  <div class="painel-foto">
+    <img id="painel-img" src="" alt="">
+    <div class="painel-foto-overlay"></div>
+    <div class="painel-info">
+      <div class="painel-numero" id="painel-numero"></div>
+      <div class="painel-saudacao" id="painel-saudacao"></div>
+      <div class="painel-meta" id="painel-meta"></div>
+    </div>
+  </div>
+
+  <div class="painel-carta">
+    <div class="painel-topo">
+      <div class="painel-topo-nome" id="painel-topo-nome"></div>
+      <div class="painel-topo-selo">Abril · 2025</div>
+    </div>
+
+    <div class="paginas-viewport-desktop">
+      <div id="paginas-track-desktop"></div>
+    </div>
+
+    <div class="painel-nav">
+      <button class="nav-btn" id="btn-anterior" aria-label="Página anterior">←</button>
+      <div class="nav-indicador">
+        <div class="nav-pontos" id="nav-pontos-desktop"></div>
+        <div class="nav-pagina">
+          <span id="pag-atual-desktop">01</span> / <span id="pag-total-desktop">01</span>
+        </div>
+      </div>
+      <button class="nav-btn" id="btn-proxima" aria-label="Próxima página">→</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ==========================================================================
+     BLOCO 05b — Modal "Faça parte" (popup central com formulário)
+     ========================================================================== -->
+
+<div class="modal-overlay" id="modal-overlay"></div>
+<aside class="modal-participar" id="modal-participar" aria-hidden="true" aria-labelledby="modal-titulo">
+  <button class="modal-fechar" id="fechar-participar" aria-label="Fechar">✕</button>
+
+  <div class="modal-rotulo">Faça parte</div>
+  <h2 class="modal-titulo" id="modal-titulo">Sua história importa</h2>
+  <p class="modal-texto">
+    Travessias nasce da escuta. Se você tem uma carta — para si mesma ou
+    para outra mulher — converse comigo no Instagram.
+  </p>
+
+  <form class="modal-form"
+        action="https://instagram.com/renataleaofotografia"
+        method="get"
+        target="_blank"
+        aria-label="Quero fazer parte de Travessias">
+    <label class="modal-campo">
+      <span class="modal-rotulo-campo">Como prefere ser chamada</span>
+      <input type="text" name="nome" placeholder="seu nome ou apelido" autocomplete="name">
+    </label>
+    <label class="modal-campo">
+      <span class="modal-rotulo-campo">Sua mensagem</span>
+      <textarea name="mensagem" rows="4"
+                placeholder="conte um pouco do que te trouxe aqui — vou ler com cuidado"></textarea>
+    </label>
+    <button type="submit" class="modal-submit">
+      Continuar no Instagram <span aria-hidden="true">→</span>
+    </button>
+    <div class="modal-nota">você será levada para <strong>@renataleaofotografia</strong></div>
+  </form>
+</aside>
+
+<!-- ==========================================================================
+     BLOCO 06 — SCRIPTS · Render templates (cards, lista, previews)
+     ========================================================================== -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    /* Helpers compartilhados de rotulagem */
+    const rotuloNumero  = (c) => c.numero ? `Carta ${c.numero}` : (c.label || "");
+    const rotuloLateral = rotuloNumero;
+    const classeBase    = (c) => " " + (c.numero ? "" : (c.tipo || "abertura"));
+
+    /* --- CARDS MOBILE --------------------------------------------------- */
+    const cardsMobile = document.getElementById("cards-mobile");
+    CARTAS.forEach((c) => {
+      const meta = [c.idade, c.cidade].filter(Boolean).join(" · ");
+      const div  = document.createElement("div");
+      div.className   = "card" + classeBase(c);
+      div.dataset.id  = c.id;
+      div.innerHTML = `
+        <img class="card-foto" src="${c.foto}" alt="${c.nome}">
+        <div class="card-info">
+          <div>
+            <div class="card-numero">${rotuloNumero(c)}</div>
+            <div class="card-nome">${c.nome}</div>
+            <div class="card-meta">${meta}</div>
+          </div>
+          <div class="card-epigrafe">&ldquo;${c.epigrafe}&rdquo;</div>
+        </div>`;
+      cardsMobile.appendChild(div);
+    });
+
+    /* --- LISTA DESKTOP (só nome + carta — caber sem rolagem) ----------- */
+    const lista = document.getElementById("cartas-lista");
+    CARTAS.forEach((c) => {
+      const li   = document.createElement("li");
+      li.className  = "carta-item" + classeBase(c);
+      li.dataset.id = c.id;
+      li.innerHTML = `
+        <span class="carta-numero">${rotuloLateral(c)}</span>
+        <span class="carta-nome-lateral">${c.nome}</span>`;
+      lista.appendChild(li);
+    });
+
+    /* --- PREVIEWS DESKTOP ----------------------------------------------- */
+    const previews = document.getElementById("previews");
+    CARTAS.forEach((c) => {
+      const div = document.createElement("div");
+      div.className  = "preview" + classeBase(c);
+      div.dataset.id = c.id;
+      div.innerHTML = `
+        <div class="preview-inner">
+          <img class="preview-foto" src="${c.foto}" alt="${c.nome}">
+          <div class="preview-texto">
+            <div class="preview-carta">${rotuloNumero(c)}</div>
+            <div class="preview-nome">${c.saudacao}</div>
+            <div class="preview-fio"></div>
+            <div class="preview-epigrafe">&ldquo;${c.epigrafe}&rdquo;</div>
+            <div class="preview-cta">${c.numero ? "ler carta" : "ler abertura"}</div>
+          </div>
+        </div>`;
+      previews.appendChild(div);
+    });
+  });
+</script>
+
+<!-- ==========================================================================
+     BLOCO 07 — SCRIPTS · app.js (lógica de interação)
+     ========================================================================== -->
+
+<script>
+/**
+ * TRAVESSIAS — cartas de mulheres reais
+ * Dados das cartas: metadados + páginas de conteúdo HTML
+ *
+ * Cada entrada tem:
+ *   id, numero (romano ou "" para abertura), label (opcional),
+ *   nome, saudacao, idade, cidade, foto, epigrafe, assinatura, paginas[]
+ *
+ * Para adicionar uma nova carta:
+ *   1. Copie um BLOCO existente como template.
+ *   2. Preencha os campos.
+ *   3. Coloque a foto em /fotos/<id>.jpg.
+ *   4. Adicione o objeto ao array CARTAS abaixo.
+ */
+
+/* ==========================================================================
+   BLOCO 01 — DOCUMENTAÇÃO DE FORMATO
+   --------------------------------------------------------------------------
+   numero === ""   → entrada é a Abertura (Renata Leão, autora). O template
+                     usa o campo `label` em vez de "Carta {numero}".
+   numero === "I", "II", ... → carta protagonista numerada.
+   ========================================================================== */
+
+const CARTAS = [
+
+  /* ========================================================================
+     BLOCO 02 — ABERTURA · Renata Leão (autora)
+     ======================================================================== */
+  {
+    id: "renata",
+    numero: "",
+    label: "Autora",
+    tipo: "abertura",
+    nome: "Renata Leão",
+    saudacao: "Sobre a autora",
+    idade: "45 anos · 1981",
+    cidade: "Bauru · SP",
+    foto: "fotos/renata_leao.jpg",
+    epigrafe: "Travessias é sobre mulheres que seguem, que atravessam a própria vida.",
+    assinatura: "Renata Leão",
+    paginas: [
+      `<p class="sem-indent">Eu sou a <em>Renata Leão</em>. Nasci em Bauru, interior de São Paulo, em 1981. Hoje, 2026, com 45 anos.</p>
+       <p>Com formação em jornalismo, sou fotógrafa, comunicadora e uma mulher profundamente atravessada pelas histórias que encontro pelo caminho, especialmente a de tantas mulheres com as quais eu tive o privilégio de trocar.</p>
+       <p>Há mais de 20 anos trabalho com comunicação, escuta e relações humanas. Ao longo da minha trajetória, compreendi que algumas histórias não querem apenas ser contadas — elas precisam ser acolhidas.</p>
+       <p>Na fotografia feminina, encontrei uma forma de transformar imagem em reencontro. Meu trabalho nasceu do desejo de questionar padrões estéticos, ampliar o sentimento de pertencimento e lembrar mulheres de que seus corpos carregam memória, potência e dignidade, mesmo quando o mundo insiste em dizer o contrário.</p>
+       <p>A primeira mulher retratada pelas minhas lentes, sob meu olhar e a minha perspectiva, foi minha mãe em 2021, Sheila, aos 65 anos.</p>
+       <p class="sem-indent">As cartas deste e-book nasceram da escuta. Escuta de mulheres reais, com suas dores, afetos, ancestralidades, silêncios, perdas e reconstruções, suas conquistas, superações e felicidades.</p>
+       <p>Cada texto foi escrito a partir de entrevistas realizadas durante a 1ª edição do Festival MEL — Mulheres em Lutas, em 2025, onde entendi, mais uma vez, que nenhuma travessia é totalmente solitária.</p>
+       <p>Escutei nove mulheres cujas histórias enriqueceram minha bagagem de afeto, consciência e percepção de existência. Incluí, então, uma décima carta: a história da minha mãe. Nada faria mais sentido do que trazer para este projeto a mulher que faz parte da minha origem, da minha ancestralidade e do meu primeiro passo na utilização da fotografia como ferramenta de cura — para mim e para ela.</p>`,
+
+      `<blockquote class="citacao">Travessias é sobre isso: mulheres que seguem, que atravessam a própria vida. Mulheres que sustentam outras mulheres. Mulheres que, juntas, criam abrigo enquanto buscam abrigo em outras travessias.</blockquote>
+       <p class="sem-indent">Além da fotografia e da comunicação, também estudo gênero, direitos humanos, atenção plena e práticas integrativas — áreas que atravessam minha maneira de olhar o mundo e de me relacionar com as pessoas.</p>
+       <p class="sem-indent"><em>Escrevo porque acredito na delicadeza como ferramenta de resistência.</em></p>
+       <p class="sem-indent"><em>Fotografo porque acredito que existir também está no direito de ser vista.</em></p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 02b — PREFÁCIO · texto placeholder (será substituído)
+     ======================================================================== */
+  {
+    id: "prefacio",
+    numero: "",
+    label: "Prefácio",
+    tipo: "prefacio",
+    nome: "Prefácio",
+    saudacao: "Antes de começar",
+    idade: "",
+    cidade: "",
+    foto: "fotos/renata_leao.jpg",
+    epigrafe: "Texto provisório — o prefácio definitivo será inserido em breve.",
+    assinatura: "Travessias",
+    paginas: [
+      `<div class="aviso-provisorio">
+         <span class="aviso-tag">Texto provisório</span>
+         <span class="aviso-msg">Este prefácio é um placeholder. O texto definitivo será inserido em breve.</span>
+       </div>
+       <p class="sem-indent">Há livros que começam por um motivo, e este é um deles. <em>Travessias</em> surge do encontro entre escuta, fotografia e palavra — e antes que qualquer carta seja lida, vale dizer alguma coisa sobre como ele nasceu, por que existe, e o cuidado tomado com cada voz reunida nestas páginas.</p>
+       <p>As cartas que vêm a seguir não foram inventadas. Foram colhidas em conversas longas, escutadas duas, três vezes, transcritas com pausas, dúvidas, silêncios. O que está escrito aqui é o que essas mulheres escolheram dizer para si mesmas, depois de tudo.</p>
+       <p>Travessia, no plural, não é figura de linguagem. É o que cada uma destas dez vidas conta de modo diferente: o passo que se dá quando o chão treme, a margem que se alcança quando ninguém mais espera, a beira que se cruza calada para que outra mulher cruze depois.</p>
+       <p>Que este livro seja, antes de tudo, um abrigo. Que cada carta encontre, no leitor ou na leitora, a escuta que ela mereceu desde o começo. E que, ao terminar, fique a sensação de que nenhuma travessia se faz sozinha.</p>
+       <blockquote class="citacao">[Aqui entrará o trecho definitivo escolhido para abrir o livro.]</blockquote>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 03 — CARTA I · Ana Claudia
+     ======================================================================== */
+  {
+    id: "ana",
+    numero: "I",
+    nome: "Ana Claudia",
+    saudacao: "Oi, Ana Claudia",
+    idade: "56 anos",
+    cidade: "",
+    foto: "fotos/ana_claudia.jpg",
+    epigrafe: "Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita.",
+    assinatura: "Ana Claudia",
+    paginas: [
+      `<p class="sem-indent">Quanto tempo a gente não se fala. São 56 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que você está aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
+       <p>Foi uma caminhada longa e sinuosa até aqui, mas repleta de amor e resiliência. Nós acreditamos — e o medo e a confiança caminharam lado a lado, se complementando e se equilibrando durante a jornada que ainda persiste.</p>
+       <p>Agradeço por juntas, termos usado cada emoção que compõe o nosso Ser de forma sábia, sem nunca perder a essência. Desviamos das leis que se transformaram em instrumentos de terror e vingança, em mãos erradas e narcisistas ao longo do caminho.</p>
+       <p>Por um desenho genuíno de família — que foi mal interpretado por um olhar tendencioso e parcial, que fragmentou a convivência do afeto. A convivência física, porque o afeto… esse é onipresente.</p>
+       <p class="sem-indent">O Benjamim, hoje com 25 anos, foi desrespeitado como pessoa humana, usado como instrumento de vingança pelo genitor. Mas nós continuamos acreditando no amor, mesmo em meio à desordem social que nos afastou fisicamente por tantos anos.</p>
+       <p>Não recorremos do processo. Não tivemos condições emocionais de lutar com o corpo presente. Atravessamos o oceano, nadando contra tudo o que queríamos, para então chegar à superfície e voltar a respirar. O Benjamim só tinha 10 anos… mas sabíamos que, um dia, ele entenderia. O tempo era necessário.</p>
+       <p>Às vezes, é preciso se ausentar de si mesma para conseguir enxergar com clareza e recuperar o oxigênio.<br>Somos corajosas!</p>`,
+
+      `<p>Aliás, acredito que essa palavra — <em>coragem</em> — atravessa a nossa história. Quando olho para trás e vejo onde estamos agora… Voltamos. Encontramos o Benjamim.</p>
+       <p>Você lembra como foi desafiador tomar essa decisão? A vida estava se ajeitando — porém, sem ele. E a dele estava se desajeitando. Precisava, agora sim, da nossa presença. Corpo presente, cheio de energia e vontade.</p>
+       <p class="sem-indent">Fomos parar na vida noturna, lembra? Somos versáteis. A experiência com produção de eventos se uniu àquela carreira mirim que ainda engatinhava rumo a um objetivo legítimo: trabalhar com o que se ama. Ele estava se formando… DJ com 13 anos.</p>
+       <p>Essa LAP — Lei de Alienação Parental — nunca foi capaz de nos Alienar, nunca foi capaz de separar a gente, de verdade. Nunca lapidou os nossos sentimentos. Foi apenas um lapso que, como uma lapiseira, serviu igualmente como instrumento de crescimento. Crescemos. Nos fortalecemos. Juntos.</p>
+       <p>A LAP… a lei que não devia "pegar". Sabe aquela história: "tem lei que não pega"? Pois é, essa pegou.<br>E agora?</p>
+       <p>São muitas outras histórias sendo lapidadas, de muitas outras mulheres, junto com a gente, Ana. Ana Claudia. Anas… Anas Claudias!</p>
+       <blockquote class="citacao">Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita. Grita alto. E há quem escute. Porque esse grito se funde a tantos outros que ecoam, fazendo barulho. Gritamos mais alto que a LAP. Vamos silenciar a LAP. Vamos!</blockquote>
+       <p class="sem-indent">Ana Claudia, você tinha 41 anos. Agora, eu estou com 56. Você também, amadurecemos juntas — e agradeço pelo que você fez por nós.</p>
+       <p>Todas as suas ações nos trouxeram até aqui.</p>
+       <p>Obrigada. Seguimos juntas, como abelhas, como um enxame!!!</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 04 — CARTA II · Luiza
+     ======================================================================== */
+  {
+    id: "luiza",
+    numero: "II",
+    nome: "Luiza",
+    saudacao: "Oi, Luiza",
+    idade: "25 anos",
+    cidade: "Mariana · MG",
+    foto: "fotos/luiza.jpg",
+    epigrafe: "Nós somos grandes, Luiza. Sempre fomos.",
+    assinatura: "Luiza",
+    paginas: [
+      `<p class="sem-indent">Quanto tempo se passou desde a nossa última conversa… Já são 25 anos de jornada compartilhada. Talvez nem tenhamos tido uma conversa profunda ao longo da nossa evolução.</p>
+       <p>Todas nós, lado a lado — com cada emoção sentida no caminho, formamos a Luiza de hoje. Trazemos muitas dentro de nós, não é Luizinha? Hoje, é um alívio e uma alegria poder dar voz a essa história, revisitando cada pedaço que vive em nossa alma, mente e corpo.</p>
+       <p>Lembra quando a mamãe trazia para casa muito mais do que histórias de sala de aula? Ela contava sobre histórias desafiadoras das famílias daquelas crianças que deveriam ter como única preocupação, os estudos.</p>
+       <p>Ela fazia isso de forma silenciosa, sem buscar mérito ou reconhecimento pelas articulações movimentando inúmeras pessoas em benefício dos que mais precisavam. Obrigada pela criança determinada e pela menina de Mariana que usou o medo como ferramenta de obter coragem pra encarar de frente um ambiente conservador, no interior de Minas Gerais.</p>
+       <p class="sem-indent">Foi essa menina que, aos 17 anos, mudou de cidade para estudar administração e construiu as bases que sustentam a mulher que somos hoje. Lembra como foi desafiador? O medo, as novidades, a solidão… Mas também quanta coisa a gente colocou na bagagem! Algumas dessas memórias ainda estão na minha mala.</p>
+       <p>Você não imagina onde estamos hoje. São Paulo, acredita? Em um festival feito especialmente para nós, mulheres. Tem tanta coisa bonita acontecendo! Agora, seguimos o legado da mamãe: Levar conhecimento onde o conhecimento insiste em não alcançar!</p>`,
+
+      `<p>São Paulo é uma cidade intensa, aqui tudo está em movimento! Sabe a coragem que você agarrou lá atrás? Hoje vejo que ela começou com a vovó, que foi corajosa e revolucionária para o tempo dela e, junto com o vovô, trabalhou para que os três filhos pudessem estudar, incluindo a mamãe, que é professora e assistente social. Ela varreu muitas ruas abrindo espaço pra gente passar, transformando o lixo em educação.</p>
+       <p class="sem-indent">Ah, preciso te contar: em 2020 vivemos uma pandemia. Foi um tempo triste, de muitas perdas. Mas a gente ficou bem. E, justamente nesse período, ganhamos o troféu de Jovens Talentos em Brasília, por um trabalho de comunicação numa campanha política do papai!</p>
+       <p>Tivemos tanto cuidado na nossa família. Cuidar. Cuidar de nós e de quantas pessoas pudermos. Esse festival tem me mostrado isso. São muitas mulheres se movimentando para o cuidado com outras mulheres — precisamos umas das outras.</p>
+       <p>Estou criando pontes que servirão de irrigação para as nossas raízes mineiras. O ano passado nasceu o Movimento por Mulheres em Mariana e nós fazemos parte disso e vamos fazer ainda mais. Sabe por quê? Não tivemos nenhuma mulher eleita em 2024. Sem mulheres na política não terão políticas públicas voltadas para mulheres.</p>
+       <p>Enquanto isso, por aqui, o Hamudes me apoia muito. Estamos juntos há 11 meses. Ele é assessor parlamentar e está lado a lado na caminhada rumo aos nossos objetivos. Nossa régua é alta!</p>
+       <p class="sem-indent">Agora, mais do que nunca, quero escancarar as lutas que correm em nosso sangue. A começar pela cor da nossa pele — desafio enfrentado com coragem pela vovó. Uma lição passada com sabedoria.</p>`,
+
+      `<p>Vivemos em uma cidade linda, cheia de história, mas conservadora. Onde vínculos são criados conforme o sobrenome e o saldo bancário. Mas a vovó deu peso à nossa história.</p>
+       <blockquote class="citacao">Nós somos grandes, Luiza. Sempre fomos.</blockquote>
+       <p>Os preconceitos nunca nos pararam. Nem mesmo quando perdemos um emprego por perseguição política. Sempre que duvidam de nós — especialmente quando é um homem, menos capacitado, que ainda assim ganha mais voz — nossa coragem se inflama. E seguimos. Nós sempre conseguimos.</p>
+       <p>Tenho muito orgulho da nossa história, construída com uma rede de apoio gigantesca. E você é a base disso tudo. Uma base firme, que passa por reformas importantes. Reformas que não erguem muros, mas fortalecem a estrutura.</p>
+       <p>Obrigada por tudo o que fez por nós até aqui. Agora, deixa comigo. Eu vou fazer um bom trabalho.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 05 — CARTA III · Silvia
+     ======================================================================== */
+  {
+    id: "silvia",
+    numero: "III",
+    nome: "Silvia",
+    saudacao: "Oi, Silvia… Silvinha",
+    idade: "57 anos",
+    cidade: "Cachoeirinha",
+    foto: "fotos/silvia_teixeira.jpg",
+    epigrafe: "A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena.",
+    assinatura: "Silvia",
+    paginas: [
+      `<p class="sem-indent">Há quanto tempo a gente não se fala. São 57 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
+       <p>Foi uma caminhada permeada pela busca. Busca por novas oportunidades… Oportunidades que nos deram a liberdade de viver as nossas emoções. Liberdade de ter a chance de proporcionar educação e acesso à tantas pessoas que fazem parte da nossa jornada, sinto que somos responsáveis por isso.</p>
+       <p>Sabe por quê? Agora, nós podemos, juntas, sermos essa ponte. Uma ponte de conhecimento, amor e confiança. Assim como toda a nossa bagagem foi, e é, a ponte entre nós… A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena dos meus poderes de hoje.</p>
+       <p>Nós conseguimos, e eu só estou aqui hoje, no MEL, porque você fez tudo o que tinha que ser feito, antes. Agora, eu posso dizer: Nós temos, nós acreditamos, nós pertencemos. Aliás, obrigada por nunca ter deixado de acreditar.</p>
+       <p class="sem-indent">Você foi uma criança privilegiada e me transformou na adulta que te agradece hoje. Obrigada, Silvinha. Nós nos formamos professora, sabia? Sabe a culpa de nunca ter chamado a Lorecy de "mãe"? Não existe mais! Nossa trajetória tinha que ser assim, nós tínhamos que ter passado a infância em meio aos nossos primos militantes para colocar a educadora e a militante para trabalhar. Afinal, somos buscadoras.</p>`,
+
+      `<p>Eu já até me aposentei, da sala de aula, porque continuo vivendo nossa busca com mais energia do que nunca. Aliás, nos desligamos rapidamente do ambiente escolar, porque entendi que a educação estava em outro ambiente, pra nós. Seguimos educando e tocando almas, fazendo com que outras mulheres continuem acreditando, como você e eu.</p>
+       <p>Inclusive, estou cheia de orgulho, trago ex-alunas nessa caminhada, na mesma busca de mostrar que sonhos podem ser realizados em qualquer lugar, até mesmo nas periferias. Na busca de levar dignidade para tantas mães, especialmente as atípicas.</p>
+       <p class="sem-indent">Nós lutamos para combater a violência contra as mulheres, sabia? Você adoraria ver isso aqui, o MEL está lindo! Mulher em Lutas! Ah, você está aqui, na verdade, junto comigo, se emocionando comigo e levando tantas bandeiras a serem levantadas em Cachoeirinha, onde há tantas mulheres se sentindo sozinhas e impotentes, nadando em cachoeiras de lágrimas.</p>
+       <p>Será que a mamãe, Laci, se sentia assim também enquanto lavava suas roupas? De uma coisa eu tenho certeza. Foi ela que nos ensinou e apontou os caminhos que poderíamos seguir. Foi ela que nos ensinou a nadar e que as lágrimas podem não ser de dor. Foi ela que nos transformou em amor.</p>
+       <p>Por falar em amor, nós temos uma filha e um neto. É a nossa história sendo contada, é a posteridade.</p>
+       <p>Hoje, eu não peço mais desculpas à Lorecy por amar tanto a mamãe e a nossa família. Agora eu entendo, nos libertei dessa culpa. A Loreci foi uma mulher, antes de ser mãe. Ela teve que trabalhar e não pode acompanhar nosso crescimento.</p>`,
+
+      `<p>Por isso estou aqui hoje, nesse estágio da nossa vida, em meio a um enxame de tantas outras mulheres. É isso que me move!</p>
+       <p>Obrigada por seguirmos juntas, como abelhas, como enxame!</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 06 — CARTA IV · Thainá
+     ======================================================================== */
+  {
+    id: "thaina",
+    numero: "IV",
+    nome: "Thainá",
+    saudacao: "Oi, Thainá",
+    idade: "29 anos",
+    cidade: "Salvador · BA",
+    foto: "fotos/thaina_britto.jpg",
+    epigrafe: "Esse corpo que abriga a nossa história.",
+    assinatura: "Thainá",
+    paginas: [
+      `<p class="sem-indent">Há quanto tempo não nos falamos. São 29 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita nossa alma, nossa mente e nosso corpo.</p>
+       <p>Corpo. Foi uma caminhada marcada pela construção do entendimento de "corpo", na construção da autoconfiança. A confiança de nos entendermos dentro da nossa existência, como menina, adolescente e mulher. Confiança no que representamos por onde passamos, com quem convivemos e na história que escrevemos, um dia de cada vez. Ainda há muito que caminhar.</p>
+       <p>A nossa história, de menina e mulher baiana, de Salvador, foi permeada, também, pela história da mamãe. E nós, sempre buscando a tal da felicidade. Mas antes de falar sobre a felicidade, quero falar do nosso corpo.</p>
+       <p class="sem-indent">Corpo, um substantivo masculino… Masculino como olhar que nos colocou em uma posição precoce, ainda muito cedo.</p>
+       <p>Embora eu enxergasse você como a criança que era, de 10 anos, os nossos seios chegavam antes, sexualizando um corpo que ainda era infantil e não entendia aquilo tudo. Lembra como aquelas situações geravam estranheza? A mamãe percebeu e nos protegeu, hoje eu entendo. Nos protegeu dos olhares do substantivo masculino.</p>
+       <p>Você lembra quando foi que começamos a perceber isso? Na adolescência, quando nosso corpo passava na frente do R.G. Nunca pediram o nosso documento, lembra?</p>
+       <p>A mamãe orquestrou tudo, porque nós não tínhamos o olhar malicioso. Era o nosso corpo, simplesmente o nosso corpo. Esse corpo que abriga a nossa história. Nós não questionávamos suas partes, estava tudo bem pra nós, não é?</p>`,
+
+      `<p>Mas, a mamãe sabia que não estava! Agora, você segue junto comigo, hoje, com seios menores e mais mulher do que antes.</p>
+       <p class="sem-indent">Lembro como foi passar por essa mudança. O corpo chegou na frente novamente, despertando questionamentos, curiosidades e a mudança no olhar de muitas pessoas.</p>
+       <p>Nosso corpo se transformou e continua se transformando. Vou te contar. Nós engordamos 30 quilos, sério! E quer saber? Estamos ótimas! Aliás, peço desculpas pela distopia no olhar e por julgar nosso corpo quando ele só pesava 53 quilinhos. Era lindo! Continua lindo! Nós somos uma mulher, uma bela gostosa com 77 quilos na balança.</p>
+       <p>Nós continuamos construindo um olhar amoroso sobre nós, como uma mulher inteira. Sabe, parte dessa construção é perceber, de maneira consciente, a mesma distopia em tantas mulheres que se olham, na tentativa de se enxergar.</p>
+       <p>Talvez, por tudo isso, mesmo que no inconsciente, eu tenha resolvido me envolver com o estudo de gênero. Aliás, nos formamos em psicologia! Demais, não é?!</p>
+       <p class="sem-indent">O que nos move é o aprendizado de nos reconhecermos, nos amando ainda mais como somos, em qualquer tempo. Me percebo nos encontrando dentro da nossa história e dos diferentes corpos que já tivemos, e ainda vamos nos enxergar. Vamos nos compondo e nos complementando. Seguimos, juntas!</p>
+       <p>A profissão que escolhemos faz parte de todo esse entendimento, porque escutar cada mulher complementa a mulher que somos e faz parte da busca da tal da felicidade.</p>`,
+
+      `<p>Aliás, sabe o que nos deixa feliz? Coisas simples, como pisar na areia da praia e colocar um biquini sem a preocupação do olhar das pessoas. Ouvir e fazer parte do autoconhecimento de mulheres, como nós, e lutar para que elas caminhem em segurança e que possam usar a roupa que quiserem, sem medo do julgamento.</p>
+       <p>Somos felizes, Thainá, pela história que você ajudou a construir até aqui.</p>
+       <p>Obrigada.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 07 — CARTA V · Márcia
+     ======================================================================== */
+  {
+    id: "marcia",
+    numero: "V",
+    nome: "Márcia",
+    saudacao: "Marcia… Marcinha",
+    idade: "54 anos",
+    cidade: "Itaim Paulista",
+    foto: "fotos/marcia.jpg",
+    epigrafe: "As tramas que embalariam nosso fim, deram início ao recomeço.",
+    assinatura: "Márcia",
+    paginas: [
+      `<p class="sem-indent">Marcia… Marcinha, olha onde nós estamos!</p>
+       <p>Não só onde estamos hoje, mas, onde estamos na vida… As tramas que embalariam nosso fim, deram início ao recomeço. Foi ali que realmente nascemos.</p>
+       <p>A memória dessa nossa história está na energia que depositamos na vontade de viver, porque os fatos foram narrados pelas vozes de quem nos embalou.</p>
+       <p>Quanta bagagem trazemos nessa mala, embora a mortalha tenha ficado pra trás, impregnou com seu significado as linhas de outras vestes que tenho deixado pelo caminho, aos poucos. Faço isso por mim e por você. Você foi uma sobrevivente para que eu pudesse ser uma vivente. Teve gente que não acreditou que aquelas perninhas dariam os primeiros passos, muito menos que estaríamos aqui, hoje com 54 anos neste festival que leva o nome doce de MEL e que tem a força do vôo, de tantas que voam como nós — Mulheres em Lutas.</p>
+       <p class="sem-indent">Você, Marcinha, caminhou bastante. Se soubesse de todo o percurso ainda pequena talvez tivesse se assustado. Mas, adianto que deu tudo certo. De uma gestação indesejada no Itaim Paulista para Pindamonhangaba. Da mortalha pra vida.</p>
+       <p>Posso te dizer uma coisa? Você nunca atrapalhou o relacionamento dela… da Ana. Ela é que se atrapalhou pela vida e no meio de todo aquele caos, nos deu a vida de presente, pra tanta gente.</p>
+       <p>Laços sanguíneos, de um vermelho frágil e com nós frouxos. Irmãos que perambulam pela vida enquanto construímos nossos próprios laços, firmes, que sustentam nossa base. Dorinha… Uma artesã pronta pra ser mãe de tantos corpos que estavam à espera da mortalha e ela… costurou a vida.</p>`,
+
+      `<div class="dialogo">— Oh Zé, a Ana tá dando uma criança, posso pegar? 1 ano e 8 meses.<br>— Tá! Se eu gostar ela fica, se não você leva ela embora.</div>
+       <p class="sem-indent">O primeiro som que a Dorinha ouviu da nossa boca foi um choro sentido, engasgado pela água que escorria, dos pés à cabeça, banhando como um fruto pendurado no pé num dia de chuva. Mesmo que a raiz nos mandasse calar, na agressividade de quem personifica o próprio rancor, insistimos pela vida.</p>
+       <p>Superamos as feridas, do corpo e da alma, e, no lugar delas, plantamos amor. O mesmo amor que recebemos e que, talvez, demoramos a perceber de onde vinha. Vinha de todos os lados, da Dorinha e das vizinhas, entre chás, abraços e sorrisos. Até o Zé, que falou pra devolver porque a gente não ia sobreviver, viveu pra ver.</p>
+       <p>Uma mulher rondava, querendo se aproximar, nos abraçava vez ou outra. Era estranho, nós tínhamos uns seis anos. A Dorinha fez tudo com muito amor e respeito, em doses homeopáticas. Esse abraço vinha da Ana.</p>
+       <p>Não, ela nunca foi nossa mãe, Marcia. Mãe é maternar, símbolo de vida. Dorinha, ela sim é nossa mãe.</p>
+       <p class="sem-indent">Precisamos falar de um período doloroso, mais um na verdade. Você só vai ter coragem de contar pra mamãe sobre o abuso que sofremos por tanto tempo já bem mais velha. Ficou muito tempo por dizer e eu fiz isso por nós, não tem tanto tempo.</p>`,
+
+      `<p>Infelizmente você vai se calar, e se culpar, como tantas de nós fazemos. Ainda hoje eu repito pra mim mesma, pra que a gente se livre desse sentimento de culpa. Culpa que só pertence a esse senhor que compartilhou o teto com a nossa família como um favor que foi pago com a nossa pele, com o nosso corpo. Branco que se aproveitou da inocência de uma criança que tem essa memória desde, pelo menos, os cinco anos. Quantas de nós existem por aí, com essa mesma dor.</p>
+       <p>Os ciclos e os ritos de passagem acontecem de acordo com cada história. A nossa foi de muitos desafios. Com frutos que embalamos com muito amor para sair da premissa de que só doamos o que recebemos. A rejeição que recebemos da Ana não determinou nossa relação com os filhos que tivemos. Foram três.</p>
+       <p class="sem-indent">A arte nasceu junto com a gente, Marcia. Renascemos pelas mãos de uma artista, uma artesã humana, competente e corajosa. Precisou de muita coragem pra fazer da mortalha um abrigo.</p>
+       <blockquote class="citacao">Tinha um bichinho que me corroía por dentro e eu não sabia o que era.</blockquote>
+       <p>Já era a artista abrindo espaço pra nascer e florescer, para trazer cor em um terreno que estava cheio de erva daninha.</p>
+       <p>Há 25 anos, fomos cheias de alegria para Pindamonhangaba, com o coração cheio de esperança e a proposta de construirmos uma vida melhor. Mas os blocos dessa construção eram de mentira, fomos enganadas e tiraram de nós o pouco dinheiro que havia. A vontade de viver… essa nunca conseguiram tirar. Somos sobreviventes!</p>`,
+
+      `<p>O pouco dinheiro que nos restou se transformou em um cavalo para nos guiar catando papelão. Vergonha… eu sentia muita vergonha e não sinto vergonha em admitir. Seguimos, com vergonha mesmo.</p>
+       <p class="sem-indent">A pior coisa é se enxergar à margem da sociedade. Estar à margem só nos permite dar passagem e assistir a vida passar. Nós nascemos para construir a própria história.</p>
+       <p>A nossa sorte, se podemos chamar assim, é que a vontade de viver unida à consciência de que podíamos transformar aquela realidade nos fez enxergar poesia e conhecimento em meio ao papelão. Sempre que encontrava um livro no meio do papelão, parava pra ler.</p>
+       <p>A arte nos salvou e me salva ainda hoje, a cada dia. Começamos a fazer teatro, com 42 anos. Conheci a história da Carolina Maria de Jesus, uma escritora com uma história muito parecida com a nossa.</p>
+       <blockquote class="citacao">Nós não somos o papelão, nunca fomos. Aquele era só um momento.</blockquote>
+       <p class="sem-indent">Em 2024 eu saí candidata a vereadora pelo PSOL e ganhei a minha vida de volta. Revisitei esses lugares todos da minha vida por conta da minha candidatura e isso tem me curado.</p>
+       <p>Trazer a experiência do abuso pode servir de referência para outras crianças que vivem essa mesma realidade. Quero contar essa história cada vez mais. A nossa história pode encorajá-las a falar.</p>
+       <p>Eu levo a história da Carolina, pelo monólogo, há muitas outras mulheres, inclusive em presídios femininos. A mensagem é simples… Não deixe que nada mate seus sonhos.</p>
+       <blockquote class="citacao">Todo dia eu abro a janela do barraco e penso. Quem sabe do outro lado da vida tem algo melhor.<span class="citacao-atribuicao">— Carolina Maria de Jesus</span></blockquote>`,
+
+      `<p class="sem-indent">Eu me identifiquei, mas nunca tive coragem por causa dos meus filhos. Tinha uma linha de trem atrás do meu barraco e eu pensava em me jogar ali, no momento certo. Fazia isso chorando, até que minha filha enxugava minhas lágrimas e me fazia desistir.</p>
+       <p>Entendo o poder que a nossa história tem e entendo que, em meio a tantas histórias diferentes, há tantos sentimentos iguais, que convergem e que lutam para se manter dentro de cada uma de nós. Até que em algum momento nos damos conta e nos livramos de todos eles: da culpa, do sentimento de abandono, do não merecimento, do não pertencimento.</p>
+       <p>Por isso, eu digo mais uma vez: Pode seguir, venha com a calma. Você construiu uma história linda em meio ao caos e eu estou aqui para dar continuidade porquê ainda há muito para viver!</p>
+       <p>Com amor,</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 08 — CARTA VI · Hosana
+     ======================================================================== */
+  {
+    id: "hosana",
+    numero: "VI",
+    nome: "Hosana",
+    saudacao: "Oi, Hosana",
+    idade: "",
+    cidade: "Mauá · SP",
+    foto: "fotos/hosana.jpg",
+    epigrafe: "Desisti de desistir.",
+    assinatura: "Hosana",
+    paginas: [
+      `<p class="sem-indent">Eu poderia cantar a nossa história, com uma melodia completa, dançando entre dramas, potências e conquistas.</p>
+       <p>Embora tantos desafios, nossa vida é uma música harmônica, cheia de rimas, ritmo e vibração.</p>
+       <p>Quando decidimos, aos 11 anos trocar a Igreja pela quadra da escola de samba, ainda não imaginávamos o que vinha pela frente. Respira fundo, vou te contar.</p>
+       <p>Você não imagina a potência de mulher e ser humano no qual nos transformamos, Hosana. A maternidade nos forjou, ainda quando éramos apenas uma criança de 14 anos. Jaque, é o nome da nossa primeira filha, hoje com 31 anos.</p>
+       <p>Somos fruto do que você foi construindo ao longo da vida, com as decisões e personalidade fortes que trilharam o caminho até aqui. Obrigada pela sua coragem.</p>
+       <p class="sem-indent">Quando nossos pais chegaram em Mauá em 64, atravessando o mapa em meio a uma ditadura, começaram a marcar uma caminhada que quebraria padrões e ciclos de estereótipos impostos involuntariamente. A Bahia e o Pernambuco fazendo parte da construção da metrópole que serve de palco para desconstruir.</p>
+       <p>Lembra, ainda pequena, nossa mãe se dividindo entre sete filhos? Penso com carinho da espera do momento em que o papai chegava do trabalho e ia preparar o que eu — você — queria comer. Embrutecido pelo sofrimento do sertão do nordeste, ele guardava espaço para cuidar. Foi a base dessa cultura de cuidado que permeia nossa trajetória.</p>
+       <p>Somos mãe. Quatro pessoas humanas às quais dedicamos toda energia, servindo de espelho para que criassem reflexos diferentes dos que recebemos. Negros, periféricos criando a própria realidade, repudiando imposições sociais de manutenção da pobreza e da ignorância.</p>`,
+
+      `<p>Sabe do melhor? O Pedro. Nós escolhemos o Pedro, junto com nossos filhos, e também fomos escolhidas por ele. Temos uma família linda, potente, que já deu continuidade à linhagem, com um netinho de um ano e meio.</p>
+       <p class="sem-indent">Com a Jaque, quebramos o ciclo de gravidez na adolescência. Criamos e educamos uma mulher que trilha o próprio caminho. Negra, periférica, sem filhos e na universidade, com 31 anos. Vem tranquila, você fez um bom trabalho.</p>
+       <p>Existe algo em nós muito genuíno. Embora a cultura evangélica permeasse nossa infância e educação, a compaixão não foi suficiente para que nos acolhesse enquanto esperávamos a Jaque nascer. Fomos culpabilizadas e responsabilizadas por não termos o esclarecimento que deveríamos ter recebido. A culpa não foi sua, não é nossa.</p>
+       <p>Se prepara, Hosana, vai ser dolorido. Mas vai valer a pena. A maternidade vai te forjar e vai te impulsionar, junto com a Cultura e a Arte que estão na sua alma. Tudo isso vai te dar pulsão de vida.</p>
+       <p>O samba, o estudo e o rap fizeram parte da construção da nossa personalidade. Trabalhamos a nossa autoestima e nunca tivemos vergonha da ancestralidade, da cultura africana e da nossa negritude. A música é uma ferramenta de conexão com o divino que há dentro de nós.</p>
+       <p class="sem-indent">Só voltamos a estudar com 34 anos, mais ou menos. Viu, nunca é tarde. EJA — Educação de Jovens e Adultos. Foi lá que terminamos os estudos. Nós gostamos de estudar!!!</p>
+       <p>Fomos corajosas, mesmo sem o apoio da família. Nos formamos em Ciências Sociais. Levar para o trabalho o que sempre nos moveu na vida. Cuidar.</p>`,
+
+      `<p>A primeira coisa mais importante que fizemos, e você me deu coragem pra isso, foi o divórcio. A segunda, foi Deitar pro Santo. O candomblé orienta nossa vida. A africanidade nos dá poder!</p>
+       <p>Quando entramos na faculdade ao mesmo tempo que entramos para o movimento negro de esquerda, tiramos o peso da ignorância e pegamos o peso da responsabilidade de entender e escolher o que fazer com o conhecimento. A resposta foi o engajamento político, não paramos mais de militar.</p>
+       <p>Entrei para o PSOL. A política é necessária, mas também é difícil, tentam nos silenciar a todo momento. Embora não tenha sido eleita, fomos a mais bem votada.</p>
+       <p class="sem-indent">Fui aprender a cuidar de mim quando me vi morando sozinha… e isso foi só há três anos, quando nossa filha resolveu cuidar dela mesma e saiu de casa. Eu pensei: Por que agora? Vou ter que cuidar de mim! Tem sido maravilhoso, puro autoconhecimento.</p>
+       <p>Toda nossa base artística, do samba, do black, do rap, a arte negra e africanidade, exalaram pela nossa pele. Planto dessa semente com as crianças do CRAS, como monitora, trabalhando a arte e a música. Sigo fazendo a nossa parte, aprendi a cuidar dos outros sem deixar de cuidar de nós.</p>
+       <blockquote class="citacao">Nós quase desistimos, sabia? Houve um tempo sem esperança e quase interrompi nossa trajetória. Mas siga firma porque desisti de desistir.</blockquote>
+       <p>Agora, viver me movimenta como num palco com a nossa música preferida. A nossa música é pra todas e nosso palco é grande, cabe todo mundo.</p>
+       <blockquote class="citacao">Somos diversas, mas não estamos dispersas. Vamos conseguir!<span class="citacao-atribuicao">— Marielle Franco</span></blockquote>
+       <p>Obrigada pela base que nos sustenta, Hosana! Pode vir, estamos bem e seguimos sambando!</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 09 — CARTA VII · Marília Martins
+     ======================================================================== */
+  {
+    id: "marilia",
+    numero: "VII",
+    nome: "Marília Martins",
+    saudacao: "Oi, Marília",
+    idade: "37 anos",
+    cidade: "Franca · SP",
+    foto: "fotos/marilia_martins.jpg",
+    epigrafe: "Atrás de uma grande mulher tem sempre outra grande mulher.",
+    assinatura: "Marília",
+    paginas: [
+      `<p class="sem-indent">Nossa, respira fundo. Tem muita coisa pra contar, Ma ou Marília… Faz tanto tempo… São 37 anos de história de páginas escritas por você, na evolução das letrinhas que hoje transmitem a segurança que sempre tivemos nos passos.</p>
+       <p>Passos legítimos de pai e mãe, sapateiros, costurando o nosso caminho, caminho que nos trouxe até aqui, hoje. Somos a união de todas as emoções, conquistas e, preciso admitir, privilégios que acumulamos ao longo de todos esses anos.</p>
+       <p>A vontade de ser livre na nossa essência nos transformou em uma mulher que trabalha com o compromisso de garantir essa liberdade para todas as mulheres que pudermos alcançar.</p>
+       <p>Somos circulares, assim como a dança que permeia nossa existência. Fazemos parte de uma transformação genuína e orgânica com raízes que fortalecem a nossa luta, até hoje. Determinação que vem da nossa ancestralidade. A vovó criou sete filhos, viúva, você lembra, né? A menina sapateira de 08 anos se formou professora. O papai, advogado.</p>
+       <p class="sem-indent">Entre letras, eventos e sala de aula, hoje estamos na política. Somos vereadora em Franca pelo PSOL, partido que ajudamos a fundar na cidade, em 2007, 2008. Aposto que você já sabia, afinal crescemos no movimento sindical e no MST.</p>
+       <p>Mas, antes disso, dançamos em lugares diferentes e voamos pra longe. Sabe o tal do privilégio? Então… nos formamos em Planejamento de Eventos Conscientes nos Estados Unidos. Temos uma bagagem rica de planejamento e políticas públicas para servir, agora, tantas mulheres que precisam de rede de apoio.</p>
+       <p>Esses momentos me fazem lembrar das 17 vezes que o papai foi cassado e processado pela ditadura militar, na tentativa de promover justiça social. Seguimos os mesmos passos: Educação e política. Dalvinha e Georginho.</p>`,
+
+      `<p>Também somos professoras. Até criamos uma cartilha: <em>"Vira a Página, Mulher"</em>. Viramos, cada página lida.</p>
+       <p class="sem-indent">Nossa vida política se fortaleceu quando voltamos dos EUA, cansadas da cultura essencialmente capitalista. Com um cachorrinho embaixo dos braços, alugamos uma casa que se transformou em um coletivo de mulheres.</p>
+       <p>Nossa casa ganhou até nome: Confraria Cult. Tantas coisas boas acontecem por lá… meditação, roda de conversas, danças circulares, eventos de humanização e políticas públicas para mulheres e até feiras de mulheres artesãs para promover independência e autonomia financeira. Nossas mulheres artesãs, hoje, até exportam seus materiais. É um projeto lindo, que nasceu antes mesmo de estarmos vereadora.</p>
+       <p>Aliás, sempre me recolho, faço meditação e às vezes encontro com você, ainda quando éramos uma menina. Ah, gostamos de menina, e namoro uma mulher incrível que é o nosso grande apoio. Consegue imaginar assumirmos isso aqui em Franca? Pois é, tudo isso faz parte da nossa luta, Marília.</p>
+       <blockquote class="citacao">Atrás de uma grande mulher tem sempre outra grande mulher!</blockquote>
+       <p>Cada plantinha que eu cultivo também estou regando os nossos sonhos e humanizando uma luta que às vezes é dolorida e densa. Precisamos equilibrar o nosso ser, que é holístico.</p>
+       <p>Nossa vida política tem seus riscos e passamos alguns apuros que pegaram fogo, literalmente. Mas, temos vizinhos bacanas e uma rede de apoio imensa que ajudaram a apagar. As autoridades tentam nos desencorajar e, mesmo recuando em alguns momentos, seguimos em frente, menina.</p>
+       <p>Nossa luta significa encontrar pessoas dispostas a conversar para a solução de problemas, não só pelo desabafo. Teremos alguns anos pela frente com a nossa voz em volume máximo, <em>"depois, eu ajusto as velas e reavalio"</em>.</p>`,
+
+      `<p>Obrigada por tudo o que você fez até aqui. Agora, deixa comigo. Vou fazer um bom trabalho!</p>
+       <p>Sinta meu abraço, apertado, e um beijo na bochecha.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 10 — CARTA VIII · Ariane
+     ======================================================================== */
+  {
+    id: "ariane",
+    numero: "VIII",
+    nome: "Ariane",
+    saudacao: "Ariane… Ariane pequena",
+    idade: "",
+    cidade: "",
+    foto: "fotos/ariane.jpg",
+    epigrafe: "Acabou o gás… mas não acabou a comida.",
+    assinatura: "Ariane",
+    paginas: [
+      `<p class="sem-indent">Eu queria poder sentar ao seu lado naquele chão de terra, onde você ainda não sabe, mas já aprendeu tudo.</p>
+       <p>Queria te observar de longe, antes de você perceber o peso que o mundo tenta colocar nas suas costas. Antes de você acreditar, por um segundo que seja, que não é suficiente.</p>
+       <p>Você vai se descobrir mulher, uma mulher inteira sem que ninguém te diga o que pode ou não pode fazer, porque você é exclusivamente dona e responsável pela sua própria vida. Vão tentar te dizer o contrário, mas rapidamente você vai enxergar com clareza, pode ficar tranquila, menina.</p>
+       <p>Você ainda não sabe, mas naquele dia em que o gás acabou… não foi só comida que você fez. Você acendeu uma mulher na origem da chama de outra, do cansaço de outra, das lágrimas de outra.</p>
+       <p>Você pegou tijolo, graveto, fogo… o que você podia, e fez nascer em você uma força que nunca mais te abandona. Por causa dessa força você vai ouvir seu nome quando tudo desmoronar: <em>"Deixa com a Ariane."</em> E você vai deixar. Vai resolver. Vai aguentar. Vai ir até o fim… mesmo quando estiver cansada demais.</p>
+       <p>Mas escuta uma coisa importante, que ainda vai levar tempo pra você entender: você não precisa dar conta de tudo sozinha o tempo inteiro. Nem toda força precisa ser solitária.</p>
+       <p class="sem-indent">Você vai crescer rápido demais. Vai ser irmã mais velha antes de ser só filha. Vai ser mãe antes de entender o que isso significa. E sobre isso… eu preciso te contar com cuidado:</p>`,
+
+      `<p>Você vai amar sua filha, a nossa filha, a nossa Maria Eduarda… Vai amar de um jeito que não cabe no corpo. Um amor bruto, visceral, que dá vontade de proteger o mundo inteiro com as mãos.</p>
+       <p>Mas também vai sentir medo. Cansaço. Dúvida. E tudo bem! Você vai encontrar muita gente romantizando a gravidez e a maternidade e vai sentir na própria pele que não é assim. Sinta isso sem culpa, somos uma mãe maravilhosa!</p>
+       <p>Porque você nunca foi só mãe. Você sempre foi mulher antes disso. E sabe o que é mais bonito? Você vai ensinar isso pra ela.</p>
+       <p>Vai ensinar que mulher pode sair, dançar, rir alto, escolher. Que liberdade não é erro. Que existir da maneira que se quer não é motivo para se desculpar. E, Ariane… Ela vai te enxergar, com amor e respeito.</p>
+       <p>E nesse dia, você vai entender que fez tudo certo, mesmo achando que não. Ela vai te enxergar como mulher, antes da mãe.</p>
+       <p class="sem-indent">Agora deixa eu te contar uma coisa que talvez doa um pouco: você vai se olhar no espelho por muito tempo… e não vai gostar do que vê. Vai achar que seu corpo é errado. Que você não é bonita. Que não cabe.</p>
+       <p>E isso não nasceu em você. Essa angústia e essa sensação de que existe um jeito certo de ser bonita foi implantada na sua cabeça, assim como é feito com todas as mulheres. Não há corpo certo e errado. Cada uma de nós carrega a beleza de ser quem realmente somos.</p>`,
+
+      `<p>Mas, um dia… um dia você vai se olhar diferente. Vai vestir uma roupa e não pedir permissão. Vai mostrar a pele sem vergonha. Vai rir do que antes te travava. E quando alguém tentar te diminuir… você já não vai caber mais nesse lugar.</p>
+       <blockquote class="citacao">Meu corpo é meu.</blockquote>
+       <p class="sem-indent">Você também vai conhecer o amor… mas não aquele que prende, diminui, ameaça. Você já conheceu esse. O que chega depois é outro. Um amor que não te corta. Que não te apaga. Que te deixa ser. Um amor que olha pra você e diz, sem medo: <em>"Vai. Viva. Seja quem você é."</em></p>
+       <p class="sem-indent">Agora, me escuta com atenção: você é uma mulher preta. Forte. Barulhenta. Viva. E vão tentar te silenciar.</p>
+       <p>Vão tentar te fazer menor. Menos bonita. Menos capaz. Menos tudo. Mas você não é menos. Você é muito. Muito de tudo. E é exatamente isso que incomoda.</p>
+       <p>Então não se diminua. Não abaixe sua cabeça. Não pede desculpa por existir do seu jeito. Você vai trazer na sua essência de mulher a mesma <em>"maluquinha"</em> de sempre, e isso é maravilhoso. Talvez seja só livre demais pra um mundo que ainda não sabe lidar com isso.</p>
+       <p>E, Ariane… guarda esse sonho que você nem sabe ainda o tamanho que tem: você vai querer ensinar. Vai querer mostrar pra outras pessoas, especialmente aquelas que acham que já passou o tempo, que dá, que é possível.</p>`,
+
+      `<p>Vai mostrar que sempre dá. Que estudar depois, voltar, tentar de novo… também é vitória. Você vai querer falar sobre cultura, sobre história, sobre quem você é. Sobre a importância e o valor da cor da nossa pele! Somos lindas! E quando você fizer isso… você não vai estar apenas ensinando. Você vai reparar o mundo.</p>
+       <p>E por fim… se em algum momento você esquecer quem você é… lembre da menina de 12 anos, com o rosto sujo de fumaça, orgulhosa diante de um fogão improvisado, dizendo:</p>
+       <blockquote class="citacao">Acabou o gás… mas não acabou a comida.</blockquote>
+       <p class="sem-indent">Ali… ali nasceu tudo. E continua nascendo. Continue crescendo, vivendo!</p>
+       <p>Com amor,</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 11 — CARTA IX · Paula
+     ======================================================================== */
+  {
+    id: "paula",
+    numero: "IX",
+    nome: "Paula",
+    saudacao: "Paula… Paulinha, vem cá",
+    idade: "",
+    cidade: "",
+    foto: "fotos/paula.jpg",
+    epigrafe: "Aquela menina nunca precisou ser consertada. Ela só precisava ser compreendida.",
+    assinatura: "Paula",
+    paginas: [
+      `<p class="sem-indent">Eu sei que você ainda não entende muita coisa. Mas você sente. E sentir… sempre foi o seu primeiro idioma.</p>
+       <p>Você observa mais do que fala. Percebe o que ninguém nomeia, porque não precisa de rótulos. Feminismo e toda essa militância que faz parte da nossa essência, foi aprendida de maneira empírica.</p>
+       <p>E, mesmo sem saber explicar, já existe em você uma inquietação que não cabe dentro da infância. Você acha que é exagero, mas não é. É lucidez nascendo cedo demais.</p>
+       <p>Você cresceu num lugar onde o amor não era dito, era feito. Como bem diz bell hooks: <em>amar é verbo, é ação</em>. E eu sei que isso, às vezes, confunde, porque você aprende a ler o cuidado nas entrelinhas, mas cresce sem saber exatamente como pedir colo.</p>
+       <p>A presença feminina, latente, no nosso dia a dia, foi decisiva para nos tornarmos quem somos hoje. Você morreria de tanto orgulho. Essa essência vem da mamãe, que sempre ocupou o espaço que lhe cabia quando ainda nem se falava disso. Fomos educadas por uma mulher que não sabia o nome do feminismo, mas sabia vivê-lo. E isso… isso te atravessou inteira.</p>
+       <p class="sem-indent">Vai chegar um momento em que você vai querer entender o mundo. E você vai estudar… ao redor do mundo. Vai unir a teoria com a experiência e isso vai enriquecer a vida de quem estiver perto de você, muito. Vai mergulhar em histórias, teorias, nomes que hoje você nem imagina.</p>
+       <p>E aí… Paulinha… vai doer. Porque conhecer é sinônimo de perder um tipo de inocência que nunca mais volta. Você vai perceber que aquilo que parecia individual… nunca foi só seu.</p>`,
+
+      `<blockquote class="citacao">Toda vez que a gente come o fruto do conhecimento, a gente é expulsa de um paraíso.<span class="citacao-atribuicao">— Melanie Klein</span></blockquote>
+       <p class="sem-indent">E eu senti que eu não fui expulsa — eu fui chutada e fui rolando, porque não tem volta, não tem como desver nada, não tem como desconhecer o que já é conhecido.</p>
+       <p>E quando você entender isso… não tem retorno. Mas deixa eu te contar: essa dor não te destrói. Ela te posiciona. Você vai se tornar uma mulher que escuta. E escuta de verdade.</p>
+       <p>Vai carregar histórias de outras mulheres como quem segura algo sagrado. Vai perceber padrões, repetições, feridas que atravessam corpos diferentes. E vai se fazer uma pergunta que muda tudo: <em>"como pode ser coincidência?"</em> Não é.</p>
+       <p class="sem-indent">Paula, eu preciso te preparar para algumas coisas que você não deveria viver… mas vai. Nem todo espaço é seguro. Nem todo gesto é cuidado. E vai ter momentos em que o seu corpo vai saber antes da sua consciência.</p>
+       <p>Você vai tentar entender. Vai buscar lógica onde só existe violência. Eu queria tanto poder te poupar disso… mas eu não posso. O que eu posso é te dizer:</p>
+       <blockquote class="citacao">Você não foi responsável.<br>Você não provocou.<br>Você não escolheu.<br>Você não mereceu.</blockquote>
+       <p class="sem-indent">E mesmo quando você não lembrar… o seu corpo vai lembrar por você. Vai levar tempo até você conseguir nomear isso. Vai levar tempo até você parar de se perguntar <em>"por quê"</em>. Mas um dia… você vai parar de se culpar. E esse dia muda tudo.</p>
+       <p>Você vai continuar, mesmo com medo. Mesmo com raiva. Mesmo com essa sensação de que o mundo é maior, e mais injusto, do que você imaginava.</p>`,
+
+      `<p>E sabe o que é mais bonito nisso tudo? Você não vai endurecer. Você vai ficar mais afiada, mais crítica, e combativa… mas também vai aprender, aos poucos, a ser afetiva. Vai ser um exercício, quase diário. Porque falar firme sempre foi mais fácil do que falar com doçura. Se posicionar sempre foi mais natural do que se abrir.</p>
+       <p class="sem-indent">Você vai amar cuidando — essa é a sua linguagem: o cuidado. Vai amar dizendo. Vai amar tentando. O mais importante: você vai se autorizar a viver tudo o que tiver vontade sem se forçar a permanecer em lugar algum ou em nenhum relacionamento.</p>
+       <p>E, aos poucos… vai se permitir sentir. Inclusive prazer, especialmente a liberdade, especialmente <em>com</em> liberdade. Um dia você vai olhar pra sua sexualidade sem medo. Sem culpa. Sem precisar caber em nenhuma regra que não faça sentido pra você.</p>
+       <p>Estudar se tornou uma missão. Com 17 anos você vai estar na faculdade: psicologia. Entender a mente humana é uma baita responsabilidade! E isso… isso também é revolução.</p>
+       <p>Você ainda não sabe, mas existe uma palavra que vai te acompanhar pela vida inteira: <em>justiça</em>. Ela já mora em você e assim nós somos: justiceiras. Continuamos inconformadas com injustiça e isso é a base do trabalho de escuta que fazemos há mais de 21 anos. Nosso trabalho é lindo, e necessário.</p>
+       <p>Você vai acordar com vontade de mostrar para outras mulheres que elas não estão erradas. Que existe uma lógica maior, coletiva, estrutural. Que a dor delas faz sentido. Elas entenderão que não estão sozinhas, que há muitas como elas, como eu, como você. Você vai devolver voz para quem foi silenciada.</p>`,
+
+      `<blockquote class="citacao">Aquela menina nunca precisou ser consertada. Ela só precisava ser compreendida.</blockquote>
+       <p class="sem-indent">Então vem tranquila. Não precisa correr. Você não precisa dar conta de tudo agora. A vida vai te atravessar, sim. Mas você também vai atravessar a vida, com consciência, com coragem e com uma força que você ainda nem imagina que tem.</p>
+       <p>Você vai ficar orgulhosa da mulher que se tornou e que, no fundo, sempre esteve aí, dentro de você.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 12 — CARTA X · Sheila
+     ======================================================================== */
+  {
+    id: "sheila",
+    numero: "X",
+    nome: "Sheila",
+    saudacao: "Oi, Sheilinha",
+    idade: "quase 70 anos",
+    cidade: "",
+    foto: "fotos/sheila.jpg",
+    epigrafe: "Você também é… uma travessia, VIVA.",
+    assinatura: "Sheila",
+    paginas: [
+      `<p class="sem-indent">Há quanto tempo a gente não se encontra assim, né? Eu queria ter vindo mais vezes, ter sentado ao seu lado em outros momentos… mas talvez a vida tenha o tempo certo das coisas. E agora, aos quase 70 anos, eu sinto que esse encontro precisava acontecer.</p>
+       <p>Setenta anos… olha quanta vida cabe dentro disso. Você ainda nem imagina, mas vai viver muito. Intensamente. Do seu jeito. E eu não vou te enganar: não vai ser fácil.</p>
+       <p>Vão existir muitas pedras no caminho, algumas tão grandes que você vai achar que não vai conseguir atravessar. Mas tem uma coisa que eu preciso te contar logo de cara — e talvez seja a mais importante de todas:</p>
+       <blockquote class="citacao">Você nunca vai perder a sua alegria.</blockquote>
+       <p class="sem-indent">Esse seu jeito leve, de rir alto, de brincar na rua como se o mundo fosse inteiro seu… isso fica. Mesmo quando a vida apertar, mesmo quando o peito doer, mesmo quando a bronquite vier e você continuar ali, com o nariz sujo, o corpo cansado e o coração inteiro. Essa menina não vai embora.</p>
+       <p>Você vai duvidar de si muitas vezes. Vai se sentir pequena, vai se sentir deixada de lado, vai tentar entender por que, tantas vezes, parece que você está amando mais do que sendo amada. Mas, ao mesmo tempo, vão ter momentos em que você vai perceber: as pessoas te procuram. Elas gostam de te ouvir, gostam da sua presença, da sua energia, do seu jeito de estar no mundo. Isso também é amor.</p>`,
+
+      `<p class="sem-indent">Nossa infância teve cor, teve rua, teve liberdade. Você queria tudo que via pela frente — até ferro velho virava desejo. Andou de bicicleta, caiu, levantou, riu… nunca teve muito medo de tentar. E isso diz muito sobre quem você é.</p>
+       <p>Você nasceu em um tempo em que ser mulher já vinha com um roteiro pronto. E, de alguma forma, você seguiu esse roteiro… casou, teve filhos, construiu uma família. Mas nunca coube completamente dentro dele.</p>
+       <p>Você sempre foi grande demais pra caber em qualquer lugar que tentassem te colocar. Por isso, eu escolhi seguir alguns caminhos que foram mais solitários. Não tenha medo, porque valeu a pena. Porque isso permitiu que você, que nós, criássemos nossos próprios espaços, sem precisarmos nos apertar.</p>
+       <p class="sem-indent">Teve um lugar… que talvez tenha sido um dos poucos em que você se sentiu inteira. <em>O Travessia</em>.</p>
+       <p>Não era só uma choperia. Era um pedaço de nós existindo no mundo. Tinha música, tinha encontro, tinha gente, tinha vida acontecendo. Tinha aquele som que atravessava a noite e parecia dizer, baixinho, que apesar de tudo… havia beleza.</p>
+       <p>Ali, você foi feliz. E você sabe disso. Talvez por isso doa tanto lembrar. Porque perder o Travessia não foi só perder um negócio. Foi perder um lugar onde você se reconhecia, onde a vida fazia sentido, onde você não era <em>"a que faltava"</em>, mas a que transbordava.</p>
+       <p>E mesmo assim… você seguiu. Tudo fez parte das nossas escolhas. Virar a página também é uma escolha.</p>`,
+
+      `<p>Tiveram perdas que chegaram sem pedir licença. Coisas que escaparam das suas mãos antes mesmo de você conseguir entender. Planos que não se sustentaram, caminhos que não deram certo. E teve também aqueles períodos em que a vida pareceu fechar as portas — literalmente e por dentro.</p>
+       <p>Mas, ainda assim, você ficou. Você sustentou e precisou segurar em grades que trancafiavam uma parte de você, por algum tempo… você não virou as costas para o amor. E isso diz mais sobre você do que qualquer dor que tenha atravessado.</p>
+       <p class="sem-indent">Você é intensa, Sheilinha. Sempre foi. Ama muito, se entrega muito, espera muito… e quando não encontra do outro lado o que imaginou, se machuca, se fecha, tenta se proteger como pode. Às vezes com julgamento. Às vezes com silêncio. Às vezes guardando aquilo que não conseguiu dizer.</p>
+       <p>Mas olha que coisa bonita — mesmo assim, você nunca deixou de amar. Nunca deixou de rir. Nunca deixou de ser transparente. Nunca deixou de ser você. E isso sustenta muita coisa.</p>
+       <p>Você construiu uma relação linda com seus filhos. Uma relação de verdade, sem máscara, sem distância. Eles te conhecem, te enxergam, te amam — e isso não acontece por acaso. Isso é construção sua.</p>
+       <p>Você também buscou sentido. Foi atrás da espiritualidade, tentou entender a vida para além do que te aconteceu. E hoje consegue olhar pra mamãe com mais compreensão… entende que ela também fez o que pôde, dentro do que aprendeu, dentro do que viveu.</p>
+       <p class="sem-indent">Mas eu sei… tem uma parte sua que ainda mora lá atrás. Na volta de Belo Horizonte. Na sensação de que poderia ter sido diferente. No <em>"e se…"</em> que nunca termina.</p>`,
+
+      `<p>Talvez pudesse… mas talvez não. Porque, no fim, você fez escolhas com o coração que tinha naquele momento. Com as dores, com as faltas, com os desejos e com as limitações daquele tempo. E isso precisa começar a bastar, sem culpa e com amor pela nossa trajetória, que é linda!</p>
+       <p>Você não precisa reescrever a sua história pra validar a sua vida. Ela já aconteceu. E ela tem valor — inteira, do jeito que é.</p>
+       <p>Agora, aos quase 70, eu quero te convidar pra um outro lugar. Um lugar onde você não é mais a que mais sofreu… mas a que atravessou. A que caiu e levantou. A que perdeu e tentou de novo. A que amou — mesmo quando doeu. A que criou espaços de vida, como o Travessia… e também aprendeu a existir quando esses espaços já não estavam mais lá.</p>
+       <p>A sua história não é leve. Mas ela é viva.</p>
+       <blockquote class="citacao">E você também é… uma travessia, VIVA.</blockquote>
+       <p class="sem-indent">Nem sempre do jeito que a gente planeja, nem sempre com a música que a gente escolheria, mas ainda assim… um caminho que segue. E olha só… você atravessou.</p>
+       <p>O Travessia nunca acabou, Sheilinha. Na verdade você nunca perdeu. Porque tudo isso vive, junto com a gente, nas nossas memórias de amor por tudo o que fizemos, por cada passo. Ela só deixou de ser um lugar… pra virar quem você é, quem eu sou, quem nós somos.</p>
+       <p>Obrigada por tudo, até aqui. Agora eu continuo, com a mesma alegria. Prometo!</p>`
+    ]
+  },
+
+];
+
+/* ==========================================================================
+   BLOCO 13 — EXPORT
+   ========================================================================== */
+if (typeof module !== 'undefined') module.exports = CARTAS;
+
+/**
+ * TRAVESSIAS — cartas de mulheres reais
+ * app.js — Orquestra mobile e desktop a partir de um único ponto de entrada
+ *
+ * Lógica:
+ * - Detecta o breakpoint (960px) via window.innerWidth
+ * - Inicializa o layout correto (mobile ou desktop)
+ * - Reage ao redimensionamento da janela e troca de layout se necessário
+ *
+ * BLOCO 01 — Constantes e estado
+ * BLOCO 02 — Detecção de layout
+ * BLOCO 03 — Utilitários compartilhados
+ * BLOCO 04 — Versão mobile
+ * BLOCO 05 — Versão desktop
+ * BLOCO 06 — Inicialização
+ */
+
+/* ==========================================================================
+   BLOCO 01 — Constantes e estado
+   ========================================================================== */
+
+const BP_DESKTOP = 960;
+
+/* Rótulo do número da carta (suporta Abertura, Prefácio e outras sem numeral) */
+function rotuloNumero(c) {
+  return c.numero ? `Carta ${c.numero}` : (c.label || "");
+}
+
+// Estado global da aplicação
+const estado = {
+  cartaAtiva: null,
+  paginaIdx: 0,
+  layout: null, // "mobile" | "desktop"
+};
+
+/* ==========================================================================
+   BLOCO 02 — Detecção de layout
+   ========================================================================== */
+
+function layoutAtual() {
+  return window.innerWidth >= BP_DESKTOP ? "desktop" : "mobile";
+}
+
+function inicializar() {
+  const layout = layoutAtual();
+  estado.layout = layout;
+  if (layout === "desktop") {
+    inicializarDesktop();
+  } else {
+    inicializarMobile();
+  }
+}
+
+// Trocar de layout se a janela for redimensionada cruzando o breakpoint
+let layoutAnterior = null;
+window.addEventListener("resize", () => {
+  const novoLayout = layoutAtual();
+  if (novoLayout !== layoutAnterior) {
+    layoutAnterior = novoLayout;
+    estado.layout = novoLayout;
+    fecharTudo();
+    // Não precisa re-inicializar os event listeners (já estão no DOM)
+    // Só precisamos garantir que o estado visual está limpo
+  }
+});
+
+/* ==========================================================================
+   BLOCO 03 — Utilitários compartilhados
+   ========================================================================== */
+
+/* Fechamento padrão de uma carta — sempre carrega "Por Renata Leão", alinhado à direita */
+function fechamentoHtml(carta) {
+  const data = carta.numero ? "Abril · 2025" : "2025";
+  return `
+    <div class="fechamento">
+      <div class="fechamento-ornamento">· · ·</div>
+      <div class="assinatura">${carta.assinatura}</div>
+      <div class="assinatura-meta"><span>${data}</span><br>Por Renata Leão</div>
+    </div>`;
+}
+
+/* Normalização tipográfica: aspas curvas, em-dash, reticências */
+function normalizarTipografia(html) {
+  return html
+    .replace(/"([^"]+)"/g, "&ldquo;$1&rdquo;")  // aspas retas → curvas
+    .replace(/(\w)--(\w)/g, "$1—$2")             // hífen duplo entre letras → em-dash
+    .replace(/\.{3}/g, "…");                     // três pontos → reticências
+}
+
+function fecharTudo() {
+  // Mobile
+  const telaCarta = document.getElementById("tela-carta");
+  if (telaCarta) telaCarta.classList.remove("aberta");
+  document.body.classList.remove("carta-aberta");
+
+  // Desktop
+  const painel = document.getElementById("painel");
+  const overlay = document.getElementById("painel-overlay");
+  const palco = document.getElementById("palco-desktop");
+  if (painel) painel.classList.remove("aberto");
+  if (overlay) overlay.classList.remove("aberto");
+  if (palco) palco.classList.remove("has-open");
+
+  document.querySelectorAll(".carta-item").forEach((el) =>
+    el.classList.remove("ativa")
+  );
+  estado.cartaAtiva = null;
+  estado.paginaIdx = 0;
+}
+
+function metaHtml(carta) {
+  const partes = [];
+  if (carta.idade) partes.push(`<span>${carta.idade}</span>`);
+  if (carta.cidade) partes.push(`<span>${carta.cidade}</span>`);
+  partes.push("Por <span>Renata Leão</span>");
+  return partes.join("<br>");
+}
+
+/* ==========================================================================
+   BLOCO 04 — Versão mobile
+   ========================================================================== */
+
+/* Define o variant da pagina de abertura mobile baseado em tipo */
+function classeTipo(carta) {
+  return carta.numero ? "" : " carta-" + (carta.tipo || "abertura");
+}
+
+function inicializarMobile() {
+  // Cards da lista → abrir carta
+  document.querySelectorAll(".card[data-id]").forEach((card) => {
+    card.addEventListener("click", () => {
+      if (estado.layout !== "mobile") return;
+      abrirCartaMobile(card.dataset.id);
+    });
+  });
+
+  // Botão voltar
+  const btnVoltar = document.getElementById("btn-voltar");
+  if (btnVoltar) btnVoltar.addEventListener("click", fecharCartaMobile);
+
+  // Navegação
+  document.getElementById("btn-ant")?.addEventListener("click", () =>
+    irParaPaginaMobile(estado.paginaIdx - 1)
+  );
+  document.getElementById("btn-prox")?.addEventListener("click", () =>
+    irParaPaginaMobile(estado.paginaIdx + 1)
+  );
+
+  // Pontos de navegação (delegação)
+  document.getElementById("nav-pontos-mobile")?.addEventListener("click", (e) => {
+    const ponto = e.target.closest(".nav-ponto");
+    if (ponto) irParaPaginaMobile(parseInt(ponto.dataset.idx, 10));
+  });
+
+  // Swipe
+  let touchStartX = 0, touchStartY = 0;
+  const viewport = document.getElementById("paginas-viewport-mobile");
+  if (viewport) {
+    viewport.addEventListener("touchstart", (e) => {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", (e) => {
+      if (estado.layout !== "mobile") return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0) irParaPaginaMobile(estado.paginaIdx + 1);
+        else irParaPaginaMobile(estado.paginaIdx - 1);
+      }
+    }, { passive: true });
+  }
+
+  // Teclado
+  window.addEventListener("keydown", (e) => {
+    if (estado.layout !== "mobile") return;
+    const telaCarta = document.getElementById("tela-carta");
+    if (!telaCarta?.classList.contains("aberta")) return;
+    if (e.key === "Escape") fecharCartaMobile();
+    if (e.key === "ArrowLeft") irParaPaginaMobile(estado.paginaIdx - 1);
+    if (e.key === "ArrowRight") irParaPaginaMobile(estado.paginaIdx + 1);
+  });
+}
+
+function abrirCartaMobile(id) {
+  const carta = CARTAS.find((c) => c.id === id);
+  if (!carta) return;
+  estado.cartaAtiva = carta;
+  estado.paginaIdx = 0;
+
+  // Preencher cabeçalho
+  document.getElementById("carta-topo-nome").textContent = carta.nome;
+
+  // Montar páginas: primeira é a abertura
+  const viewport = document.getElementById("paginas-viewport-mobile");
+  let html = `
+    <div class="pagina-mobile pagina-abertura${classeTipo(carta)}" data-idx="0">
+      <img class="abertura-foto" src="${carta.foto}" alt="${carta.nome}">
+      <div class="abertura-info">
+        <div class="abertura-numero">${rotuloNumero(carta)}</div>
+        <div class="abertura-saudacao">${carta.saudacao}</div>
+        <div class="abertura-fio"></div>
+        <div class="abertura-meta">${metaHtml(carta)}</div>
+        <div class="abertura-epigrafe">&ldquo;${carta.epigrafe}&rdquo;</div>
+        <div class="abertura-swipe-dica">arraste para ler</div>
+      </div>
+    </div>`;
+
+  carta.paginas.forEach((pHtml, i) => {
+    const cls = i === 0
+      ? "pagina-mobile pagina-leitura primeira"
+      : "pagina-mobile pagina-leitura";
+    const ehUltima = i === carta.paginas.length - 1;
+    const conteudo = normalizarTipografia(pHtml) + (ehUltima ? fechamentoHtml(carta) : "");
+    html += `<div class="${cls}" data-idx="${i + 1}">${conteudo}</div>`;
+  });
+
+  viewport.innerHTML = html;
+
+  // Pontos
+  const total = carta.paginas.length + 1;
+  const navPontos = document.getElementById("nav-pontos-mobile");
+  navPontos.innerHTML = Array.from({ length: total }, (_, i) =>
+    `<span class="nav-ponto" data-idx="${i}"></span>`
+  ).join("");
+
+  document.getElementById("pag-total-mobile").textContent = String(total).padStart(2, "0");
+
+  atualizarPaginaMobile();
+
+  // Abrir tela
+  document.getElementById("tela-carta").classList.add("aberta");
+  document.body.classList.add("carta-aberta");
+  window.scrollTo(0, 0);
+}
+
+function fecharCartaMobile() {
+  document.getElementById("tela-carta").classList.remove("aberta");
+  document.body.classList.remove("carta-aberta");
+  setTimeout(() => {
+    if (!document.getElementById("tela-carta").classList.contains("aberta")) {
+      document.getElementById("paginas-viewport-mobile").innerHTML = "";
+      estado.cartaAtiva = null;
+    }
+  }, 450);
+}
+
+function irParaPaginaMobile(i) {
+  if (!estado.cartaAtiva) return;
+  const total = estado.cartaAtiva.paginas.length + 1;
+  if (i < 0 || i >= total) return;
+  estado.paginaIdx = i;
+  atualizarPaginaMobile();
+}
+
+function atualizarPaginaMobile() {
+  if (!estado.cartaAtiva) return;
+  const paginas = document.querySelectorAll("#paginas-viewport-mobile .pagina-mobile");
+  paginas.forEach((p, i) => {
+    p.classList.remove("ativa", "fora-esquerda");
+    if (i === estado.paginaIdx) { p.classList.add("ativa"); p.scrollTop = 0; }
+    else if (i < estado.paginaIdx) p.classList.add("fora-esquerda");
+  });
+
+  const total = estado.cartaAtiva.paginas.length + 1;
+  document.getElementById("pag-atual-mobile").textContent =
+    String(estado.paginaIdx + 1).padStart(2, "0");
+  document.getElementById("btn-ant").disabled = estado.paginaIdx === 0;
+  document.getElementById("btn-prox").disabled = estado.paginaIdx === total - 1;
+
+  document.querySelectorAll("#nav-pontos-mobile .nav-ponto").forEach((p, i) =>
+    p.classList.toggle("ativo", i === estado.paginaIdx)
+  );
+}
+
+/* ==========================================================================
+   BLOCO 05 — Versão desktop
+   ========================================================================== */
+
+function inicializarDesktop() {
+  const lista = document.getElementById("cartas-lista");
+  const palco = document.getElementById("palco-desktop");
+
+  // Hover → preview
+  lista?.addEventListener("mouseover", (e) => {
+    if (estado.layout !== "desktop") return;
+    const item = e.target.closest(".carta-item");
+    if (!item) return;
+    palco.classList.add("has-hover");
+    document.querySelectorAll(".preview").forEach((p) =>
+      p.classList.toggle("visible", p.dataset.id === item.dataset.id)
+    );
+  });
+
+  lista?.addEventListener("mouseleave", () => {
+    if (estado.layout !== "desktop") return;
+    palco.classList.remove("has-hover");
+    document.querySelectorAll(".preview").forEach((p) =>
+      p.classList.remove("visible")
+    );
+  });
+
+  // Clique → abrir painel
+  lista?.addEventListener("click", (e) => {
+    if (estado.layout !== "desktop") return;
+    const item = e.target.closest(".carta-item");
+    if (item) abrirPainel(item.dataset.id);
+  });
+
+  // Fechar painel
+  document.getElementById("btn-fechar")?.addEventListener("click", fecharPainel);
+  document.getElementById("painel-overlay")?.addEventListener("click", fecharPainel);
+
+  // Navegação do painel
+  document.getElementById("btn-anterior")?.addEventListener("click", () =>
+    irParaPaginaDesktop(estado.paginaIdx - 1)
+  );
+  document.getElementById("btn-proxima")?.addEventListener("click", () =>
+    irParaPaginaDesktop(estado.paginaIdx + 1)
+  );
+
+  // Pontos (delegação)
+  document.getElementById("nav-pontos-desktop")?.addEventListener("click", (e) => {
+    const ponto = e.target.closest(".nav-ponto");
+    if (ponto) irParaPaginaDesktop(parseInt(ponto.dataset.idx, 10));
+  });
+
+  // Botão "Ler carta →" da cover → avança para a 1ª página de texto
+  document.getElementById("paginas-track-desktop")?.addEventListener("click", (e) => {
+    if (e.target.closest(".cover-cta")) irParaPaginaDesktop(estado.paginaIdx + 1);
+  });
+
+  // Teclado
+  window.addEventListener("keydown", (e) => {
+    if (estado.layout !== "desktop") return;
+    if (!document.getElementById("painel")?.classList.contains("aberto")) return;
+    if (e.key === "Escape") fecharPainel();
+    if (e.key === "ArrowLeft") irParaPaginaDesktop(estado.paginaIdx - 1);
+    if (e.key === "ArrowRight") irParaPaginaDesktop(estado.paginaIdx + 1);
+  });
+}
+
+function abrirPainel(id) {
+  const carta = CARTAS.find((c) => c.id === id);
+  if (!carta) return;
+  estado.cartaAtiva = carta;
+  estado.paginaIdx = 0;
+
+  // Foto e info
+  document.getElementById("painel-img").src = carta.foto;
+  document.getElementById("painel-img").alt = carta.nome;
+  document.getElementById("painel-numero").textContent = rotuloNumero(carta);
+  document.getElementById("painel-saudacao").textContent = carta.saudacao;
+  document.getElementById("painel-meta").innerHTML = metaHtml(carta);
+  document.getElementById("painel-topo-nome").textContent = carta.nome;
+  const painelEl = document.getElementById("painel");
+  painelEl.classList.remove("painel-abertura", "painel-prefacio");
+  if (!carta.numero) painelEl.classList.add("painel-" + (carta.tipo || "abertura"));
+
+  // Páginas: cover (idx 0) + páginas de texto (idx 1..N)
+  const track = document.getElementById("paginas-track-desktop");
+  const textoCta = carta.numero
+    ? "Ler carta"
+    : "Ler " + (carta.label || "abertura").toLowerCase();
+  const coverPg = `
+    <div class="pagina-desktop pagina-cover" data-idx="0">
+      <div class="cover-inner">
+        <div class="cover-rotulo">${rotuloNumero(carta)}</div>
+        <h2 class="cover-saudacao">${carta.saudacao}</h2>
+        <div class="cover-fio"></div>
+        <p class="cover-epigrafe">&ldquo;${carta.epigrafe}&rdquo;</p>
+        <button type="button" class="cover-cta" data-action="ler">
+          ${textoCta} <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>`;
+  const textPgs = carta.paginas.map((pHtml, i) => {
+    const cls = i === 0 ? "pagina-desktop primeira" : "pagina-desktop";
+    const ehUltima = i === carta.paginas.length - 1;
+    const conteudo = normalizarTipografia(pHtml) + (ehUltima ? fechamentoHtml(carta) : "");
+    return `<div class="${cls}" data-idx="${i + 1}">${conteudo}</div>`;
+  }).join("");
+  track.innerHTML = coverPg + textPgs;
+
+  // Pontos = N+1 (inclui cover)
+  const total = carta.paginas.length + 1;
+  document.getElementById("nav-pontos-desktop").innerHTML = Array.from(
+    { length: total },
+    (_, i) => `<span class="nav-ponto" data-idx="${i}"></span>`
+  ).join("");
+  document.getElementById("pag-total-desktop").textContent =
+    String(total).padStart(2, "0");
+
+  atualizarPaginaDesktop();
+
+  // Destaque lateral
+  document.querySelectorAll(".carta-item").forEach((el) =>
+    el.classList.toggle("ativa", el.dataset.id === id)
+  );
+
+  // Abrir
+  document.getElementById("painel").classList.add("aberto");
+  document.getElementById("painel-overlay").classList.add("aberto");
+  document.getElementById("palco-desktop").classList.add("has-open");
+}
+
+function fecharPainel() {
+  document.getElementById("painel").classList.remove("aberto");
+  document.getElementById("painel-overlay").classList.remove("aberto");
+  document.getElementById("palco-desktop").classList.remove("has-open");
+  document.querySelectorAll(".carta-item").forEach((el) =>
+    el.classList.remove("ativa")
+  );
+  estado.cartaAtiva = null;
+}
+
+function irParaPaginaDesktop(i) {
+  if (!estado.cartaAtiva) return;
+  const total = estado.cartaAtiva.paginas.length + 1;  // +1 = cover
+  if (i < 0 || i >= total) return;
+  estado.paginaIdx = i;
+  atualizarPaginaDesktop();
+}
+
+function atualizarPaginaDesktop() {
+  if (!estado.cartaAtiva) return;
+  const paginas = document.querySelectorAll("#paginas-track-desktop .pagina-desktop");
+  paginas.forEach((p, i) => {
+    p.classList.remove("ativa", "fora-esquerda");
+    if (i === estado.paginaIdx) { p.classList.add("ativa"); p.scrollTop = 0; }
+    else if (i < estado.paginaIdx) p.classList.add("fora-esquerda");
+  });
+
+  const total = estado.cartaAtiva.paginas.length + 1;  // +1 = cover
+  document.getElementById("pag-atual-desktop").textContent =
+    String(estado.paginaIdx + 1).padStart(2, "0");
+  document.getElementById("btn-anterior").disabled = estado.paginaIdx === 0;
+  document.getElementById("btn-proxima").disabled = estado.paginaIdx === total - 1;
+
+  document.querySelectorAll("#nav-pontos-desktop .nav-ponto").forEach((p, i) =>
+    p.classList.toggle("ativo", i === estado.paginaIdx)
+  );
+
+  // Toggle painel state for cover (idx 0) — esconde info sobre a foto
+  const painelEl = document.getElementById("painel");
+  painelEl.classList.toggle("painel-cover-ativa", estado.paginaIdx === 0);
+}
+
+/* ==========================================================================
+   BLOCO 06 — Modal "Faça parte"
+   ========================================================================== */
+
+function inicializarModalParticipar() {
+  const modal   = document.getElementById("modal-participar");
+  const overlay = document.getElementById("modal-overlay");
+  if (!modal || !overlay) return;
+
+  function abrir() {
+    modal.classList.add("aberto");
+    overlay.classList.add("aberto");
+    modal.setAttribute("aria-hidden", "false");
+    const firstInput = modal.querySelector("input, textarea");
+    if (firstInput) setTimeout(() => firstInput.focus(), 250);
+  }
+  function fechar() {
+    modal.classList.remove("aberto");
+    overlay.classList.remove("aberto");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  document.getElementById("abrir-participar")?.addEventListener("click", abrir);
+  document.getElementById("abrir-participar-mobile")?.addEventListener("click", abrir);
+  document.getElementById("fechar-participar")?.addEventListener("click", fechar);
+  overlay.addEventListener("click", fechar);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("aberto")) fechar();
+  });
+}
+
+/* ==========================================================================
+   BLOCO 07 — Inicialização
+   ========================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  layoutAnterior = layoutAtual();
+  inicializar();
+  inicializarModalParticipar();
+});
+
+</script>
+
+</body>
+</html>
