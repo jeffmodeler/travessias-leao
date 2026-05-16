@@ -1,0 +1,780 @@
+/* ==========================================================================
+   TRAVESSIAS — versão DESKTOP (≥ 960px)
+   Coluna lateral + hover com preview + painel deslizante
+   ========================================================================== */
+
+@media (min-width: 960px) {
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Esconder elementos mobile */
+  .tela-lista,
+  .tela-carta { display: none !important; }
+
+  /* ------------------------------------------------------------------
+     PALCO PRINCIPAL
+     ------------------------------------------------------------------ */
+  .palco-desktop {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    background: var(--tinta);
+    color: var(--creme);
+    overflow: hidden;
+  }
+
+  /* ------------------------------------------------------------------
+     COLUNA LATERAL (NOMES) — 11 itens cabem sem rolagem em viewport >= 720px
+     Layout em três faixas: header (fixo) · lista (flex:1) · rodapé (fixo)
+     ------------------------------------------------------------------ */
+  .lateral {
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+    border-right: 1px solid rgba(200,155,74,0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 36px 28px;
+    position: relative;
+    z-index: 3;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .lateral-header {
+    flex-shrink: 0;
+    margin-bottom: 18px;
+  }
+
+  .lateral-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-size: 40px;
+    letter-spacing: 0.06em;
+    line-height: 0.95;
+    color: var(--creme);
+    margin-bottom: 8px;
+  }
+
+  .lateral-subtitulo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mel);
+    margin-bottom: 14px;
+  }
+
+  .lateral-fio {
+    width: 40px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.5;
+  }
+
+  /* Lista de cartas — 11 itens distribuídos equitativamente, sem scroll */
+  .cartas-lista {
+    list-style: none;
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+  }
+
+  .carta-item {
+    flex: 1 1 0;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2px 0;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+    border-bottom: 1px solid rgba(200,155,74,0.08);
+  }
+  .carta-item:last-child { border-bottom: none; }
+  .carta-item:hover { transform: translateX(6px); }
+
+  .carta-numero {
+    font-family: var(--fonte-meta);
+    font-size: 8.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--terra);
+    display: block;
+    margin-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .carta-nome-lateral {
+    font-family: var(--fonte-titulo);
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--creme);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    transition: color 0.3s;
+  }
+
+  .carta-item:hover .carta-nome-lateral { color: var(--mel); }
+  .carta-item:hover .carta-numero { color: var(--mel); }
+  .carta-item.ativa .carta-nome-lateral { color: var(--mel); }
+  .carta-item.ativa .carta-numero { color: var(--mel); }
+
+  /* Variantes destacadas no sidebar */
+  .carta-item.abertura .carta-numero { color: var(--mel);   font-style: normal; }
+  .carta-item.prefacio .carta-numero { color: var(--terra); font-style: normal; }
+
+  /* ------------------------------------------------------------------
+     TRIGGER "Faça parte" — botão clicável no sidebar (abre modal)
+     Estilizado como uma carta-item, mas com destaque mel
+     ------------------------------------------------------------------ */
+  .participar-trigger {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 16px;
+    margin-top: 12px;
+    background: linear-gradient(180deg,
+                  rgba(200,155,74,0.18) 0%,
+                  rgba(200,155,74,0.06) 100%);
+    border: 1px solid rgba(200,155,74,0.55);
+    border-radius: 4px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s, border-color 0.25s;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+  .participar-trigger:hover {
+    background: linear-gradient(180deg,
+                  rgba(200,155,74,0.30) 0%,
+                  rgba(200,155,74,0.12) 100%);
+    border-color: var(--mel);
+    transform: translateX(4px);
+  }
+  .participar-trigger-numero {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 4px;
+  }
+  .participar-trigger-nome {
+    font-family: var(--fonte-titulo);
+    font-size: 18px;
+    color: var(--creme);
+    font-weight: 400;
+    line-height: 1.05;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .participar-trigger-seta {
+    color: var(--mel);
+    font-size: 14px;
+    transition: transform 0.25s;
+  }
+  .participar-trigger:hover .participar-trigger-seta {
+    transform: translateX(3px);
+  }
+
+  .lateral-rodape {
+    flex-shrink: 0;
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.7;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(200,155,74,0.12);
+    text-align: center;
+  }
+  .lateral-rodape span { color: var(--mel); }
+
+  /* ------------------------------------------------------------------
+     ÁREA CENTRAL (HERO + PREVIEWS)
+     ------------------------------------------------------------------ */
+  .central {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+  }
+
+  /* Hero inicial */
+  .hero {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--creme);
+    text-align: center;
+    padding: 0 80px;
+    opacity: 1;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .palco-desktop.has-hover .hero,
+  .palco-desktop.has-open .hero { opacity: 0; }
+
+  .hero-titulo {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    /* "TRAVESSIAS" tem 10 letras — clamp ajusta entre 1280px e 1920px+ */
+    font-size: clamp(82px, 9vw, 140px);
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    color: var(--creme);
+    margin-bottom: 24px;
+  }
+
+  .hero-sub {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--mel);
+    margin-bottom: 40px;
+  }
+
+  .hero-fio {
+    width: 60px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.5;
+    margin-bottom: 32px;
+  }
+
+  .hero-texto {
+    font-family: var(--fonte-texto);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--creme);
+    opacity: 0.8;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+
+  .hero-dica {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    opacity: 0.7;
+  }
+  .hero-dica::before, .hero-dica::after { content: "·"; margin: 0 14px; color: var(--mel); }
+
+  /* Previews por hover */
+  .previews {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .preview {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .preview.visible { opacity: 1; }
+
+  .preview-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 0 80px;
+    max-width: 100%;
+  }
+
+  .preview-foto {
+    width: 340px;
+    height: 480px;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 10px 20px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+
+  .preview-texto { max-width: 340px; color: var(--creme); }
+
+  .preview-carta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 16px;
+  }
+
+  .preview-nome {
+    font-family: var(--fonte-mao);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--creme);
+    margin-bottom: 20px;
+  }
+
+  .preview-fio {
+    width: 40px;
+    height: 1px;
+    background: var(--terra);
+    margin-bottom: 20px;
+  }
+
+  .preview-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--creme);
+    opacity: 0.85;
+    margin-bottom: 24px;
+  }
+
+  .preview-cta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.85;
+  }
+  .preview-cta::after { content: "→"; font-size: 14px; }
+
+  /* ------------------------------------------------------------------
+     PAINEL DESLIZANTE
+     ------------------------------------------------------------------ */
+  .painel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s, background 0.4s;
+    z-index: 10;
+  }
+  .painel-overlay.aberto {
+    opacity: 1;
+    pointer-events: auto;
+    background: rgba(10,16,24,0.55);
+  }
+
+  .painel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 66%;
+    max-width: 1100px;
+    background: var(--creme);
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.25,0.85,0.3,1);
+    z-index: 11;
+    box-shadow: -40px 0 80px rgba(0,0,0,0.3);
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    overflow: hidden;
+  }
+  .painel.aberto { transform: translateX(0); }
+
+  /* Foto + info */
+  .painel-foto {
+    position: relative;
+    background: var(--tinta);
+    overflow: hidden;
+  }
+  .painel-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.04);
+    display: block;
+  }
+  .painel-foto-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(30,42,56,0) 50%, rgba(30,42,56,0.75) 100%);
+    pointer-events: none;
+  }
+
+  /* Variante prefácio: oculta foto facial e mostra textura editorial */
+  .painel.painel-prefacio .painel-foto img { display: none; }
+  .painel.painel-prefacio .painel-foto {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(168,74,42,0.4) 0%, transparent 60%),
+      linear-gradient(180deg, var(--tinta) 0%, var(--tinta-suave) 100%);
+  }
+  .painel.painel-prefacio .painel-foto::before {
+    content: "T";
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-size: 460px;
+    line-height: 1;
+    color: var(--terra);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .painel-info {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 36px;
+    color: var(--creme);
+    z-index: 2;
+  }
+  .painel-numero {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mel);
+    margin-bottom: 12px;
+  }
+  .painel-saudacao {
+    font-family: var(--fonte-mao);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--creme);
+    margin-bottom: 16px;
+  }
+  .painel-meta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.85;
+    line-height: 1.9;
+  }
+  .painel-meta span { color: var(--mel); }
+
+  /* Conteúdo da carta */
+  .painel-carta {
+    display: flex;
+    flex-direction: column;
+    background: var(--creme);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .painel-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 56px 20px;
+    border-bottom: 1px solid rgba(92,107,78,0.15);
+    flex-shrink: 0;
+  }
+  .painel-topo-nome {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terra);
+    font-weight: 500;
+  }
+  .painel-topo-selo {
+    font-family: var(--fonte-meta);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .painel-fechar {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(92,107,78,0.3);
+    color: var(--tinta);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.2s, border-color 0.2s;
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+  .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+
+  /* Páginas da carta no painel — margens editoriais generosas */
+  .paginas-viewport-desktop {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    padding: 36px 0 28px;
+  }
+
+  .pagina-desktop {
+    position: absolute;
+    inset: 0;
+    padding: 0 88px 0 80px;   /* margem lateral generosa, tipo livro */
+    overflow: hidden;          /* sem scroll — leitura cabe na tela */
+    font-family: var(--fonte-texto);
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--tinta);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(30px);
+    transition: opacity 0.35s, transform 0.35s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cinza-claro) transparent;
+  }
+  .pagina-desktop.ativa { opacity: 1; pointer-events: auto; transform: translateX(0); }
+  .pagina-desktop.fora-esquerda { opacity: 0; transform: translateX(-30px); }
+
+  /* ------------------------------------------------------------------
+     COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
+     Aparece como primeira página de toda carta no painel desktop.
+     Ao clicar "Ler carta →" avança para a 1ª página de texto.
+     ------------------------------------------------------------------ */
+  .pagina-desktop.pagina-cover {
+    background-color: var(--tinta);
+    background-image: var(--tinta-textura);
+    padding: 0 64px;
+    display: flex;
+    align-items: center;
+    color: var(--creme);
+  }
+  .cover-inner {
+    width: 100%;
+    max-width: 460px;
+  }
+  .cover-rotulo {
+    font-family: var(--fonte-meta);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--mel);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .cover-saudacao {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 52px;
+    line-height: 1.02;
+    letter-spacing: 0.005em;
+    color: var(--creme);
+    margin-bottom: 24px;
+  }
+  .cover-fio {
+    width: 56px;
+    height: 1px;
+    background: var(--mel);
+    opacity: 0.55;
+    margin-bottom: 28px;
+  }
+  .cover-epigrafe {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--creme);
+    opacity: 0.85;
+    margin-bottom: 36px;
+  }
+  .cover-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-family: var(--fonte-meta);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--mel);
+    font-weight: 600;
+    cursor: pointer;
+    transition: gap 0.25s, color 0.2s;
+  }
+  .cover-cta:hover {
+    color: var(--terra);
+    gap: 18px;
+  }
+  .cover-cta span { font-size: 14px; }
+
+  /* Variante prefácio na cover — sutilmente diferente (terra) */
+  .pagina-cover.pagina-prefacio .cover-rotulo,
+  .painel-prefacio .pagina-cover .cover-rotulo {
+    color: var(--terra);
+  }
+
+  /* Quando a cover está ativa, esconde info sobre a foto (sem duplicação) */
+  .painel.painel-cover-ativa .painel-info { opacity: 0; }
+  .painel-info { transition: opacity 0.3s; }
+
+  .pagina-desktop p { margin-bottom: 1em; }
+  .pagina-desktop p + p { text-indent: 1.6em; margin-top: -0.2em; }
+  .pagina-desktop p.sem-indent { text-indent: 0 !important; }
+  .pagina-desktop em, .pagina-desktop i { font-style: italic; color: var(--tinta-suave); }
+
+  .pagina-desktop.primeira p:first-child::first-letter {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 4em;
+    float: left;
+    line-height: 0.85;
+    margin: 0.05em 0.1em 0 0;
+    color: var(--terra);
+  }
+
+  .pagina-desktop .citacao {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--tinta);
+    margin: 22px 0 22px 16px;
+    padding-left: 18px;
+    border-left: 2px solid var(--mel);
+  }
+  .pagina-desktop .citacao-atribuicao {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    font-style: normal;
+  }
+  .pagina-desktop .dialogo {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--oliva);
+    margin: 14px 0 14px 28px;
+    padding-left: 14px;
+    border-left: 1px solid var(--oliva);
+    line-height: 1.5;
+  }
+
+  .pagina-desktop .fechamento {
+    margin-top: 24px;
+    text-align: right;          /* nome e meta alinhados à direita */
+  }
+  .pagina-desktop .fechamento-ornamento {
+    text-align: center;
+    margin: 22px 0 18px;
+    color: var(--mel);
+    letter-spacing: 1em;
+    font-size: 12px;
+  }
+  .pagina-desktop .assinatura {
+    font-family: var(--fonte-titulo);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: 0.005em;
+    color: var(--tinta);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .pagina-desktop .assinatura-meta {
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    line-height: 1.9;
+  }
+  .pagina-desktop .assinatura-meta span { color: var(--terra); }
+
+  /* Navegação do painel */
+  .painel-nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 56px 24px;
+    border-top: 1px solid rgba(92,107,78,0.15);
+    background: var(--creme);
+  }
+
+  .nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,78,0.35);
+    background: transparent;
+    color: var(--tinta);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+  }
+  .nav-btn:not(:disabled):hover { background: var(--terra); color: var(--creme); border-color: var(--terra); transform: scale(1.05); }
+  .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  .nav-indicador {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--fonte-meta);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .nav-pontos { display: flex; gap: 8px; }
+  .nav-ponto {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cinza-claro);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .nav-ponto.ativo { background: var(--terra); transform: scale(1.3); }
+  .nav-ponto:hover { background: var(--mel); }
+
+  .nav-pagina {
+    font-variant-numeric: tabular-nums;
+    color: var(--cinza);
+  }
+  .nav-pagina span { color: var(--terra); }
+
+} /* fim @media desktop */

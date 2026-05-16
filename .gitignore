@@ -1,0 +1,14 @@
+# Backups locais e material-fonte (não versionar)
+backup_pre_travessias/
+ENXAME/
+old/
+
+# Arquivos temporários
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+
+# Dependências pesadas que não precisam de versionamento
+*.zip
+*.docx

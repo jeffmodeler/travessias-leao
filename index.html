@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- ==========================================================================
+     BLOCO 01 — HEAD / META
+     ========================================================================== -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
+<meta name="theme-color" content="#1E2A38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Travessias — dez cartas escritas a partir da escuta de mulheres reais. Por Renata Leão.">
+<title>Travessias — cartas de mulheres reais</title>
+
+<link rel="stylesheet" href="src/tokens.css">
+<link rel="stylesheet" href="src/mobile.css">
+<link rel="stylesheet" href="src/desktop.css">
+
+</head>
+<body>
+
+<!-- ==========================================================================
+     BLOCO 02 — MOBILE · Tela Lista (< 960px)
+     Renderizado sempre no DOM; ocultado via CSS no desktop
+     ========================================================================== -->
+
+<div class="tela-lista">
+  <header class="lista-header">
+    <h1 class="lista-titulo">Travessias</h1>
+    <div class="lista-subtitulo">cartas de mulheres reais</div>
+    <div class="lista-fio"></div>
+    <p class="lista-intro">
+      Dez mulheres escrevem para si mesmas. Cartas sobre memória, corpo,
+      ancestralidade, coragem — e o caminho coletivo de quem atravessa junto.
+    </p>
+  </header>
+
+  <div class="lista-secao">Cartas · volume 01</div>
+
+  <!-- Cards renderizados por BLOCO 06 (script de template) -->
+  <div class="cards" id="cards-mobile"></div>
+
+  <!-- BLOCO 02b — CTA "Faça parte" (mobile · abre o mesmo modal) -->
+  <button type="button" class="cta-participar" id="abrir-participar-mobile">
+    <div class="cta-rotulo">Faça parte</div>
+    <div class="cta-titulo">Sua história importa</div>
+    <p class="cta-texto">
+      Travessias nasce da escuta. Se você tem uma carta — para si mesma
+      ou para outra mulher — converse comigo no Instagram.
+    </p>
+    <div class="cta-link">@renataleaofotografia →</div>
+  </button>
+
+  <footer class="lista-rodape">
+    Volume 01 · 2025<br>
+    Por <span>Renata Leão</span>
+  </footer>
+</div>
+
+<!-- ==========================================================================
+     BLOCO 03 — MOBILE · Tela Carta (fullscreen com swipe)
+     ========================================================================== -->
+
+<div class="tela-carta" id="tela-carta">
+  <div class="carta-topo">
+    <button class="btn-voltar" id="btn-voltar" aria-label="Voltar">←</button>
+    <div class="carta-topo-titulo" id="carta-topo-nome"></div>
+    <div class="carta-topo-selo">Abril · 2025</div>
+  </div>
+
+  <div class="paginas-viewport-mobile" id="paginas-viewport-mobile"></div>
+
+  <div class="carta-nav-mobile">
+    <button class="nav-btn" id="btn-ant" aria-label="Página anterior">←</button>
+    <div class="nav-centro">
+      <div class="nav-pontos" id="nav-pontos-mobile"></div>
+      <div class="nav-pagina">
+        <span id="pag-atual-mobile">01</span> / <span id="pag-total-mobile">01</span>
+      </div>
+    </div>
+    <button class="nav-btn" id="btn-prox" aria-label="Próxima página">→</button>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     BLOCO 04 — DESKTOP · Palco (≥ 960px)
+     Coluna lateral + hero central + previews em hover
+     ========================================================================== -->
+
+<div class="palco-desktop" id="palco-desktop">
+
+  <!-- Coluna lateral · índice de cartas -->
+  <aside class="lateral">
+    <div class="lateral-header">
+      <h1 class="lateral-titulo">Travessias</h1>
+      <div class="lateral-subtitulo">cartas de mulheres reais</div>
+      <div class="lateral-fio"></div>
+    </div>
+
+    <!-- Lista renderizada por BLOCO 06 -->
+    <ol class="cartas-lista" id="cartas-lista"></ol>
+
+    <!-- BLOCO 04b — Trigger "Faça parte" (abre modal ao clicar) -->
+    <button type="button" class="participar-trigger" id="abrir-participar">
+      <span class="participar-trigger-numero">Participe</span>
+      <span class="participar-trigger-nome">Faça parte <span class="participar-trigger-seta" aria-hidden="true">→</span></span>
+    </button>
+
+    <div class="lateral-rodape">
+      Volume 01 · 2025<br>
+      Por <span>Renata Leão</span>
+    </div>
+  </aside>
+
+  <!-- Área central · hero + previews -->
+  <main class="central">
+    <div class="hero">
+      <div class="hero-titulo">TRAVESSIAS</div>
+      <div class="hero-sub">cartas de mulheres reais</div>
+      <div class="hero-fio"></div>
+      <p class="hero-texto">
+        Dez mulheres escrevem para si mesmas.<br>
+        Cartas sobre memória, corpo, ancestralidade,<br>
+        coragem — e o caminho coletivo de quem atravessa junto.
+      </p>
+      <div class="hero-dica">passe o cursor sobre um nome</div>
+    </div>
+
+    <!-- Previews renderizados por BLOCO 06 -->
+    <div class="previews" id="previews"></div>
+  </main>
+
+</div>
+
+<!-- ==========================================================================
+     BLOCO 05 — DESKTOP · Painel Deslizante (carta aberta)
+     ========================================================================== -->
+
+<div class="painel-overlay" id="painel-overlay"></div>
+<aside class="painel" id="painel" aria-hidden="true">
+  <button class="painel-fechar" id="btn-fechar" aria-label="Fechar carta">✕</button>
+
+  <div class="painel-foto">
+    <img id="painel-img" src="" alt="">
+    <div class="painel-foto-overlay"></div>
+    <div class="painel-info">
+      <div class="painel-numero" id="painel-numero"></div>
+      <div class="painel-saudacao" id="painel-saudacao"></div>
+      <div class="painel-meta" id="painel-meta"></div>
+    </div>
+  </div>
+
+  <div class="painel-carta">
+    <div class="painel-topo">
+      <div class="painel-topo-nome" id="painel-topo-nome"></div>
+      <div class="painel-topo-selo">Abril · 2025</div>
+    </div>
+
+    <div class="paginas-viewport-desktop">
+      <div id="paginas-track-desktop"></div>
+    </div>
+
+    <div class="painel-nav">
+      <button class="nav-btn" id="btn-anterior" aria-label="Página anterior">←</button>
+      <div class="nav-indicador">
+        <div class="nav-pontos" id="nav-pontos-desktop"></div>
+        <div class="nav-pagina">
+          <span id="pag-atual-desktop">01</span> / <span id="pag-total-desktop">01</span>
+        </div>
+      </div>
+      <button class="nav-btn" id="btn-proxima" aria-label="Próxima página">→</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ==========================================================================
+     BLOCO 05b — Modal "Faça parte" (popup central com formulário)
+     ========================================================================== -->
+
+<div class="modal-overlay" id="modal-overlay"></div>
+<aside class="modal-participar" id="modal-participar" aria-hidden="true" aria-labelledby="modal-titulo">
+  <button class="modal-fechar" id="fechar-participar" aria-label="Fechar">✕</button>
+
+  <div class="modal-rotulo">Faça parte</div>
+  <h2 class="modal-titulo" id="modal-titulo">Sua história importa</h2>
+  <p class="modal-texto">
+    Travessias nasce da escuta. Se você tem uma carta — para si mesma ou
+    para outra mulher — converse comigo no Instagram.
+  </p>
+
+  <form class="modal-form"
+        action="https://instagram.com/renataleaofotografia"
+        method="get"
+        target="_blank"
+        aria-label="Quero fazer parte de Travessias">
+    <label class="modal-campo">
+      <span class="modal-rotulo-campo">Como prefere ser chamada</span>
+      <input type="text" name="nome" placeholder="seu nome ou apelido" autocomplete="name">
+    </label>
+    <label class="modal-campo">
+      <span class="modal-rotulo-campo">Sua mensagem</span>
+      <textarea name="mensagem" rows="4"
+                placeholder="conte um pouco do que te trouxe aqui — vou ler com cuidado"></textarea>
+    </label>
+    <button type="submit" class="modal-submit">
+      Continuar no Instagram <span aria-hidden="true">→</span>
+    </button>
+    <div class="modal-nota">você será levada para <strong>@renataleaofotografia</strong></div>
+  </form>
+</aside>
+
+<!-- ==========================================================================
+     BLOCO 06 — SCRIPTS · Render templates (cards, lista, previews)
+     ========================================================================== -->
+<script src="src/cartas.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    /* Helpers compartilhados de rotulagem */
+    const rotuloNumero  = (c) => c.numero ? `Carta ${c.numero}` : (c.label || "");
+    const rotuloLateral = rotuloNumero;
+    const classeBase    = (c) => " " + (c.numero ? "" : (c.tipo || "abertura"));
+
+    /* --- CARDS MOBILE --------------------------------------------------- */
+    const cardsMobile = document.getElementById("cards-mobile");
+    CARTAS.forEach((c) => {
+      const meta = [c.idade, c.cidade].filter(Boolean).join(" · ");
+      const div  = document.createElement("div");
+      div.className   = "card" + classeBase(c);
+      div.dataset.id  = c.id;
+      div.innerHTML = `
+        <img class="card-foto" src="${c.foto}" alt="${c.nome}">
+        <div class="card-info">
+          <div>
+            <div class="card-numero">${rotuloNumero(c)}</div>
+            <div class="card-nome">${c.nome}</div>
+            <div class="card-meta">${meta}</div>
+          </div>
+          <div class="card-epigrafe">&ldquo;${c.epigrafe}&rdquo;</div>
+        </div>`;
+      cardsMobile.appendChild(div);
+    });
+
+    /* --- LISTA DESKTOP (só nome + carta — caber sem rolagem) ----------- */
+    const lista = document.getElementById("cartas-lista");
+    CARTAS.forEach((c) => {
+      const li   = document.createElement("li");
+      li.className  = "carta-item" + classeBase(c);
+      li.dataset.id = c.id;
+      li.innerHTML = `
+        <span class="carta-numero">${rotuloLateral(c)}</span>
+        <span class="carta-nome-lateral">${c.nome}</span>`;
+      lista.appendChild(li);
+    });
+
+    /* --- PREVIEWS DESKTOP ----------------------------------------------- */
+    const previews = document.getElementById("previews");
+    CARTAS.forEach((c) => {
+      const div = document.createElement("div");
+      div.className  = "preview" + classeBase(c);
+      div.dataset.id = c.id;
+      div.innerHTML = `
+        <div class="preview-inner">
+          <img class="preview-foto" src="${c.foto}" alt="${c.nome}">
+          <div class="preview-texto">
+            <div class="preview-carta">${rotuloNumero(c)}</div>
+            <div class="preview-nome">${c.saudacao}</div>
+            <div class="preview-fio"></div>
+            <div class="preview-epigrafe">&ldquo;${c.epigrafe}&rdquo;</div>
+            <div class="preview-cta">${c.numero ? "ler carta" : "ler abertura"}</div>
+          </div>
+        </div>`;
+      previews.appendChild(div);
+    });
+  });
+</script>
+
+<!-- ==========================================================================
+     BLOCO 07 — SCRIPTS · app.js (lógica de interação)
+     ========================================================================== -->
+<script src="src/app.js"></script>
+
+</body>
+</html>

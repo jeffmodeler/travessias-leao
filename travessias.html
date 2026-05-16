@@ -119,8 +119,9 @@ body {
 .card.abertura  .card-numero { color: var(--mel);   letter-spacing: .14em; }
 .card.prefacio  .card-numero { color: var(--terra); letter-spacing: .14em; }
 
-/* Preview desktop · borda mel (abertura) / terra (prefácio) para diferenciar */
-.preview.abertura .preview-inner { box-shadow: inset 0 0 0 1px rgba(200, 155, 74, .35); }
+/* Preview desktop · borda mel em todos (inset box-shadow, mesmo padrão de Renata);
+   prefácio sobrescreve para terra (sinalizando texto provisório) */
+.preview .preview-inner          { box-shadow: inset 0 0 0 1px rgba(200, 155, 74, .35); }
 .preview.prefacio .preview-inner { box-shadow: inset 0 0 0 1px rgba(168,  74, 42, .35); }
 .preview.abertura .preview-carta { color: var(--mel); }
 .preview.prefacio .preview-carta { color: var(--terra); }
@@ -739,12 +740,10 @@ body {
   }
 
   .abertura-saudacao {
-    font-family: var(--fonte-titulo);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 38px;
-    line-height: 1.05;
-    letter-spacing: 0.005em;
+    font-family: var(--fonte-mao);
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 1;
     color: var(--tinta);
     margin-bottom: 16px;
   }
@@ -1392,12 +1391,10 @@ body {
     margin-bottom: 12px;
   }
   .painel-saudacao {
-    font-family: var(--fonte-titulo);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 44px;
-    line-height: 1.05;
-    letter-spacing: 0.005em;
+    font-family: var(--fonte-mao);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
     color: var(--creme);
     margin-bottom: 16px;
   }
@@ -2811,11 +2808,6 @@ function inicializarDesktop() {
     if (ponto) irParaPaginaDesktop(parseInt(ponto.dataset.idx, 10));
   });
 
-  // Botão "Ler carta →" da cover → avança para a 1ª página de texto
-  document.getElementById("paginas-track-desktop")?.addEventListener("click", (e) => {
-    if (e.target.closest(".cover-cta")) irParaPaginaDesktop(estado.paginaIdx + 1);
-  });
-
   // Teclado
   window.addEventListener("keydown", (e) => {
     if (estado.layout !== "desktop") return;
@@ -2843,33 +2835,17 @@ function abrirPainel(id) {
   painelEl.classList.remove("painel-abertura", "painel-prefacio");
   if (!carta.numero) painelEl.classList.add("painel-" + (carta.tipo || "abertura"));
 
-  // Páginas: cover (idx 0) + páginas de texto (idx 1..N)
+  // Páginas: render direto do texto (sem cover azul intermediária)
   const track = document.getElementById("paginas-track-desktop");
-  const textoCta = carta.numero
-    ? "Ler carta"
-    : "Ler " + (carta.label || "abertura").toLowerCase();
-  const coverPg = `
-    <div class="pagina-desktop pagina-cover" data-idx="0">
-      <div class="cover-inner">
-        <div class="cover-rotulo">${rotuloNumero(carta)}</div>
-        <h2 class="cover-saudacao">${carta.saudacao}</h2>
-        <div class="cover-fio"></div>
-        <p class="cover-epigrafe">&ldquo;${carta.epigrafe}&rdquo;</p>
-        <button type="button" class="cover-cta" data-action="ler">
-          ${textoCta} <span aria-hidden="true">→</span>
-        </button>
-      </div>
-    </div>`;
-  const textPgs = carta.paginas.map((pHtml, i) => {
+  track.innerHTML = carta.paginas.map((pHtml, i) => {
     const cls = i === 0 ? "pagina-desktop primeira" : "pagina-desktop";
     const ehUltima = i === carta.paginas.length - 1;
     const conteudo = normalizarTipografia(pHtml) + (ehUltima ? fechamentoHtml(carta) : "");
-    return `<div class="${cls}" data-idx="${i + 1}">${conteudo}</div>`;
+    return `<div class="${cls}" data-idx="${i}">${conteudo}</div>`;
   }).join("");
-  track.innerHTML = coverPg + textPgs;
 
-  // Pontos = N+1 (inclui cover)
-  const total = carta.paginas.length + 1;
+  // Pontos
+  const total = carta.paginas.length;
   document.getElementById("nav-pontos-desktop").innerHTML = Array.from(
     { length: total },
     (_, i) => `<span class="nav-ponto" data-idx="${i}"></span>`
@@ -2902,8 +2878,7 @@ function fecharPainel() {
 
 function irParaPaginaDesktop(i) {
   if (!estado.cartaAtiva) return;
-  const total = estado.cartaAtiva.paginas.length + 1;  // +1 = cover
-  if (i < 0 || i >= total) return;
+  if (i < 0 || i >= estado.cartaAtiva.paginas.length) return;
   estado.paginaIdx = i;
   atualizarPaginaDesktop();
 }
@@ -2917,7 +2892,7 @@ function atualizarPaginaDesktop() {
     else if (i < estado.paginaIdx) p.classList.add("fora-esquerda");
   });
 
-  const total = estado.cartaAtiva.paginas.length + 1;  // +1 = cover
+  const total = estado.cartaAtiva.paginas.length;
   document.getElementById("pag-atual-desktop").textContent =
     String(estado.paginaIdx + 1).padStart(2, "0");
   document.getElementById("btn-anterior").disabled = estado.paginaIdx === 0;
@@ -2926,10 +2901,6 @@ function atualizarPaginaDesktop() {
   document.querySelectorAll("#nav-pontos-desktop .nav-ponto").forEach((p, i) =>
     p.classList.toggle("ativo", i === estado.paginaIdx)
   );
-
-  // Toggle painel state for cover (idx 0) — esconde info sobre a foto
-  const painelEl = document.getElementById("painel");
-  painelEl.classList.toggle("painel-cover-ativa", estado.paginaIdx === 0);
 }
 
 /* ==========================================================================

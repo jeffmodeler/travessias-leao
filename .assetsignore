@@ -1,0 +1,24 @@
+# Excluído do deploy estático (Cloudflare assets)
+# Funciona como um .gitignore mas só para o upload de assets
+
+# Backups e material-fonte
+backup_pre_travessias/
+ENXAME/
+old/
+
+# Arquivos internos / dev
+CLAUDE.md
+wrangler.jsonc
+.assetsignore
+.git/
+.gitignore
+node_modules/
+
+# Documentos não-web (caso tenham sido versionados)
+*.docx
+*.pdf
+
+# Logs e temporários
+*.log
+.DS_Store
+Thumbs.db

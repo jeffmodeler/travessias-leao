@@ -1,0 +1,385 @@
+/* ==========================================================================
+   TRAVESSIAS — cartas de mulheres reais
+   Design Tokens — compartilhado entre mobile e desktop
+   --------------------------------------------------------------------------
+   BLOCO 01 — @font-face
+   BLOCO 02 — Tokens · paleta de cores
+   BLOCO 03 — Tokens · tipografia e breakpoint
+   BLOCO 04 — Reset mínimo + base do body
+   BLOCO 05 — Compartilhado · variante "Abertura" (Renata)
+   BLOCO 06 — Compartilhado · bloco de contato (na abertura)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   BLOCO 01 — @font-face
+   ========================================================================== */
+
+@font-face { font-family: 'Caveat'; font-weight: 400; src: url('../fonts/caveat-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 500; src: url('../fonts/caveat-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 600; src: url('../fonts/caveat-latin-600-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Caveat'; font-weight: 700; src: url('../fonts/caveat-latin-700-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Fraunces'; font-weight: 300; src: url('../fonts/fraunces-latin-300-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; src: url('../fonts/fraunces-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; font-style: italic; src: url('../fonts/fraunces-latin-400-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; src: url('../fonts/fraunces-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; font-style: italic; src: url('../fonts/fraunces-latin-500-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-600-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Fraunces'; font-weight: 700; src: url('../fonts/fraunces-latin-700-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Lora'; font-weight: 400; src: url('../fonts/lora-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 400; font-style: italic; src: url('../fonts/lora-latin-400-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 500; src: url('../fonts/lora-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 500; font-style: italic; src: url('../fonts/lora-latin-500-italic.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Lora'; font-weight: 600; src: url('../fonts/lora-latin-600-normal.woff2') format('woff2'); font-display: block; }
+
+@font-face { font-family: 'Inter'; font-weight: 300; src: url('../fonts/inter-latin-300-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('../fonts/inter-latin-400-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('../fonts/inter-latin-500-normal.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-600-normal.woff2') format('woff2'); font-display: block; }
+
+
+/* ==========================================================================
+   BLOCO 02 — Tokens · paleta de cores
+   ========================================================================== */
+
+:root {
+  --creme:        #FAF7F2;
+  --creme-escuro: #F2ECE0;
+  --tinta:        #1E2A38;
+  --tinta-suave:  #2C3849;
+  --terra:        #A84A2A;
+  --mel:          #C89B4A;
+  --oliva:        #5C6B4E;
+  --carvao:       #3A3A3A;
+  --cinza:        #8A8578;
+  --cinza-claro:  #C4BFB4;
+}
+
+
+/* ==========================================================================
+   BLOCO 03 — Tokens · tipografia e breakpoint
+   ========================================================================== */
+
+:root {
+  --fonte-titulo: 'Fraunces', Georgia, serif;
+  --fonte-texto:  'Lora', Georgia, serif;
+  --fonte-mao:    'Caveat', cursive;
+  --fonte-meta:   'Inter', -apple-system, sans-serif;
+
+  --bp-desktop: 960px;
+}
+
+
+/* ==========================================================================
+   BLOCO 04 — Reset mínimo + base do body
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a, a:visited { color: inherit; text-decoration: none; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--fonte-texto);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--tinta);
+  color: var(--tinta);
+}
+
+
+/* ==========================================================================
+   BLOCO 05 — Compartilhado · variante "Abertura" (Renata)
+   --------------------------------------------------------------------------
+   Aplicada nos elementos com classe .abertura (card mobile, item lateral,
+   preview desktop e painel). Sinaliza visualmente que essa entrada é a
+   apresentação da autora, não uma carta numerada.
+   ========================================================================== */
+
+/* Card mobile · faixa lateral cor mel (abertura) ou terra (prefácio) */
+.card.abertura  { border-left: 3px solid var(--mel); }
+.card.prefacio  { border-left: 3px solid var(--terra); }
+.card.abertura  .card-numero { color: var(--mel);   letter-spacing: .14em; }
+.card.prefacio  .card-numero { color: var(--terra); letter-spacing: .14em; }
+
+/* Preview desktop · borda mel em todos (inset box-shadow, mesmo padrão de Renata);
+   prefácio sobrescreve para terra (sinalizando texto provisório) */
+.preview .preview-inner          { box-shadow: inset 0 0 0 1px rgba(200, 155, 74, .35); }
+.preview.prefacio .preview-inner { box-shadow: inset 0 0 0 1px rgba(168,  74, 42, .35); }
+.preview.abertura .preview-carta { color: var(--mel); }
+.preview.prefacio .preview-carta { color: var(--terra); }
+
+/* Aviso de texto provisório (no prefácio, removível) */
+.aviso-provisorio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 1.6rem;
+  padding: 10px 14px;
+  border: 1px dashed var(--terra);
+  border-radius: 4px;
+  background: rgba(168, 74, 42, 0.06);
+  font-family: var(--fonte-meta);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--carvao);
+}
+.aviso-tag {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  background: var(--terra);
+  color: var(--creme);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  font-weight: 600;
+}
+.aviso-msg { color: var(--tinta-suave); }
+
+
+/* ==========================================================================
+   BLOCO 06 — Compartilhado · marca d'água sutil no fundo azul
+   --------------------------------------------------------------------------
+   Cross-hatch diagonal em mel a ~2% de opacidade. Aplicado nos containers
+   de cor --tinta (lista mobile, lateral desktop, central desktop). Não
+   interfere em legibilidade, dá textura editorial sem peso visual.
+   ========================================================================== */
+
+:root {
+  --tinta-textura:
+    repeating-linear-gradient(-45deg, rgba(200,155,74,0.022) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(45deg,  rgba(200,155,74,0.018) 0 1px, transparent 1px 26px);
+}
+
+.tinta-textura {
+  background-color: var(--tinta);
+  background-image: var(--tinta-textura);
+}
+
+
+/* ==========================================================================
+   BLOCO 07 — Compartilhado · modal "Faça parte"
+   --------------------------------------------------------------------------
+   Popup central para o formulário de contato. Acionado por triggers em
+   mobile (.cta-participar) e desktop (.participar-trigger). Submit abre
+   Instagram em nova aba.
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, background 0.35s;
+  z-index: 20;
+}
+.modal-overlay.aberto {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(10,16,24,0.7);
+}
+
+.modal-participar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(460px, 92vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--creme);
+  background-image:
+    radial-gradient(ellipse at 85% 0%, rgba(200,155,74,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(168,74,42,0.05) 0%, transparent 50%);
+  border-radius: 6px;
+  padding: 44px 38px 36px;
+  transform: translate(-50%, -48%) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2,0.85,0.3,1);
+  z-index: 21;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+}
+.modal-participar.aberto {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(30,42,56,0.15);
+  border-radius: 50%;
+  color: var(--tinta);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.modal-fechar:hover {
+  background: var(--tinta);
+  color: var(--creme);
+  border-color: var(--tinta);
+}
+
+.modal-rotulo {
+  font-family: var(--fonte-meta);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--mel);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.modal-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  color: var(--tinta);
+  margin-bottom: 14px;
+}
+.modal-texto {
+  font-family: var(--fonte-texto);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--carvao);
+  margin-bottom: 24px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.modal-rotulo-campo {
+  font-family: var(--fonte-meta);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(30,42,56,0.04);
+  border: 1px solid rgba(30,42,56,0.18);
+  border-radius: 3px;
+  font-family: var(--fonte-meta);
+  font-size: 13px;
+  color: var(--tinta);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.modal-form input:focus,
+.modal-form textarea:focus {
+  border-color: var(--mel);
+  background: var(--creme);
+  box-shadow: 0 0 0 3px rgba(200,155,74,0.12);
+}
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+  color: var(--cinza);
+  font-style: italic;
+}
+
+.modal-submit {
+  margin-top: 4px;
+  padding: 13px 18px;
+  background: var(--tinta);
+  border: none;
+  border-radius: 3px;
+  font-family: var(--fonte-meta);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--creme);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.modal-submit:hover { background: var(--terra); }
+.modal-submit:active { transform: scale(0.985); }
+
+.modal-nota {
+  font-family: var(--fonte-meta);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--cinza);
+  text-align: center;
+  margin-top: 4px;
+}
+.modal-nota strong {
+  color: var(--terra);
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   BLOCO 08 — Compartilhado · bloco de contato (no fim de cada carta)
+   ========================================================================== */
+
+.contato {
+  margin: 1.8rem 0 1.4rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: 1px solid rgba(200, 155, 74, .35);
+  border-radius: 4px;
+  background: rgba(200, 155, 74, .06);
+}
+
+.contato-titulo {
+  font-family: var(--fonte-meta);
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--mel);
+  margin-bottom: .7rem;
+}
+
+.contato-linha {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+  font-family: var(--fonte-meta);
+  font-size: .9rem;
+  line-height: 1.55;
+  padding: .15rem 0;
+  color: var(--carvao);
+  flex-wrap: wrap;
+}
+
+.contato-rotulo {
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  min-width: 5.5rem;
+}
+
+.contato-linha a {
+  color: var(--terra);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease;
+  word-break: break-all;
+}
+.contato-linha a:hover {
+  border-bottom-color: var(--terra);
+}
