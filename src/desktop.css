@@ -532,12 +532,12 @@
   }
   .painel-fechar:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
 
-  /* Páginas da carta no painel — margens editoriais generosas (top + bottom também) */
+  /* Páginas da carta no painel — margem 20mm topo/base (≈ 76px), lateral livro */
   .paginas-viewport-desktop {
     flex: 1;
     overflow: hidden;
     position: relative;
-    padding: 56px 0 48px;     /* respiro vertical generoso */
+    padding: 20mm 0;
   }
 
   .pagina-desktop {
@@ -546,8 +546,8 @@
     padding: 0 88px 0 80px;   /* margem lateral generosa, tipo livro */
     overflow: hidden;          /* sem scroll — leitura cabe na tela */
     font-family: var(--fonte-texto);
-    font-size: 14.5px;
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.65;
     color: var(--tinta);
     opacity: 0;
     pointer-events: none;
