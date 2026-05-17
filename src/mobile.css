@@ -300,6 +300,17 @@
   .pagina-mobile.ativa  { opacity: 1; pointer-events: auto; transform: translateX(0); }
   .pagina-mobile.fora-esquerda { transform: translateX(-30px); }
 
+  /* Fallback: páginas que estouram ganham scroll discreto */
+  .pagina-mobile.com-overflow {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .pagina-mobile.com-overflow::-webkit-scrollbar { width: 3px; }
+  .pagina-mobile.com-overflow::-webkit-scrollbar-thumb {
+    background: var(--cinza-claro); border-radius: 2px;
+  }
+
   /* Página de abertura */
   .pagina-abertura { display: flex; flex-direction: column; padding: 0; }
 

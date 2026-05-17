@@ -559,6 +559,18 @@
   .pagina-desktop.ativa { opacity: 1; pointer-events: auto; transform: translateX(0); }
   .pagina-desktop.fora-esquerda { opacity: 0; transform: translateX(-30px); }
 
+  /* Fallback: páginas que ainda assim estouram ganham scroll discreto */
+  .pagina-desktop.com-overflow {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cinza-claro) transparent;
+  }
+  .pagina-desktop.com-overflow::-webkit-scrollbar { width: 5px; }
+  .pagina-desktop.com-overflow::-webkit-scrollbar-track { background: transparent; }
+  .pagina-desktop.com-overflow::-webkit-scrollbar-thumb {
+    background: var(--cinza-claro); border-radius: 3px;
+  }
+
   /* ------------------------------------------------------------------
      COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
      Aparece como primeira página de toda carta no painel desktop.

@@ -59,8 +59,13 @@ window.addEventListener("resize", () => {
     layoutAnterior = novoLayout;
     estado.layout = novoLayout;
     fecharTudo();
-    // Não precisa re-inicializar os event listeners (já estão no DOM)
-    // Só precisamos garantir que o estado visual está limpo
+  }
+  // Re-medir overflow quando a janela muda de tamanho
+  if (estado.cartaAtiva) {
+    requestAnimationFrame(() => {
+      detectarOverflow("#paginas-track-desktop .pagina-desktop");
+      detectarOverflow("#paginas-viewport-mobile .pagina-mobile");
+    });
   }
 });
 
@@ -77,6 +82,16 @@ function fechamentoHtml(carta) {
       <div class="assinatura">${carta.assinatura}</div>
       <div class="assinatura-meta"><span>${data}</span><br>Por Renata Leão</div>
     </div>`;
+}
+
+/* Detecta páginas cujo conteúdo ultrapassa o container e habilita scroll
+   discreto APENAS nelas. Mantém overflow: hidden no padrão. */
+function detectarOverflow(selector) {
+  document.querySelectorAll(selector).forEach((el) => {
+    // Comparar scrollHeight com clientHeight para saber se conteúdo passa
+    const overflowing = el.scrollHeight > el.clientHeight + 1;
+    el.classList.toggle("com-overflow", overflowing);
+  });
 }
 
 /* Normalização tipográfica: aspas curvas, em-dash, reticências */
@@ -230,6 +245,7 @@ function abrirCartaMobile(id) {
   document.getElementById("pag-total-mobile").textContent = String(total).padStart(2, "0");
 
   atualizarPaginaMobile();
+  requestAnimationFrame(() => detectarOverflow("#paginas-viewport-mobile .pagina-mobile"));
 
   // Abrir tela
   document.getElementById("tela-carta").classList.add("aberta");
