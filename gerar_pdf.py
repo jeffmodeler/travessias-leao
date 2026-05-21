@@ -69,7 +69,7 @@ PAGINAS_FORCADAS: dict[str, int] = {
     "marcia":   3,
     "hosana":   3,
     "marilia":  3,
-    "ariane":   3,
+    "ariane":   2,
     "paula":    3,
     "sheila":   3,
 }
@@ -329,25 +329,34 @@ def texto_da_carta(
                 _adicionar(Paragraph(conteudo, style), len(conteudo))
 
     # Se a carta está em PAGINAS_FORCADAS, redistribui em N páginas
-    # balanceadas. As primeiras (target-1) páginas recebem ~1.15× do
-    # peso médio para que a ÚLTIMA fique mais leve e acomode o
-    # fechamento (ornamento + assinatura + meta) sem overflow.
+    # balanceadas usando lookahead: quebra ANTES de um item se a página
+    # já está razoavelmente cheia E o próximo item pesado a empurraria
+    # muito além do alvo. Isso evita que um único item "gordo" (como
+    # uma citação) entupa a página atual e deixe a próxima vazia.
     target = PAGINAS_FORCADAS.get(carta.id)
     if not target or target <= 1 or len(flow) < target:
         return flow
 
     total_peso = sum(pesos)
     peso_medio = total_peso / target
-    # Threshold acima de 1.0 → primeiras páginas mais densas, última leve
-    threshold = peso_medio * 1.15
+    # MIN_PROP: página só pode fechar quando atingir 80% do peso médio.
+    # MAX_PROP: se adicionar o próximo item ultrapassaria 120% do peso
+    # médio, quebra ANTES de adicionar.
+    min_prop = peso_medio * 0.80
+    max_prop = peso_medio * 1.20
 
     redistribuido: list = []
     peso_atual = 0
     paginas_abertas = 1
     for f, p in zip(flow, pesos):
-        if (paginas_abertas < target and
-            peso_atual >= threshold and
-            peso_atual > 0):
+        # Lookahead: se já tem conteúdo suficiente E adicionar este
+        # passaria do limite máximo, quebra ANTES de adicionar
+        deveria_quebrar = (
+            paginas_abertas < target
+            and peso_atual >= min_prop
+            and (peso_atual + p) > max_prop
+        )
+        if deveria_quebrar:
             redistribuido.append(PageBreak())
             paginas_abertas += 1
             peso_atual = 0
