@@ -422,26 +422,7 @@
     pointer-events: none;
   }
 
-  /* Variante prefácio: oculta foto facial e mostra textura editorial */
-  .painel.painel-prefacio .painel-foto img { display: none; }
-  .painel.painel-prefacio .painel-foto {
-    background:
-      radial-gradient(ellipse at 30% 20%, rgba(168,74,42,0.4) 0%, transparent 60%),
-      linear-gradient(180deg, var(--tinta) 0%, var(--tinta-suave) 100%);
-  }
-  .painel.painel-prefacio .painel-foto::before {
-    content: "T";
-    position: absolute;
-    right: -40px;
-    bottom: -60px;
-    font-family: var(--fonte-titulo);
-    font-weight: 300;
-    font-size: 460px;
-    line-height: 1;
-    color: var(--terra);
-    opacity: 0.18;
-    pointer-events: none;
-  }
+  /* Variante prefácio: usa foto real da Nicole (sem tratamento especial) */
   .painel-info {
     position: absolute;
     left: 40px;

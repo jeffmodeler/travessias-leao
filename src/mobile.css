@@ -314,16 +314,7 @@
   /* Página de abertura */
   .pagina-abertura { display: flex; flex-direction: column; padding: 0; }
 
-  /* Variante prefácio: oculta foto facial (texto provisório) */
-  .pagina-abertura.carta-prefacio .abertura-foto { display: none; }
-  .pagina-abertura.carta-prefacio {
-    background:
-      radial-gradient(ellipse at 30% 20%, rgba(168,74,42,0.3) 0%, transparent 60%),
-      linear-gradient(180deg, var(--tinta) 0%, var(--tinta-suave) 100%);
-  }
-  .pagina-abertura.carta-prefacio .abertura-info {
-    color: var(--creme);
-  }
+  /* Variante prefácio: usa foto real da Nicole (sem tratamento especial) */
 
   .abertura-foto {
     width: 100%;
