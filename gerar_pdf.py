@@ -60,13 +60,18 @@ from reportlab.platypus import (
 # páginas com PageBreak entre elas, alocando mais peso nas primeiras
 # pra que a última fique com folga e acomode o fechamento.
 PAGINAS_FORCADAS: dict[str, int] = {
-    "renata":  2,
-    "ana":     2,
-    "thaina":  2,
-    "silvia":  2,
-    "marilia": 3,
-    "paula":   3,
-    "sheila":  3,
+    "renata":   2,
+    "prefacio": 1,   # 215 palavras cabem em 1 página
+    "ana":      2,
+    "luiza":    2,
+    "silvia":   2,
+    "thaina":   2,
+    "marcia":   3,
+    "hosana":   2,
+    "marilia":  3,
+    "ariane":   2,
+    "paula":    3,
+    "sheila":   3,
 }
 
 
