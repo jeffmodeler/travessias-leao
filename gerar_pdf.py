@@ -3,28 +3,34 @@
 TRAVESSIAS — Gerador de PDF (eBook editorial)
 ==============================================
 
-Diagramação no estilo de livro de fotografia/literário, formato 6×9 polegadas
-(formato padrão de paperback de trade nos EUA, comum em livros-arte e ensaios).
+Estrutura editorial:
 
-Sequência editorial:
+    Pré-textuais (creme)
+      1. Capa do livro
+      2. Folha de rosto
+      3. Ficha técnica
+      4. Sumário (com números de página reais)
 
-    1. Capa
-    2. Folha de rosto (limpa, com ornamento)
-    3. Ficha técnica (duas colunas refinadas)
-    4. Sumário com três seções tipográficas:
-         · ABERTURA  · PREFÁCIO  · AS CARTAS
-       Nomes alinhados à esquerda e ano à direita (sem números de
-       página — convenção de eBook moderno).
-    5. Para cada uma das 12 entradas:
-         a. Página de meia-portada (label "CARTA III" + grande)
-         b. Página retratada (foto + nome + epígrafe centralizada)
-         c. Corpo da carta (texto justificado, drop-cap no primeiro
-            parágrafo, header com nome em versaletes + filete mel)
-         d. Fechamento (ornamento + assinatura à direita)
-    6. Colofão final (citação síntese + crédito + ornamento de cauda)
+    Para cada uma das 12 entradas:
+      a. Página separadora (fundo tinta) — meia-portada limpa, anuncia
+         a entrada. Equivale ao "frontispício" de um livro impresso.
+      b. Página retratada (creme) — foto + saudação manuscrita +
+         epígrafe + meta (idade · cidade).
+      c. Texto da carta — uma página por entrada de paginas[], com
+         drop-cap no primeiro parágrafo do primeiro bloco.
+      d. Fechamento no final do último texto — ornamento + assinatura
+         alinhada à direita + crédito de autoria.
 
-Refatoração técnica em PEP-8 com type hints; estrutura em camadas
-(parser → modelo → estilos → desenho de página → composição).
+    Pós-textuais
+      • Colofão final
+
+Detalhes:
+    • Formato 6 × 9 polegadas, paperback de trade.
+    • Header de páginas de texto: "TRAVESSIAS" em versaletes (não o
+      nome da carta — convenção comum em livros de coletânea).
+    • Footer: número de página em algarismos arábicos a partir
+      da página de sumário.
+    • Sumário tem números de página REAIS — calculados em pré-passo.
 """
 
 from __future__ import annotations
@@ -32,7 +38,7 @@ from __future__ import annotations
 import os
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 from reportlab.lib.colors import HexColor
@@ -41,6 +47,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch, mm
 from reportlab.platypus import (
     BaseDocTemplate,
+    Flowable,
     Frame,
     Image,
     NextPageTemplate,
@@ -53,8 +60,28 @@ from reportlab.platypus import (
 )
 
 
+class PageMarker(Flowable):
+    """Flowable invisível que registra em qual página foi renderizado.
+
+    Usado em two-pass build: na primeira passada, populamos um registry
+    com os números de página reais; na segunda, o sumário usa esses
+    números em vez da predição.
+    """
+
+    def __init__(self, key: str, registry: dict[str, int]) -> None:
+        super().__init__()
+        self.key = key
+        self.registry = registry
+
+    def wrap(self, _w: float, _h: float) -> tuple[float, float]:
+        return 0, 0
+
+    def draw(self) -> None:
+        self.registry[self.key] = self.canv.getPageNumber()
+
+
 # ==========================================================================
-# PALETA DE CORES (igual ao site)
+# PALETA
 # ==========================================================================
 
 CREME = HexColor("#FAF7F2")
@@ -71,10 +98,9 @@ CINZA = HexColor("#8A8578")
 # DIMENSÕES E FONTES
 # ==========================================================================
 
-# 6 × 9 polegadas — formato de paperback de trade (152.4 × 228.6 mm)
 PG_W, PG_H = 6 * inch, 9 * inch
 MARGIN_OUTER = 20 * mm
-MARGIN_INNER = 22 * mm   # margem interna ligeiramente maior (lombada)
+MARGIN_INNER = 22 * mm
 MARGIN_TOP = 24 * mm
 MARGIN_BOTTOM = 22 * mm
 
@@ -95,7 +121,7 @@ FONTE_META_BOLD = "Helvetica-Bold"
 
 @dataclass(frozen=True)
 class Carta:
-    """Representa uma entrada do livro (autora, prefácio ou carta)."""
+    """Uma entrada do livro (autora, prefácio ou carta numerada)."""
 
     id: str
     numero: str
@@ -121,15 +147,13 @@ class Carta:
         return self.label or "Abertura"
 
     @property
-    def autoria_credito(self) -> str:
-        """Por quem foi escrita esta entrada — 'Renata Leão' ou 'Nicole Pelosi'."""
-        if self.tipo == "prefacio":
-            return "Nicole Pelosi"
-        return "Renata Leão"
+    def numero_paginas_internas(self) -> int:
+        """Páginas que esta entrada consome: 1 separador + 1 retrato + len(paginas)."""
+        return 2 + len(self.paginas)
 
 
 # ==========================================================================
-# PARSER de cartas.js
+# PARSER
 # ==========================================================================
 
 
@@ -178,7 +202,7 @@ def extrair_cartas(path: str = "src/cartas.js") -> list[Carta]:
 
     cartas: list[Carta] = []
     for obj_text in objs:
-        valores = {}
+        valores: dict[str, str] = {}
         for campo in campos_obrigatorios:
             m = re.search(rf'{campo}:\s*"((?:[^"\\]|\\.)*)"', obj_text)
             valores[campo] = m.group(1) if m else ""
@@ -215,19 +239,19 @@ def _limpar_inline(html: str) -> str:
 
 
 def _aplicar_drop_cap(texto: str) -> str:
-    """Insere drop-cap inline (primeira letra maior em terra)."""
     texto = texto.lstrip()
     if not texto:
         return texto
-    # encontra a primeira letra real (pula tags abertas)
-    m = re.match(r"^(<[^>]+>)*([A-Za-zÁÉÍÓÚÀÂÊÔÃÕÇáéíóúàâêôãõç])", texto)
+    m = re.match(
+        r"^(<[^>]+>)*([A-Za-zÁÉÍÓÚÀÂÊÔÃÕÇáéíóúàâêôãõç])", texto
+    )
     if not m:
         return texto
     abre = m.group(1) or ""
     letra = m.group(2)
     resto = texto[m.end():]
     return (
-        f'{abre}<font size="32" color="#A84A2A" face="Times-Roman">{letra}</font>'
+        f'{abre}<font size="34" color="#A84A2A" face="Times-Roman">{letra}</font>'
         f'{resto}'
     )
 
@@ -240,14 +264,13 @@ def html_to_flowables(
 ) -> list:
     flow: list = []
     blocos = re.split(r"(?=<(?:p|blockquote|div)[\s>])", html)
-    primeiro_p_ja_aplicado = False
+    drop_aplicado = False
 
     for blk in blocos:
         blk = blk.strip()
         if not blk:
             continue
 
-        # blockquote class="citacao"
         if re.match(r'<blockquote[^>]*class="citacao"', blk):
             inner = re.sub(r"<blockquote[^>]*>", "", blk)
             inner = re.sub(r"</blockquote>\s*$", "", inner)
@@ -263,23 +286,21 @@ def html_to_flowables(
             flow.append(Spacer(1, 4))
             continue
 
-        # div class="dialogo"
         if re.match(r'<div[^>]*class="dialogo"', blk):
             inner = re.sub(r"<div[^>]*>", "", blk, count=1)
             inner = re.sub(r"</div>\s*$", "", inner)
             flow.append(Paragraph(_limpar_inline(inner), styles["dialogo"]))
             continue
 
-        # <p>
         m_p = re.match(r"<p([^>]*)>(.*)</p>\s*$", blk, re.DOTALL)
         if m_p:
             attrs, content = m_p.group(1), m_p.group(2)
             sem_indent = "sem-indent" in attrs
             content_limpo = _limpar_inline(content)
 
-            if com_drop_cap and not primeiro_p_ja_aplicado and sem_indent:
+            if com_drop_cap and not drop_aplicado and sem_indent:
                 content_limpo = _aplicar_drop_cap(content_limpo)
-                primeiro_p_ja_aplicado = True
+                drop_aplicado = True
                 style = styles["p_drop_cap"]
             else:
                 style = styles["p_sem_indent"] if sem_indent else styles["p"]
@@ -291,7 +312,7 @@ def html_to_flowables(
 
 
 # ==========================================================================
-# ESTILOS EDITORIAIS
+# ESTILOS
 # ==========================================================================
 
 
@@ -304,12 +325,8 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
         leading=14, textColor=MEL, alignment=TA_CENTER, spaceAfter=8,
     )
     s["capa_titulo"] = ParagraphStyle(
-        "capa_titulo", fontName=FONTE_TITULO_ITAL, fontSize=64,
-        leading=68, textColor=CREME, alignment=TA_CENTER, spaceAfter=14,
-    )
-    s["capa_subtitulo"] = ParagraphStyle(
-        "capa_subtitulo", fontName=FONTE_TITULO_ITAL, fontSize=18,
-        leading=24, textColor=MEL, alignment=TA_CENTER, spaceAfter=8,
+        "capa_titulo", fontName=FONTE_TITULO_ITAL, fontSize=68,
+        leading=72, textColor=CREME, alignment=TA_CENTER, spaceAfter=14,
     )
     s["capa_autora"] = ParagraphStyle(
         "capa_autora", fontName=FONTE_META, fontSize=10,
@@ -322,8 +339,8 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
 
     # ---- Folha de rosto ----
     s["rosto_titulo"] = ParagraphStyle(
-        "rosto_titulo", fontName=FONTE_TITULO_ITAL, fontSize=46,
-        leading=50, textColor=TINTA, alignment=TA_CENTER, spaceAfter=10,
+        "rosto_titulo", fontName=FONTE_TITULO_ITAL, fontSize=48,
+        leading=52, textColor=TINTA, alignment=TA_CENTER, spaceAfter=10,
     )
     s["rosto_subtitulo"] = ParagraphStyle(
         "rosto_subtitulo", fontName=FONTE_TITULO_ITAL, fontSize=16,
@@ -346,60 +363,53 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
 
     # ---- Sumário ----
     s["sum_titulo"] = ParagraphStyle(
-        "sum_titulo", fontName=FONTE_TITULO_ITAL, fontSize=30,
-        leading=34, textColor=TINTA, alignment=TA_CENTER, spaceAfter=10,
+        "sum_titulo", fontName=FONTE_TITULO_ITAL, fontSize=34,
+        leading=38, textColor=TINTA, alignment=TA_CENTER, spaceAfter=20,
     )
     s["sum_secao"] = ParagraphStyle(
-        "sum_secao", fontName=FONTE_META_BOLD, fontSize=8.5,
-        leading=12, textColor=MEL, alignment=TA_LEFT, spaceAfter=2,
+        "sum_secao", fontName=FONTE_META_BOLD, fontSize=8,
+        leading=12, textColor=MEL, alignment=TA_LEFT,
+        spaceBefore=10, spaceAfter=4,
     )
-    s["sum_item_rotulo"] = ParagraphStyle(
-        "sum_item_rotulo", fontName=FONTE_META, fontSize=8,
-        leading=11, textColor=CINZA, alignment=TA_LEFT,
+    s["sum_numero"] = ParagraphStyle(
+        "sum_numero", fontName=FONTE_META, fontSize=9,
+        leading=20, textColor=CINZA, alignment=TA_LEFT,
     )
-    s["sum_item_nome"] = ParagraphStyle(
-        "sum_item_nome", fontName=FONTE_TITULO_ITAL, fontSize=15,
+    s["sum_nome"] = ParagraphStyle(
+        "sum_nome", fontName=FONTE_TITULO_ITAL, fontSize=14,
         leading=20, textColor=TINTA, alignment=TA_LEFT,
     )
-    s["sum_item_epigrafe"] = ParagraphStyle(
-        "sum_item_epigrafe", fontName=FONTE_TEXTO_ITAL, fontSize=9,
-        leading=13, textColor=CARVAO, alignment=TA_LEFT, spaceAfter=10,
-    )
-    s["sum_item_autor"] = ParagraphStyle(
-        "sum_item_autor", fontName=FONTE_META, fontSize=8,
-        leading=11, textColor=CINZA, alignment=TA_RIGHT,
+    s["sum_pagina"] = ParagraphStyle(
+        "sum_pagina", fontName=FONTE_META, fontSize=10,
+        leading=20, textColor=MEL, alignment=TA_RIGHT,
     )
 
-    # ---- Meia-portada (página antes da carta) ----
-    s["meia_portada_rotulo"] = ParagraphStyle(
-        "meia_portada_rotulo", fontName=FONTE_META_BOLD, fontSize=9,
-        leading=14, textColor=MEL, alignment=TA_CENTER, spaceAfter=12,
+    # ---- Separador (fundo tinta — anuncia carta) ----
+    s["sep_rotulo"] = ParagraphStyle(
+        "sep_rotulo", fontName=FONTE_META_BOLD, fontSize=11,
+        leading=16, textColor=MEL, alignment=TA_CENTER, spaceAfter=22,
     )
-    s["meia_portada_nome"] = ParagraphStyle(
-        "meia_portada_nome", fontName=FONTE_TITULO_ITAL, fontSize=48,
-        leading=54, textColor=TINTA, alignment=TA_CENTER, spaceAfter=18,
+    s["sep_nome"] = ParagraphStyle(
+        "sep_nome", fontName=FONTE_TITULO_ITAL, fontSize=56,
+        leading=62, textColor=CREME, alignment=TA_CENTER,
     )
-    s["meia_portada_epigrafe"] = ParagraphStyle(
-        "meia_portada_epigrafe", fontName=FONTE_TEXTO_ITAL, fontSize=12,
+
+    # ---- Retrato (creme — foto + saudação) ----
+    s["retr_saudacao"] = ParagraphStyle(
+        "retr_saudacao", fontName=FONTE_TITULO_ITAL, fontSize=32,
+        leading=36, textColor=TINTA, alignment=TA_CENTER, spaceAfter=14,
+    )
+    s["retr_epigrafe"] = ParagraphStyle(
+        "retr_epigrafe", fontName=FONTE_TEXTO_ITAL, fontSize=12,
         leading=18, textColor=CARVAO, alignment=TA_CENTER,
-        leftIndent=30, rightIndent=30, spaceAfter=4,
+        leftIndent=24, rightIndent=24, spaceAfter=10,
     )
-
-    # ---- Página retratada (foto + saudação) ----
-    s["retrato_rotulo"] = ParagraphStyle(
-        "retrato_rotulo", fontName=FONTE_META_BOLD, fontSize=9,
-        leading=14, textColor=MEL, alignment=TA_CENTER, spaceAfter=10,
-    )
-    s["retrato_saudacao"] = ParagraphStyle(
-        "retrato_saudacao", fontName=FONTE_TITULO_ITAL, fontSize=32,
-        leading=36, textColor=CREME, alignment=TA_CENTER, spaceAfter=12,
-    )
-    s["retrato_meta"] = ParagraphStyle(
-        "retrato_meta", fontName=FONTE_META, fontSize=9,
+    s["retr_meta"] = ParagraphStyle(
+        "retr_meta", fontName=FONTE_META, fontSize=9,
         leading=14, textColor=MEL, alignment=TA_CENTER,
     )
 
-    # ---- Corpo do texto ----
+    # ---- Corpo ----
     s["p"] = ParagraphStyle(
         "p", fontName=FONTE_TEXTO, fontSize=10.5, leading=16.5,
         textColor=TINTA, alignment=TA_JUSTIFY,
@@ -410,8 +420,7 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
         firstLineIndent=0, spaceBefore=4,
     )
     s["p_drop_cap"] = ParagraphStyle(
-        "p_drop_cap", parent=s["p_sem_indent"],
-        leading=18,  # leading maior pra acomodar o tamanho da letra inicial
+        "p_drop_cap", parent=s["p_sem_indent"], leading=20,
     )
     s["citacao"] = ParagraphStyle(
         "citacao", fontName=FONTE_TEXTO_ITAL, fontSize=11.5,
@@ -446,9 +455,9 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
 
     # ---- Colofão final ----
     s["colofao_citacao"] = ParagraphStyle(
-        "colofao_citacao", fontName=FONTE_TITULO_ITAL, fontSize=14,
-        leading=22, textColor=TINTA, alignment=TA_CENTER,
-        leftIndent=24, rightIndent=24, spaceAfter=8,
+        "colofao_citacao", fontName=FONTE_TITULO_ITAL, fontSize=15,
+        leading=24, textColor=TINTA, alignment=TA_CENTER,
+        leftIndent=22, rightIndent=22, spaceAfter=8,
     )
     s["colofao_credito"] = ParagraphStyle(
         "colofao_credito", fontName=FONTE_META_BOLD, fontSize=8,
@@ -459,14 +468,18 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
 
 
 # ==========================================================================
-# DESENHOS DE FUNDO E HEADER/FOOTER
+# FUNDOS DE PÁGINA
 # ==========================================================================
 
+# Estado mutável global para o handler de fundo (reportlab chama com
+# (canvas, doc); precisamos passar contexto por aqui).
+_ctx: dict[str, object] = {
+    "mostrar_cabecalho": False,  # bool — se mostra "TRAVESSIAS" no header
+    "numerar": False,             # bool — se mostra número de página
+}
 
-_ctx: dict[str, str] = {"carta_atual": "", "pagina_atual_rotulo": ""}
 
-
-def _desenhar_filete(c, x1: float, x2: float, y: float, cor=MEL, espessura: float = 0.4) -> None:
+def _filete(c, x1: float, x2: float, y: float, cor=MEL, espessura: float = 0.4) -> None:
     c.saveState()
     c.setStrokeColor(cor)
     c.setLineWidth(espessura)
@@ -475,50 +488,57 @@ def _desenhar_filete(c, x1: float, x2: float, y: float, cor=MEL, espessura: floa
 
 
 def fundo_capa(c, _doc) -> None:
-    """Capa do livro: tinta + dois filetes mel decorativos."""
     c.saveState()
     c.setFillColor(TINTA)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
-    _desenhar_filete(c, MARGIN_OUTER, PG_W - MARGIN_OUTER, PG_H - 30 * mm)
-    _desenhar_filete(c, PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm, 20 * mm)
+    _filete(c, MARGIN_OUTER, PG_W - MARGIN_OUTER, PG_H - 30 * mm)
+    _filete(c, PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm, 20 * mm)
 
 
-def fundo_carta_retrato(c, _doc) -> None:
-    """Fundo tinta da página retratada (foto + saudação)."""
+def fundo_separador(c, _doc) -> None:
+    """Fundo tinta com filete decorativo central — separador de carta."""
     c.saveState()
     c.setFillColor(TINTA)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
+    # Dois filetes simétricos, dão peso editorial à separação
+    _filete(c, PG_W / 2 - 30 * mm, PG_W / 2 + 30 * mm, PG_H / 2 + 28 * mm, MEL, 0.5)
+    _filete(c, PG_W / 2 - 20 * mm, PG_W / 2 + 20 * mm, PG_H / 2 - 50 * mm, MEL, 0.4)
 
 
-def fundo_rosto(c, _doc) -> None:
-    """Folhas creme sem header/footer (rosto, ficha, sumário, meia-portada)."""
+def fundo_creme_pretextual(c, _doc) -> None:
+    """Páginas creme antes do corpo (rosto, ficha, sumário, retratos)."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
-    # Filete delicado no topo
-    _desenhar_filete(c, PG_W / 2 - 14 * mm, PG_W / 2 + 14 * mm, PG_H - 18 * mm, MEL, 0.3)
+    _filete(c, PG_W / 2 - 14 * mm, PG_W / 2 + 14 * mm, PG_H - 18 * mm, MEL, 0.3)
+    if _ctx.get("numerar"):
+        c.saveState()
+        c.setFont(FONTE_META, 7.5)
+        c.setFillColor(CINZA)
+        c.drawCentredString(PG_W / 2, 12 * mm, str(c.getPageNumber()))
+        c.restoreState()
 
 
 def fundo_texto(c, _doc) -> None:
-    """Páginas de corpo: header com nome da carta, footer com número."""
+    """Páginas de corpo da carta: header 'TRAVESSIAS' + footer com número."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
 
-    nome = _ctx.get("carta_atual", "")
-    if nome:
-        c.setFont(FONTE_META, 7)
-        c.setFillColor(CINZA)
-        c.drawCentredString(PG_W / 2, PG_H - 14 * mm, nome.upper())
-        _desenhar_filete(
-            c,
-            PG_W / 2 - 14 * mm, PG_W / 2 + 14 * mm,
-            PG_H - 17 * mm, MEL, 0.3,
-        )
+    # Header: nome do projeto em versaletes
+    c.setFont(FONTE_META, 7)
+    c.setFillColor(CINZA)
+    c.drawCentredString(PG_W / 2, PG_H - 14 * mm, "TRAVESSIAS")
+    _filete(
+        c,
+        PG_W / 2 - 14 * mm, PG_W / 2 + 14 * mm,
+        PG_H - 17 * mm, MEL, 0.3,
+    )
 
+    # Footer: número de página
     c.setFont(FONTE_META, 7.5)
     c.setFillColor(CINZA)
     c.drawCentredString(PG_W / 2, 12 * mm, str(c.getPageNumber()))
@@ -536,14 +556,13 @@ def _foto_existe(caminho: str) -> Optional[str]:
 
 
 def _tabela_ficha(linhas: list[tuple[str, str]], styles: dict[str, ParagraphStyle]) -> Table:
-    """Monta a ficha técnica como tabela de duas colunas (label / valor)."""
     data = []
     for label, valor in linhas:
         data.append([
             Paragraph(label.upper(), styles["ficha_secao"]),
             Paragraph(valor, styles["ficha_valor"]),
         ])
-    t = Table(data, colWidths=[38 * mm, None])
+    t = Table(data, colWidths=[42 * mm, None])
     t.setStyle(TableStyle([
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
@@ -554,63 +573,85 @@ def _tabela_ficha(linhas: list[tuple[str, str]], styles: dict[str, ParagraphStyl
     return t
 
 
-def _bloco_sumario(
-    cartas: list[Carta], styles: dict[str, ParagraphStyle]
-) -> list:
-    """Sumário editorial com três seções e nome do autor à direita."""
+# Constantes da paginação calculada
+PAGINAS_PRETEXTUAIS = 4  # capa, rosto, ficha, sumário (sumário = pg 4)
 
+
+def _calcular_paginas_por_entrada(cartas: list[Carta]) -> dict[str, int]:
+    """Calcula em que página COMEÇA cada entrada (a página separadora).
+
+    Estrutura prevista:
+      Pré-textuais: pgs 1..4 (capa, rosto, ficha, sumário)
+      Cada entrada: 1 separador + 1 retrato + N text pages
+    """
+    pagina_atual = PAGINAS_PRETEXTUAIS + 1  # próxima página após o sumário
+    mapa: dict[str, int] = {}
+    for c in cartas:
+        mapa[c.id] = pagina_atual
+        pagina_atual += c.numero_paginas_internas
+    return mapa
+
+
+def _bloco_sumario(
+    cartas: list[Carta],
+    mapa_paginas: dict[str, int],
+    styles: dict[str, ParagraphStyle],
+) -> list:
+    """Sumário com seções tipográficas e números de página alinhados à direita.
+
+    Layout por linha:
+      [I]    [Marília Martins]            [13]
+      ^      ^                            ^
+      8mm    expande                      14mm
+    """
     flow: list = []
 
-    def secao(titulo: str, entradas: list[Carta]) -> None:
-        flow.append(Spacer(1, 6 * mm))
+    def render_secao(titulo: str, entradas: list[Carta]) -> None:
+        if not entradas:
+            return
+        flow.append(Spacer(1, 8 * mm))
         flow.append(Paragraph(titulo.upper(), styles["sum_secao"]))
-        flow.append(Spacer(1, 1 * mm))
 
+        data = []
         for c in entradas:
-            esquerda_html = (
-                f'<font color="#8A8578">{c.rotulo.upper()}</font><br/>'
-                f'<font name="Times-Italic" size="14" color="#1E2A38">{c.nome}</font>'
-            )
-            esquerda = Paragraph(esquerda_html, styles["sum_item_rotulo"])
-            direita = Paragraph(c.autoria_credito, styles["sum_item_autor"])
+            numero_visual = c.numero if c.numero else "—"
+            pag = mapa_paginas.get(c.id, 0)
+            data.append([
+                Paragraph(numero_visual, styles["sum_numero"]),
+                Paragraph(c.nome, styles["sum_nome"]),
+                Paragraph(str(pag), styles["sum_pagina"]),
+            ])
 
-            t = Table(
-                [[esquerda, direita]],
-                colWidths=[None, 36 * mm],
-                style=TableStyle([
-                    ("VALIGN", (0, 0), (-1, -1), "BOTTOM"),
-                    ("LEFTPADDING", (0, 0), (-1, -1), 0),
-                    ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-                    ("TOPPADDING", (0, 0), (-1, -1), 2),
-                    ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-                    ("LINEBELOW", (0, 0), (-1, -1), 0.3, MEL),
-                ]),
-            )
-            flow.append(t)
-            if c.epigrafe:
-                flow.append(Spacer(1, 1 * mm))
-                flow.append(Paragraph(
-                    f'<i>“{c.epigrafe}”</i>', styles["sum_item_epigrafe"]
-                ))
+        t = Table(data, colWidths=[10 * mm, None, 14 * mm])
+        t.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "BOTTOM"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+            ("TOPPADDING", (0, 0), (-1, -1), 6),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ("LINEBELOW", (0, 0), (-1, -1), 0.25, MEL),
+        ]))
+        flow.append(t)
 
     aberturas = [c for c in cartas if c.tipo == "abertura"]
     prefacios = [c for c in cartas if c.tipo == "prefacio"]
     numeradas = [c for c in cartas if c.eh_carta]
 
-    if aberturas:
-        secao("Abertura", aberturas)
-    if prefacios:
-        secao("Prefácio", prefacios)
-    if numeradas:
-        secao("As cartas", numeradas)
+    render_secao("Abertura", aberturas)
+    render_secao("Prefácio", prefacios)
+    render_secao("As cartas", numeradas)
 
     return flow
 
 
-def construir_pdf(
+def _build_uma_passada(
     cartas: list[Carta],
-    saida: str = "travessias.pdf",
-) -> str:
+    mapa_paginas: dict[str, int],
+    registry: dict[str, int],
+    saida: str,
+) -> None:
+    """Constroi o PDF uma vez com o mapa de páginas dado e marcadores
+    populando o registry."""
     styles = montar_estilos()
 
     doc = BaseDocTemplate(
@@ -641,10 +682,11 @@ def construir_pdf(
     )
 
     doc.addPageTemplates([
-        PageTemplate(id="capa",          frames=[frame_full],  onPage=fundo_capa),
-        PageTemplate(id="rosto",         frames=[frame_full],  onPage=fundo_rosto),
-        PageTemplate(id="carta-retrato", frames=[frame_full],  onPage=fundo_carta_retrato),
-        PageTemplate(id="texto",         frames=[frame_texto], onPage=fundo_texto),
+        PageTemplate(id="capa",        frames=[frame_full],  onPage=fundo_capa),
+        PageTemplate(id="pretextual",  frames=[frame_full],  onPage=fundo_creme_pretextual),
+        PageTemplate(id="separador",   frames=[frame_full],  onPage=fundo_separador),
+        PageTemplate(id="retrato",     frames=[frame_full],  onPage=fundo_creme_pretextual),
+        PageTemplate(id="texto",       frames=[frame_texto], onPage=fundo_texto),
     ])
 
     story: list = []
@@ -653,15 +695,15 @@ def construir_pdf(
     story.append(NextPageTemplate("capa"))
     story.append(Spacer(1, 16 * mm))
     story.append(Paragraph("CARTAS DE MULHERES REAIS", styles["capa_marca"]))
-    story.append(Spacer(1, 8 * mm))
+    story.append(Spacer(1, 6 * mm))
     story.append(Paragraph("Travessias", styles["capa_titulo"]))
 
     foto_renata = _foto_existe("fotos/renata_leao.jpg")
     if foto_renata:
-        img = Image(foto_renata, width=68 * mm, height=92 * mm)
+        img = Image(foto_renata, width=70 * mm, height=94 * mm)
         img.hAlign = "CENTER"
         story.append(img)
-        story.append(Spacer(1, 12 * mm))
+        story.append(Spacer(1, 14 * mm))
     else:
         story.append(Spacer(1, 60 * mm))
 
@@ -671,8 +713,9 @@ def construir_pdf(
     story.append(PageBreak())
 
     # -------- 2. FOLHA DE ROSTO --------
-    story.append(NextPageTemplate("rosto"))
-    story.append(Spacer(1, 50 * mm))
+    _ctx["numerar"] = False
+    story.append(NextPageTemplate("pretextual"))
+    story.append(Spacer(1, 56 * mm))
     story.append(Paragraph("Travessias", styles["rosto_titulo"]))
     story.append(Paragraph("cartas de mulheres reais", styles["rosto_subtitulo"]))
     story.append(Spacer(1, 30 * mm))
@@ -682,7 +725,7 @@ def construir_pdf(
     story.append(PageBreak())
 
     # -------- 3. FICHA TÉCNICA --------
-    story.append(Spacer(1, 40 * mm))
+    story.append(Spacer(1, 38 * mm))
     story.append(_tabela_ficha([
         ("Obra", "<b>Travessias — cartas de mulheres reais</b><br/>Volume 01 · Edição 2025"),
         ("Idealização", "Renata Leão"),
@@ -693,72 +736,73 @@ def construir_pdf(
     ], styles))
     story.append(PageBreak())
 
-    # -------- 4. SUMÁRIO --------
+    # -------- 4. SUMÁRIO (página 4, números reais) --------
+    _ctx["numerar"] = True
     story.append(Spacer(1, 18 * mm))
     story.append(Paragraph("Sumário", styles["sum_titulo"]))
-    story.append(Spacer(1, 6 * mm))
-    story.extend(_bloco_sumario(cartas, styles))
+    story.extend(_bloco_sumario(cartas, mapa_paginas, styles))
     story.append(PageBreak())
 
-    # -------- 5. CADA ENTRADA --------
+    # -------- 5. ENTRADAS --------
     for carta in cartas:
-        # 5a · Página retratada (foto sobre fundo tinta)
-        story.append(NextPageTemplate("carta-retrato"))
-        _ctx["carta_atual"] = ""
+        # 5a · Separador (fundo tinta — meia-portada elegante)
+        _ctx["numerar"] = True
+        story.append(NextPageTemplate("separador"))
+        story.append(PageMarker(carta.id, registry))  # registra página real
+        story.append(Spacer(1, PG_H * 0.32))  # empurra pro centro vertical
+        story.append(Paragraph(carta.rotulo.upper(), styles["sep_rotulo"]))
+        story.append(Paragraph(carta.nome, styles["sep_nome"]))
+        story.append(PageBreak())
 
+        # 5b · Retrato (creme — foto + saudação + epígrafe + meta)
+        story.append(NextPageTemplate("retrato"))
         story.append(Spacer(1, 16 * mm))
-        story.append(Paragraph(carta.rotulo.upper(), styles["retrato_rotulo"]))
+        story.append(Paragraph(carta.saudacao, styles["retr_saudacao"]))
 
         foto = _foto_existe(carta.foto)
         if foto:
-            img = Image(foto, width=72 * mm, height=104 * mm)
+            img = Image(foto, width=66 * mm, height=94 * mm)
             img.hAlign = "CENTER"
             story.append(img)
-            story.append(Spacer(1, 12 * mm))
+            story.append(Spacer(1, 10 * mm))
 
-        story.append(Paragraph(carta.saudacao, styles["retrato_saudacao"]))
+        if carta.epigrafe:
+            story.append(Paragraph(
+                f"“{carta.epigrafe}”", styles["retr_epigrafe"]
+            ))
 
         meta = " · ".join(p for p in (carta.idade, carta.cidade) if p)
         if meta:
-            story.append(Paragraph(meta, styles["retrato_meta"]))
+            story.append(Paragraph(meta, styles["retr_meta"]))
 
         story.append(PageBreak())
 
-        # 5b · Meia-portada (em creme) com o nome em grande e a epígrafe
-        story.append(NextPageTemplate("rosto"))
-        story.append(Spacer(1, 60 * mm))
-        story.append(Paragraph(carta.rotulo.upper(), styles["meia_portada_rotulo"]))
-        story.append(Paragraph(carta.nome, styles["meia_portada_nome"]))
-        if carta.epigrafe:
-            story.append(Paragraph(f"“{carta.epigrafe}”", styles["meia_portada_epigrafe"]))
-        story.append(PageBreak())
-
-        # 5c · Páginas de texto
+        # 5c · Páginas de texto — UMA PAGE BREAK ENTRE CADA pagina[]
         story.append(NextPageTemplate("texto"))
-        _ctx["carta_atual"] = carta.nome
-
         for i, pHtml in enumerate(carta.paginas):
             story.extend(html_to_flowables(
                 pHtml, styles, com_drop_cap=(i == 0),
             ))
+            # Page break entre páginas, exceto na última (que termina com
+            # fechamento + page break depois)
+            if i < len(carta.paginas) - 1:
+                story.append(PageBreak())
 
-        # 5d · Fechamento (ornamento + assinatura à direita)
+        # 5d · Fechamento na última página de texto
         story.append(Paragraph("· · ·", styles["ornamento"]))
         story.append(Paragraph(carta.assinatura, styles["assinatura"]))
-
         if carta.eh_carta:
-            assinatura_meta = "Abril · 2025<br/>Por Renata Leão"
+            meta_ass = "Abril · 2025<br/>Por Renata Leão"
         elif carta.tipo == "prefacio":
-            assinatura_meta = "2025<br/>Por Nicole Pelosi"
+            meta_ass = "2025<br/>Por Nicole Pelosi"
         else:
-            assinatura_meta = "2025"
-        story.append(Paragraph(assinatura_meta, styles["assinatura_meta"]))
-
+            meta_ass = "2025"
+        story.append(Paragraph(meta_ass, styles["assinatura_meta"]))
         story.append(PageBreak())
 
     # -------- 6. COLOFÃO FINAL --------
-    story.append(NextPageTemplate("rosto"))
-    story.append(Spacer(1, 70 * mm))
+    story.append(NextPageTemplate("pretextual"))
+    story.append(Spacer(1, 80 * mm))
     story.append(Paragraph("· · ·", styles["ornamento"]))
     story.append(Spacer(1, 12 * mm))
     story.append(Paragraph(
@@ -768,35 +812,64 @@ def construir_pdf(
     ))
     story.append(Spacer(1, 6 * mm))
     story.append(Paragraph(
-        "Mulheres que sustentam outras mulheres.<br/>"
+        "<i>Mulheres que sustentam outras mulheres.<br/>"
         "Mulheres que, juntas, criam abrigo<br/>"
-        "enquanto buscam abrigo em outras travessias.",
+        "enquanto buscam abrigo em outras travessias.</i>",
         styles["colofao_citacao"],
     ))
     story.append(Spacer(1, 30 * mm))
     story.append(Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]))
 
     doc.build(story)
+
+
+def construir_pdf(cartas: list[Carta], saida: str = "travessias.pdf") -> str:
+    """Constroi o PDF em duas passadas:
+
+    1. Build inicial com predição de páginas. Cada separador de carta
+       carrega um PageMarker que regista a página REAL no registry.
+    2. Re-build usando o registry como mapa de páginas — agora o sumário
+       reflete exatamente onde cada entrada começa.
+    """
+    # Passe 1: predição → captura páginas reais
+    mapa_predito = _calcular_paginas_por_entrada(cartas)
+    registry: dict[str, int] = {}
+    _build_uma_passada(cartas, mapa_predito, registry, saida)
+
+    # Se a predição já estiver correta, evita re-build
+    if registry == mapa_predito:
+        return saida
+
+    # Passe 2: re-build com páginas reais
+    registry2: dict[str, int] = {}
+    _build_uma_passada(cartas, registry, registry2, saida)
     return saida
 
 
 # ==========================================================================
-# ENTRADA PRINCIPAL
+# ENTRADA
 # ==========================================================================
 
 
 def main() -> int:
     cartas = extrair_cartas("src/cartas.js")
+    mapa = _calcular_paginas_por_entrada(cartas)
+
     print(f"Carregadas {len(cartas)} entradas:")
+    print(f"{'rótulo':14}  {'nome':24}  {'págs':>4}  {'inicia pg':>10}")
+    print("-" * 65)
     total_pgs = 0
     for c in cartas:
         total_pgs += len(c.paginas)
-        print(f"  {c.rotulo:14}  {c.nome:24}  {len(c.paginas):>2} pgs")
+        print(f"  {c.rotulo:12}  {c.nome:24}  {len(c.paginas):>4}  {mapa[c.id]:>10}")
+
     saida = construir_pdf(cartas, "travessias.pdf")
     tamanho_kb = os.path.getsize(saida) // 1024
-    print(f"\nPDF: {saida} · {tamanho_kb} KB")
-    print(f"Formato: 6×9 polegadas (paperback de trade)")
-    print(f"Conteúdo: {total_pgs} pgs de texto + capa + rosto + ficha + sumário + 12 retratos + 12 meias-portadas + colofão")
+    print()
+    print(f"PDF: {saida} · {tamanho_kb} KB")
+    print(f"Formato: 6×9 polegadas (152 × 229 mm)")
+    print(f"Estrutura: 4 pré + {sum(c.numero_paginas_internas for c in cartas)} corpo + 1 colofão "
+          f"= {4 + sum(c.numero_paginas_internas for c in cartas) + 1} páginas previstas")
     return 0
 
 
