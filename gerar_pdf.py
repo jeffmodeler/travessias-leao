@@ -42,6 +42,7 @@ from reportlab.platypus import (
     BaseDocTemplate,
     Flowable,
     Frame,
+    HRFlowable,
     Image,
     NextPageTemplate,
     PageBreak,
@@ -357,29 +358,26 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
         leading=18, textColor=MEL, alignment=TA_RIGHT,
     )
 
-    # Separador (fundo tinta)
+    # Separador (fundo creme — anuncia a carta com tipografia grande)
     s["sep_rotulo"] = ParagraphStyle(
-        "sep_rotulo", fontName=FONTE_META_BOLD, fontSize=11,
-        leading=16, textColor=MEL, alignment=TA_CENTER, spaceAfter=24,
-    )
-    s["sep_nome"] = ParagraphStyle(
-        "sep_nome", fontName=FONTE_TITULO_ITAL, fontSize=66,
-        leading=72, textColor=CREME, alignment=TA_CENTER,
+        "sep_rotulo", fontName=FONTE_TITULO_ITAL, fontSize=32,
+        leading=40, textColor=MEL, alignment=TA_CENTER, spaceAfter=8,
     )
 
-    # Retrato (foto + saudação)
-    s["retr_saudacao"] = ParagraphStyle(
-        "retr_saudacao", fontName=FONTE_TITULO_ITAL, fontSize=36,
-        leading=40, textColor=TINTA, alignment=TA_CENTER, spaceAfter=18,
+    # Retrato (fundo tinta — foto + nome + epígrafe + meta)
+    # (a saudação "Oi, Nome" foi removida do retrato)
+    s["retr_nome"] = ParagraphStyle(
+        "retr_nome", fontName=FONTE_TITULO_ITAL, fontSize=15,
+        leading=20, textColor=MEL, alignment=TA_CENTER, spaceAfter=6,
     )
     s["retr_epigrafe"] = ParagraphStyle(
         "retr_epigrafe", fontName=FONTE_TEXTO_ITAL, fontSize=13,
-        leading=20, textColor=CARVAO, alignment=TA_CENTER,
-        leftIndent=30, rightIndent=30, spaceAfter=12,
+        leading=20, textColor=CREME, alignment=TA_CENTER,
+        leftIndent=30, rightIndent=30, spaceAfter=8,
     )
     s["retr_meta"] = ParagraphStyle(
         "retr_meta", fontName=FONTE_META, fontSize=10,
-        leading=14, textColor=MEL, alignment=TA_CENTER,
+        leading=14, textColor=MEL, alignment=TA_CENTER, spaceBefore=8,
     )
 
     # Corpo da carta — 11.5pt / 17pt para A4
@@ -466,12 +464,13 @@ def fundo_capa(c, _doc) -> None:
 
 
 def fundo_separador(c, _doc) -> None:
+    """Fundo tinta limpo — sem filetes fixos. Os elementos visuais
+    decorativos agora ficam ATRELADOS ao conteúdo (HRFlowable abaixo
+    do nome, com largura proporcional à frase)."""
     c.saveState()
     c.setFillColor(TINTA)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
-    _filete(c, PG_W / 2 - 40 * mm, PG_W / 2 + 40 * mm, PG_H / 2 + 32 * mm, MEL, 0.6)
-    _filete(c, PG_W / 2 - 26 * mm, PG_W / 2 + 26 * mm, PG_H / 2 - 60 * mm, MEL, 0.4)
 
 
 def fundo_creme_simples(c, _doc) -> None:
@@ -490,25 +489,20 @@ def fundo_creme_simples(c, _doc) -> None:
 
 
 def fundo_texto(c, _doc) -> None:
-    """Páginas de corpo de carta: header (TRAVESSIAS + nome da carta atual)
-    + footer com número de página."""
+    """Páginas de corpo de carta: header com 'TRAVESSIAS' apenas + footer
+    com número de página."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
 
-    # Header: TRAVESSIAS centralizado + nome da carta abaixo discreto
-    nome = str(_ctx.get("carta_atual", "")).strip()
-    c.setFont(FONTE_META_BOLD, 7.5)
+    # Header: somente "TRAVESSIAS" (sem nome da carta — convenção de coletânea)
+    c.setFont(FONTE_META_BOLD, 8)
     c.setFillColor(MEL)
-    c.drawCentredString(PG_W / 2, PG_H - 16 * mm, "TRAVESSIAS")
-    if nome:
-        c.setFont(FONTE_META, 7)
-        c.setFillColor(CINZA)
-        c.drawCentredString(PG_W / 2, PG_H - 21 * mm, nome.upper())
+    c.drawCentredString(PG_W / 2, PG_H - 18 * mm, "TRAVESSIAS")
     _filete(
         c,
         PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
-        PG_H - 24 * mm, MEL, 0.3,
+        PG_H - 21 * mm, MEL, 0.3,
     )
 
     # Footer: número de página
@@ -642,8 +636,12 @@ def _build_uma_passada(
     doc.addPageTemplates([
         PageTemplate(id="capa",       frames=[frame_full],  onPage=fundo_capa),
         PageTemplate(id="pretextual", frames=[frame_full],  onPage=fundo_creme_simples),
-        PageTemplate(id="separador",  frames=[frame_full],  onPage=fundo_separador),
-        PageTemplate(id="retrato",    frames=[frame_full],  onPage=fundo_creme_simples),
+        # Separador (anúncio da carta) em fundo CREME — dramatizado pela
+        # tipografia grande "CARTA III" em mel.
+        PageTemplate(id="separador",  frames=[frame_full],  onPage=fundo_creme_simples),
+        # Retrato (foto + saudação + epígrafe) em fundo TINTA — o retrato
+        # vira a "página de capa" da carta, cinematográfica.
+        PageTemplate(id="retrato",    frames=[frame_full],  onPage=fundo_separador),
         PageTemplate(id="texto",      frames=[frame_texto], onPage=fundo_texto),
     ])
 
@@ -701,44 +699,57 @@ def _build_uma_passada(
     story.append(Spacer(1, 20 * mm))
     story.append(Paragraph("Sumário", styles["sum_titulo"]))
     story.extend(_bloco_sumario(cartas, mapa_paginas, styles))
-    story.append(PageBreak())
+    # Sem PageBreak — a primeira carta tem seu próprio
+    # NextPageTemplate + PageBreak que encerra o sumário corretamente.
 
     # -------- 5. CADA ENTRADA --------
+    # Ordenação correta: NextPageTemplate define o template DO NEXT page;
+    # o PageBreak imediato aplica e move pra essa página, então o conteúdo
+    # flowi no template certo.
     for carta in cartas:
-        # 5a · Separador (fundo tinta)
+        # 5a · Separador (fundo creme — anúncio dramático)
         story.append(NextPageTemplate("separador"))
-        story.append(PageMarker(carta.id, registry))
-        story.append(Spacer(1, PG_H * 0.36))
-        story.append(Paragraph(carta.rotulo.upper(), styles["sep_rotulo"]))
-        story.append(Paragraph(carta.nome, styles["sep_nome"]))
         story.append(PageBreak())
+        story.append(PageMarker(carta.id, registry))
+        story.append(Spacer(1, PG_H * 0.42))  # centro vertical do papel
+        story.append(Paragraph(carta.rotulo.upper(), styles["sep_rotulo"]))
 
-        # 5b · Retrato (creme: foto + saudação + epígrafe + meta)
+        # 5b · Retrato (fundo tinta — foto + nome + epígrafe + filete + meta)
+        # Sem saudação acima da foto (era ruidoso e duplicava o nome).
         story.append(NextPageTemplate("retrato"))
-        story.append(Spacer(1, 24 * mm))
-        story.append(Paragraph(carta.saudacao, styles["retr_saudacao"]))
+        story.append(PageBreak())
+        story.append(Spacer(1, 32 * mm))
 
         foto = _foto_existe(carta.foto)
         if foto:
-            img = Image(foto, width=80 * mm, height=112 * mm)
+            img = Image(foto, width=82 * mm, height=114 * mm)
             img.hAlign = "CENTER"
             story.append(img)
-            story.append(Spacer(1, 14 * mm))
+            story.append(Spacer(1, 12 * mm))
+
+        # Nome em Times itálico mel logo abaixo da foto
+        story.append(Paragraph(carta.nome, styles["retr_nome"]))
 
         if carta.epigrafe:
+            # Quebra natural após o travessão " — " (vale para qualquer
+            # carta cuja epígrafe contenha essa pontuação)
+            epigrafe_quebrada = carta.epigrafe.replace(" — ", " —<br/>")
             story.append(Paragraph(
-                f"“{carta.epigrafe}”", styles["retr_epigrafe"]
+                f"“{epigrafe_quebrada}”", styles["retr_epigrafe"]
+            ))
+            # Filete proporcional à largura da epígrafe (~60% da página)
+            story.append(HRFlowable(
+                width="50%", thickness=0.5, color=MEL,
+                hAlign="CENTER", spaceBefore=4, spaceAfter=8,
             ))
 
         meta = " · ".join(p for p in (carta.idade, carta.cidade) if p)
         if meta:
             story.append(Paragraph(meta, styles["retr_meta"]))
 
-        story.append(PageBreak())
-
         # 5c · Texto fluido (paginação automática)
         story.append(NextPageTemplate("texto"))
-        _ctx["carta_atual"] = carta.nome
+        story.append(PageBreak())
         story.extend(texto_da_carta(carta, styles))
 
         # 5d · Fechamento (na mesma página onde o texto termina, se couber)
@@ -751,11 +762,12 @@ def _build_uma_passada(
         else:
             meta_ass = "2025"
         story.append(Paragraph(meta_ass, styles["assinatura_meta"]))
-
-        story.append(PageBreak())
+        # Sem PageBreak aqui — a próxima carta começa com seu próprio
+        # NextPageTemplate("separador") + PageBreak.
 
     # -------- 6. COLOFÃO FINAL --------
     story.append(NextPageTemplate("pretextual"))
+    story.append(PageBreak())
     story.append(Spacer(1, 100 * mm))
     story.append(Paragraph("· · ·", styles["ornamento"]))
     story.append(Spacer(1, 16 * mm))
@@ -778,17 +790,28 @@ def _build_uma_passada(
 
 
 def construir_pdf(cartas: list[Carta], saida: str = "travessias.pdf") -> str:
-    """Two-pass build: predição + correção via PageMarker."""
+    """Two-pass build: predição + correção via PageMarker.
+
+    Escreve sempre em um arquivo temp e renomeia ao final, evitando
+    erros de Permission caso o PDF esteja aberto em outro leitor.
+    """
+    import tempfile, shutil
+    tmp_saida = saida + ".tmp"
+
     mapa_predito = _predicao_paginas(cartas)
     registry: dict[str, int] = {}
-    _build_uma_passada(cartas, mapa_predito, registry, saida)
+    _build_uma_passada(cartas, mapa_predito, registry, tmp_saida)
 
-    if registry == mapa_predito:
-        return saida
+    if registry != mapa_predito:
+        registry2: dict[str, int] = {}
+        _build_uma_passada(cartas, registry, registry2, tmp_saida)
 
-    # Re-build com páginas reais
-    registry2: dict[str, int] = {}
-    _build_uma_passada(cartas, registry, registry2, saida)
+    try:
+        shutil.move(tmp_saida, saida)
+    except PermissionError:
+        # Arquivo final está aberto — entrega o temp pra revisão manual
+        print(f"AVISO: {saida} está em uso. PDF gerado em {tmp_saida}.")
+        return tmp_saida
     return saida
 
 
