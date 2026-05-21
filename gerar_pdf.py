@@ -55,10 +55,16 @@ from reportlab.platypus import (
 )
 
 
-# Cartas que devem ter distribuição FORÇADA em N páginas (pedido editorial)
+# Cartas com distribuição FORÇADA em N páginas (decisão editorial).
+# Algoritmo de balanceamento (texto_da_carta) divide o conteúdo em N
+# páginas com PageBreak entre elas, alocando mais peso nas primeiras
+# pra que a última fique com folga e acomode o fechamento.
 PAGINAS_FORCADAS: dict[str, int] = {
+    "renata":  2,
+    "ana":     2,
+    "thaina":  2,
+    "silvia":  2,
     "marilia": 3,
-    "silvia":  3,
     "paula":   3,
     "sheila":  3,
 }
@@ -312,22 +318,25 @@ def texto_da_carta(
                 style = styles["p_sem_indent"] if sem_indent else styles["p"]
                 _adicionar(Paragraph(conteudo, style), len(conteudo))
 
-    # Se a carta está em PAGINAS_FORCADAS, redistribui em N páginas balanceadas
+    # Se a carta está em PAGINAS_FORCADAS, redistribui em N páginas
+    # balanceadas. As primeiras (target-1) páginas recebem ~1.15× do
+    # peso médio para que a ÚLTIMA fique mais leve e acomode o
+    # fechamento (ornamento + assinatura + meta) sem overflow.
     target = PAGINAS_FORCADAS.get(carta.id)
     if not target or target <= 1 or len(flow) < target:
         return flow
 
     total_peso = sum(pesos)
-    peso_por_pagina = total_peso / target
+    peso_medio = total_peso / target
+    # Threshold acima de 1.0 → primeiras páginas mais densas, última leve
+    threshold = peso_medio * 1.15
 
     redistribuido: list = []
     peso_atual = 0
     paginas_abertas = 1
     for f, p in zip(flow, pesos):
-        # Se já passou do target da página atual e ainda temos páginas
-        # a abrir, força PageBreak antes desse flowable
         if (paginas_abertas < target and
-            peso_atual >= peso_por_pagina * 0.92 and
+            peso_atual >= threshold and
             peso_atual > 0):
             redistribuido.append(PageBreak())
             paginas_abertas += 1
