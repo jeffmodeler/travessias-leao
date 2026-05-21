@@ -23,7 +23,7 @@
 
 const CARTAS = [
 
-  /* ========================================================================
+/* ========================================================================
      BLOCO 02 — ABERTURA · Renata Leão (autora)
      ======================================================================== */
   {
@@ -83,160 +83,96 @@ const CARTAS = [
   },
 
   /* ========================================================================
-     BLOCO 03 — CARTA I · Ana Claudia
+     BLOCO 03 — CARTA I · Marilia
      ======================================================================== */
   {
-    id: "ana",
+    id: "marilia",
     numero: "I",
-    nome: "Ana Claudia",
-    saudacao: "Oi, Ana Claudia",
-    idade: "56 anos",
-    cidade: "",
-    foto: "fotos/ana_claudia.jpg",
-    epigrafe: "Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita.",
-    assinatura: "Ana Claudia",
+    nome: "Marília Martins",
+    saudacao: "Oi, Marília",
+    idade: "37 anos",
+    cidade: "Franca · SP",
+    foto: "fotos/marilia_martins.jpg",
+    epigrafe: "Atrás de uma grande mulher tem sempre outra grande mulher.",
+    assinatura: "Marília",
     paginas: [
-      `<p class="sem-indent">Quanto tempo a gente não se fala. São 56 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que você está aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
-       <p>Foi uma caminhada longa e sinuosa até aqui, mas repleta de amor e resiliência. Nós acreditamos — e o medo e a confiança caminharam lado a lado, se complementando e se equilibrando durante a jornada que ainda persiste.</p>
-       <p>Agradeço por juntas, termos usado cada emoção que compõe o nosso Ser de forma sábia, sem nunca perder a essência. Desviamos das leis que se transformaram em instrumentos de terror e vingança, em mãos erradas e narcisistas ao longo do caminho.</p>`,
+      `<p class="sem-indent">Nossa, respira fundo. Tem muita coisa pra contar, Ma ou Marília… Faz tanto tempo… São 37 anos de história de páginas escritas por você, na evolução das letrinhas que hoje transmitem a segurança que sempre tivemos nos passos.</p>
+       <p>Passos legítimos de pai e mãe, sapateiros, costurando o nosso caminho, caminho que nos trouxe até aqui, hoje. Somos a união de todas as emoções, conquistas e, preciso admitir, privilégios que acumulamos ao longo de todos esses anos.</p>
+       <p>A vontade de ser livre na nossa essência nos transformou em uma mulher que trabalha com o compromisso de garantir essa liberdade para todas as mulheres que pudermos alcançar.</p>`,
 
-      `<p>Por um desenho genuíno de família — que foi mal interpretado por um olhar tendencioso e parcial, que fragmentou a convivência do afeto. A convivência física, porque o afeto… esse é onipresente.</p>
-       <p class="sem-indent">O Benjamim, hoje com 25 anos, foi desrespeitado como pessoa humana, usado como instrumento de vingança pelo genitor. Mas nós continuamos acreditando no amor, mesmo em meio à desordem social que nos afastou fisicamente por tantos anos.</p>
-       <p>Não recorremos do processo. Não tivemos condições emocionais de lutar com o corpo presente. Atravessamos o oceano, nadando contra tudo o que queríamos, para então chegar à superfície e voltar a respirar. O Benjamim só tinha 10 anos… mas sabíamos que, um dia, ele entenderia. O tempo era necessário.</p>`,
+      `<p>Somos circulares, assim como a dança que permeia nossa existência. Fazemos parte de uma transformação genuína e orgânica com raízes que fortalecem a nossa luta, até hoje. Determinação que vem da nossa ancestralidade. A vovó criou sete filhos, viúva, você lembra, né? A menina sapateira de 08 anos se formou professora. O papai, advogado.</p>
+       <p class="sem-indent">Entre letras, eventos e sala de aula, hoje estamos na política. Somos vereadora em Franca pelo PSOL, partido que ajudamos a fundar na cidade, em 2007, 2008. Aposto que você já sabia, afinal crescemos no movimento sindical e no MST.</p>
+       <p>Mas, antes disso, dançamos em lugares diferentes e voamos pra longe. Sabe o tal do privilégio? Então… nos formamos em Planejamento de Eventos Conscientes nos Estados Unidos. Temos uma bagagem rica de planejamento e políticas públicas para servir, agora, tantas mulheres que precisam de rede de apoio.</p>`,
 
-      `<p>Às vezes, é preciso se ausentar de si mesma para conseguir enxergar com clareza e recuperar o oxigênio.<br>Somos corajosas!</p>
-       <p>Aliás, acredito que essa palavra — <em>coragem</em> — atravessa a nossa história. Quando olho para trás e vejo onde estamos agora… Voltamos. Encontramos o Benjamim.</p>
-       <p>Você lembra como foi desafiador tomar essa decisão? A vida estava se ajeitando — porém, sem ele. E a dele estava se desajeitando. Precisava, agora sim, da nossa presença. Corpo presente, cheio de energia e vontade.</p>
-       <p class="sem-indent">Fomos parar na vida noturna, lembra? Somos versáteis. A experiência com produção de eventos se uniu àquela carreira mirim que ainda engatinhava rumo a um objetivo legítimo: trabalhar com o que se ama. Ele estava se formando… DJ com 13 anos.</p>`,
+      `<p>Esses momentos me fazem lembrar das 17 vezes que o papai foi cassado e processado pela ditadura militar, na tentativa de promover justiça social. Seguimos os mesmos passos: Educação e política. Dalvinha e Georginho.</p>
+       <p>Também somos professoras. Até criamos uma cartilha: <em>"Vira a Página, Mulher"</em>. Viramos, cada página lida.</p>
+       <p class="sem-indent">Nossa vida política se fortaleceu quando voltamos dos EUA, cansadas da cultura essencialmente capitalista. Com um cachorrinho embaixo dos braços, alugamos uma casa que se transformou em um coletivo de mulheres.</p>
+       <p>Nossa casa ganhou até nome: Confraria Cult. Tantas coisas boas acontecem por lá… meditação, roda de conversas, danças circulares, eventos de humanização e políticas públicas para mulheres e até feiras de mulheres artesãs para promover independência e autonomia financeira. Nossas mulheres artesãs, hoje, até exportam seus materiais. É um projeto lindo, que nasceu antes mesmo de estarmos vereadora.</p>`,
 
-      `<p>Essa LAP — Lei de Alienação Parental — nunca foi capaz de nos Alienar, nunca foi capaz de separar a gente, de verdade. Nunca lapidou os nossos sentimentos. Foi apenas um lapso que, como uma lapiseira, serviu igualmente como instrumento de crescimento. Crescemos. Nos fortalecemos. Juntos.</p>
-       <p>A LAP… a lei que não devia "pegar". Sabe aquela história: "tem lei que não pega"? Pois é, essa pegou.<br>E agora?</p>
-       <p>São muitas outras histórias sendo lapidadas, de muitas outras mulheres, junto com a gente, Ana. Ana Claudia. Anas… Anas Claudias!</p>`,
+      `<p>Aliás, sempre me recolho, faço meditação e às vezes encontro com você, ainda quando éramos uma menina. Ah, gostamos de menina, e namoro uma mulher incrível que é o nosso grande apoio. Consegue imaginar assumirmos isso aqui em Franca? Pois é, tudo isso faz parte da nossa luta, Marília.</p>
+       <blockquote class="citacao">Atrás de uma grande mulher tem sempre outra grande mulher!</blockquote>
+       <p>Cada plantinha que eu cultivo também estou regando os nossos sonhos e humanizando uma luta que às vezes é dolorida e densa. Precisamos equilibrar o nosso ser, que é holístico.</p>
+       <p>Nossa vida política tem seus riscos e passamos alguns apuros que pegaram fogo, literalmente. Mas, temos vizinhos bacanas e uma rede de apoio imensa que ajudaram a apagar. As autoridades tentam nos desencorajar e, mesmo recuando em alguns momentos, seguimos em frente, menina.</p>`,
 
-      `<blockquote class="citacao">Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita. Grita alto. E há quem escute. Porque esse grito se funde a tantos outros que ecoam, fazendo barulho. Gritamos mais alto que a LAP. Vamos silenciar a LAP. Vamos!</blockquote>
-       <p class="sem-indent">Ana Claudia, você tinha 41 anos. Agora, eu estou com 56. Você também, amadurecemos juntas — e agradeço pelo que você fez por nós.</p>
-       <p>Todas as suas ações nos trouxeram até aqui.</p>
-       <p>Obrigada. Seguimos juntas, como abelhas, como um enxame!!!</p>`
+      `<p>Nossa luta significa encontrar pessoas dispostas a conversar para a solução de problemas, não só pelo desabafo. Teremos alguns anos pela frente com a nossa voz em volume máximo, <em>"depois, eu ajusto as velas e reavalio"</em>.</p>
+       <p>Obrigada por tudo o que você fez até aqui. Agora, deixa comigo. Vou fazer um bom trabalho!</p>
+       <p>Sinta meu abraço, apertado, e um beijo na bochecha.</p>`
     ]
   },
 
   /* ========================================================================
-     BLOCO 04 — CARTA II · Luiza
+     BLOCO 04 — CARTA II · Hosana
      ======================================================================== */
   {
-    id: "luiza",
+    id: "hosana",
     numero: "II",
-    nome: "Luiza",
-    saudacao: "Oi, Luiza",
-    idade: "25 anos",
-    cidade: "Mariana · MG",
-    foto: "fotos/luiza.jpg",
-    epigrafe: "Nós somos grandes, Luiza. Sempre fomos.",
-    assinatura: "Luiza",
+    nome: "Hosana",
+    saudacao: "Oi, Hosana",
+    idade: "",
+    cidade: "Mauá · SP",
+    foto: "fotos/hosana.jpg",
+    epigrafe: "Desisti de desistir.",
+    assinatura: "Hosana",
     paginas: [
-      `<p class="sem-indent">Quanto tempo se passou desde a nossa última conversa… Já são 25 anos de jornada compartilhada. Talvez nem tenhamos tido uma conversa profunda ao longo da nossa evolução.</p>
-       <p>Todas nós, lado a lado — com cada emoção sentida no caminho, formamos a Luiza de hoje. Trazemos muitas dentro de nós, não é Luizinha? Hoje, é um alívio e uma alegria poder dar voz a essa história, revisitando cada pedaço que vive em nossa alma, mente e corpo.</p>
-       <p>Lembra quando a mamãe trazia para casa muito mais do que histórias de sala de aula? Ela contava sobre histórias desafiadoras das famílias daquelas crianças que deveriam ter como única preocupação, os estudos.</p>`,
+      `<p class="sem-indent">Eu poderia cantar a nossa história, com uma melodia completa, dançando entre dramas, potências e conquistas.</p>
+       <p>Embora tantos desafios, nossa vida é uma música harmônica, cheia de rimas, ritmo e vibração.</p>
+       <p>Quando decidimos, aos 11 anos trocar a Igreja pela quadra da escola de samba, ainda não imaginávamos o que vinha pela frente. Respira fundo, vou te contar.</p>
+       <p>Você não imagina a potência de mulher e ser humano no qual nos transformamos, Hosana. A maternidade nos forjou, ainda quando éramos apenas uma criança de 14 anos. Jaque, é o nome da nossa primeira filha, hoje com 31 anos.</p>
+       <p>Somos fruto do que você foi construindo ao longo da vida, com as decisões e personalidade fortes que trilharam o caminho até aqui. Obrigada pela sua coragem.</p>`,
 
-      `<p>Ela fazia isso de forma silenciosa, sem buscar mérito ou reconhecimento pelas articulações movimentando inúmeras pessoas em benefício dos que mais precisavam. Obrigada pela criança determinada e pela menina de Mariana que usou o medo como ferramenta de obter coragem pra encarar de frente um ambiente conservador, no interior de Minas Gerais.</p>
-       <p class="sem-indent">Foi essa menina que, aos 17 anos, mudou de cidade para estudar administração e construiu as bases que sustentam a mulher que somos hoje. Lembra como foi desafiador? O medo, as novidades, a solidão… Mas também quanta coisa a gente colocou na bagagem! Algumas dessas memórias ainda estão na minha mala.</p>`,
+      `<p class="sem-indent">Quando nossos pais chegaram em Mauá em 64, atravessando o mapa em meio a uma ditadura, começaram a marcar uma caminhada que quebraria padrões e ciclos de estereótipos impostos involuntariamente. A Bahia e o Pernambuco fazendo parte da construção da metrópole que serve de palco para desconstruir.</p>
+       <p>Lembra, ainda pequena, nossa mãe se dividindo entre sete filhos? Penso com carinho da espera do momento em que o papai chegava do trabalho e ia preparar o que eu — você — queria comer. Embrutecido pelo sofrimento do sertão do nordeste, ele guardava espaço para cuidar. Foi a base dessa cultura de cuidado que permeia nossa trajetória.</p>`,
 
-      `<p>Você não imagina onde estamos hoje. São Paulo, acredita? Em um festival feito especialmente para nós, mulheres. Tem tanta coisa bonita acontecendo! Agora, seguimos o legado da mamãe: Levar conhecimento onde o conhecimento insiste em não alcançar!</p>
-       <p>São Paulo é uma cidade intensa, aqui tudo está em movimento! Sabe a coragem que você agarrou lá atrás? Hoje vejo que ela começou com a vovó, que foi corajosa e revolucionária para o tempo dela e, junto com o vovô, trabalhou para que os três filhos pudessem estudar, incluindo a mamãe, que é professora e assistente social. Ela varreu muitas ruas abrindo espaço pra gente passar, transformando o lixo em educação.</p>`,
+      `<p>Somos mãe. Quatro pessoas humanas às quais dedicamos toda energia, servindo de espelho para que criassem reflexos diferentes dos que recebemos. Negros, periféricos criando a própria realidade, repudiando imposições sociais de manutenção da pobreza e da ignorância.</p>
+       <p>Sabe do melhor? O Pedro. Nós escolhemos o Pedro, junto com nossos filhos, e também fomos escolhidas por ele. Temos uma família linda, potente, que já deu continuidade à linhagem, com um netinho de um ano e meio.</p>
+       <p class="sem-indent">Com a Jaque, quebramos o ciclo de gravidez na adolescência. Criamos e educamos uma mulher que trilha o próprio caminho. Negra, periférica, sem filhos e na universidade, com 31 anos. Vem tranquila, você fez um bom trabalho.</p>`,
 
-      `<p class="sem-indent">Ah, preciso te contar: em 2020 vivemos uma pandemia. Foi um tempo triste, de muitas perdas. Mas a gente ficou bem. E, justamente nesse período, ganhamos o troféu de Jovens Talentos em Brasília, por um trabalho de comunicação numa campanha política do papai!</p>
-       <p>Tivemos tanto cuidado na nossa família. Cuidar. Cuidar de nós e de quantas pessoas pudermos. Esse festival tem me mostrado isso. São muitas mulheres se movimentando para o cuidado com outras mulheres — precisamos umas das outras.</p>`,
+      `<p>Existe algo em nós muito genuíno. Embora a cultura evangélica permeasse nossa infância e educação, a compaixão não foi suficiente para que nos acolhesse enquanto esperávamos a Jaque nascer. Fomos culpabilizadas e responsabilizadas por não termos o esclarecimento que deveríamos ter recebido. A culpa não foi sua, não é nossa.</p>
+       <p>Se prepara, Hosana, vai ser dolorido. Mas vai valer a pena. A maternidade vai te forjar e vai te impulsionar, junto com a Cultura e a Arte que estão na sua alma. Tudo isso vai te dar pulsão de vida.</p>
+       <p>O samba, o estudo e o rap fizeram parte da construção da nossa personalidade. Trabalhamos a nossa autoestima e nunca tivemos vergonha da ancestralidade, da cultura africana e da nossa negritude. A música é uma ferramenta de conexão com o divino que há dentro de nós.</p>`,
 
-      `<p>Estou criando pontes que servirão de irrigação para as nossas raízes mineiras. O ano passado nasceu o Movimento por Mulheres em Mariana e nós fazemos parte disso e vamos fazer ainda mais. Sabe por quê? Não tivemos nenhuma mulher eleita em 2024. Sem mulheres na política não terão políticas públicas voltadas para mulheres.</p>
-       <p>Enquanto isso, por aqui, o Hamudes me apoia muito. Estamos juntos há 11 meses. Ele é assessor parlamentar e está lado a lado na caminhada rumo aos nossos objetivos. Nossa régua é alta!</p>
-       <p class="sem-indent">Agora, mais do que nunca, quero escancarar as lutas que correm em nosso sangue. A começar pela cor da nossa pele — desafio enfrentado com coragem pela vovó. Uma lição passada com sabedoria.</p>`,
+      `<p class="sem-indent">Só voltamos a estudar com 34 anos, mais ou menos. Viu, nunca é tarde. EJA — Educação de Jovens e Adultos. Foi lá que terminamos os estudos. Nós gostamos de estudar!!!</p>
+       <p>Fomos corajosas, mesmo sem o apoio da família. Nos formamos em Ciências Sociais. Levar para o trabalho o que sempre nos moveu na vida. Cuidar.</p>
+       <p>A primeira coisa mais importante que fizemos, e você me deu coragem pra isso, foi o divórcio. A segunda, foi Deitar pro Santo. O candomblé orienta nossa vida. A africanidade nos dá poder!</p>
+       <p>Quando entramos na faculdade ao mesmo tempo que entramos para o movimento negro de esquerda, tiramos o peso da ignorância e pegamos o peso da responsabilidade de entender e escolher o que fazer com o conhecimento. A resposta foi o engajamento político, não paramos mais de militar.</p>`,
 
-      `<p>Vivemos em uma cidade linda, cheia de história, mas conservadora. Onde vínculos são criados conforme o sobrenome e o saldo bancário. Mas a vovó deu peso à nossa história.</p>
-       <blockquote class="citacao">Nós somos grandes, Luiza. Sempre fomos.</blockquote>
-       <p>Os preconceitos nunca nos pararam. Nem mesmo quando perdemos um emprego por perseguição política. Sempre que duvidam de nós — especialmente quando é um homem, menos capacitado, que ainda assim ganha mais voz — nossa coragem se inflama. E seguimos. Nós sempre conseguimos.</p>
-       <p>Tenho muito orgulho da nossa história, construída com uma rede de apoio gigantesca. E você é a base disso tudo. Uma base firme, que passa por reformas importantes. Reformas que não erguem muros, mas fortalecem a estrutura.</p>
-       <p>Obrigada por tudo o que fez por nós até aqui. Agora, deixa comigo. Eu vou fazer um bom trabalho.</p>`
+      `<p>Entrei para o PSOL. A política é necessária, mas também é difícil, tentam nos silenciar a todo momento. Embora não tenha sido eleita, fomos a mais bem votada.</p>
+       <p class="sem-indent">Fui aprender a cuidar de mim quando me vi morando sozinha… e isso foi só há três anos, quando nossa filha resolveu cuidar dela mesma e saiu de casa. Eu pensei: Por que agora? Vou ter que cuidar de mim! Tem sido maravilhoso, puro autoconhecimento.</p>
+       <p>Toda nossa base artística, do samba, do black, do rap, a arte negra e africanidade, exalaram pela nossa pele. Planto dessa semente com as crianças do CRAS, como monitora, trabalhando a arte e a música. Sigo fazendo a nossa parte, aprendi a cuidar dos outros sem deixar de cuidar de nós.</p>`,
+
+      `<blockquote class="citacao">Nós quase desistimos, sabia? Houve um tempo sem esperança e quase interrompi nossa trajetória. Mas siga firma porque desisti de desistir.</blockquote>
+       <p>Agora, viver me movimenta como num palco com a nossa música preferida. A nossa música é pra todas e nosso palco é grande, cabe todo mundo.</p>
+       <blockquote class="citacao">Somos diversas, mas não estamos dispersas. Vamos conseguir!<span class="citacao-atribuicao">— Marielle Franco</span></blockquote>
+       <p>Obrigada pela base que nos sustenta, Hosana! Pode vir, estamos bem e seguimos sambando!</p>`
     ]
   },
 
   /* ========================================================================
-     BLOCO 05 — CARTA III · Silvia
-     ======================================================================== */
-  {
-    id: "silvia",
-    numero: "III",
-    nome: "Silvia",
-    saudacao: "Oi, Silvia… Silvinha",
-    idade: "57 anos",
-    cidade: "Cachoeirinha",
-    foto: "fotos/silvia_teixeira.jpg",
-    epigrafe: "A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena.",
-    assinatura: "Silvia",
-    paginas: [
-      `<p class="sem-indent">Há quanto tempo a gente não se fala. São 57 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
-       <p>Foi uma caminhada permeada pela busca. Busca por novas oportunidades… Oportunidades que nos deram a liberdade de viver as nossas emoções. Liberdade de ter a chance de proporcionar educação e acesso à tantas pessoas que fazem parte da nossa jornada, sinto que somos responsáveis por isso.</p>`,
-
-      `<p>Sabe por quê? Agora, nós podemos, juntas, sermos essa ponte. Uma ponte de conhecimento, amor e confiança. Assim como toda a nossa bagagem foi, e é, a ponte entre nós… A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena dos meus poderes de hoje.</p>
-       <p>Nós conseguimos, e eu só estou aqui hoje, no MEL, porque você fez tudo o que tinha que ser feito, antes. Agora, eu posso dizer: Nós temos, nós acreditamos, nós pertencemos. Aliás, obrigada por nunca ter deixado de acreditar.</p>`,
-
-      `<p class="sem-indent">Você foi uma criança privilegiada e me transformou na adulta que te agradece hoje. Obrigada, Silvinha. Nós nos formamos professora, sabia? Sabe a culpa de nunca ter chamado a Lorecy de "mãe"? Não existe mais! Nossa trajetória tinha que ser assim, nós tínhamos que ter passado a infância em meio aos nossos primos militantes para colocar a educadora e a militante para trabalhar. Afinal, somos buscadoras.</p>
-       <p>Eu já até me aposentei, da sala de aula, porque continuo vivendo nossa busca com mais energia do que nunca. Aliás, nos desligamos rapidamente do ambiente escolar, porque entendi que a educação estava em outro ambiente, pra nós. Seguimos educando e tocando almas, fazendo com que outras mulheres continuem acreditando, como você e eu.</p>`,
-
-      `<p>Inclusive, estou cheia de orgulho, trago ex-alunas nessa caminhada, na mesma busca de mostrar que sonhos podem ser realizados em qualquer lugar, até mesmo nas periferias. Na busca de levar dignidade para tantas mães, especialmente as atípicas.</p>
-       <p class="sem-indent">Nós lutamos para combater a violência contra as mulheres, sabia? Você adoraria ver isso aqui, o MEL está lindo! Mulher em Lutas! Ah, você está aqui, na verdade, junto comigo, se emocionando comigo e levando tantas bandeiras a serem levantadas em Cachoeirinha, onde há tantas mulheres se sentindo sozinhas e impotentes, nadando em cachoeiras de lágrimas.</p>`,
-
-      `<p>Será que a mamãe, Laci, se sentia assim também enquanto lavava suas roupas? De uma coisa eu tenho certeza. Foi ela que nos ensinou e apontou os caminhos que poderíamos seguir. Foi ela que nos ensinou a nadar e que as lágrimas podem não ser de dor. Foi ela que nos transformou em amor.</p>
-       <p>Por falar em amor, nós temos uma filha e um neto. É a nossa história sendo contada, é a posteridade.</p>
-       <p>Hoje, eu não peço mais desculpas à Lorecy por amar tanto a mamãe e a nossa família. Agora eu entendo, nos libertei dessa culpa. A Loreci foi uma mulher, antes de ser mãe. Ela teve que trabalhar e não pode acompanhar nosso crescimento.</p>
-       <p>Por isso estou aqui hoje, nesse estágio da nossa vida, em meio a um enxame de tantas outras mulheres. É isso que me move!</p>
-       <p>Obrigada por seguirmos juntas, como abelhas, como enxame!</p>`
-    ]
-  },
-
-  /* ========================================================================
-     BLOCO 06 — CARTA IV · Thainá
-     ======================================================================== */
-  {
-    id: "thaina",
-    numero: "IV",
-    nome: "Thainá",
-    saudacao: "Oi, Thainá",
-    idade: "29 anos",
-    cidade: "Salvador · BA",
-    foto: "fotos/thaina_britto.jpg",
-    epigrafe: "Esse corpo que abriga a nossa história.",
-    assinatura: "Thainá",
-    paginas: [
-      `<p class="sem-indent">Há quanto tempo não nos falamos. São 29 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita nossa alma, nossa mente e nosso corpo.</p>
-       <p>Corpo. Foi uma caminhada marcada pela construção do entendimento de "corpo", na construção da autoconfiança. A confiança de nos entendermos dentro da nossa existência, como menina, adolescente e mulher. Confiança no que representamos por onde passamos, com quem convivemos e na história que escrevemos, um dia de cada vez. Ainda há muito que caminhar.</p>
-       <p>A nossa história, de menina e mulher baiana, de Salvador, foi permeada, também, pela história da mamãe. E nós, sempre buscando a tal da felicidade. Mas antes de falar sobre a felicidade, quero falar do nosso corpo.</p>`,
-
-      `<p class="sem-indent">Corpo, um substantivo masculino… Masculino como olhar que nos colocou em uma posição precoce, ainda muito cedo.</p>
-       <p>Embora eu enxergasse você como a criança que era, de 10 anos, os nossos seios chegavam antes, sexualizando um corpo que ainda era infantil e não entendia aquilo tudo. Lembra como aquelas situações geravam estranheza? A mamãe percebeu e nos protegeu, hoje eu entendo. Nos protegeu dos olhares do substantivo masculino.</p>
-       <p>Você lembra quando foi que começamos a perceber isso? Na adolescência, quando nosso corpo passava na frente do R.G. Nunca pediram o nosso documento, lembra?</p>
-       <p>A mamãe orquestrou tudo, porque nós não tínhamos o olhar malicioso. Era o nosso corpo, simplesmente o nosso corpo. Esse corpo que abriga a nossa história. Nós não questionávamos suas partes, estava tudo bem pra nós, não é?</p>`,
-
-      `<p>Mas, a mamãe sabia que não estava! Agora, você segue junto comigo, hoje, com seios menores e mais mulher do que antes.</p>
-       <p class="sem-indent">Lembro como foi passar por essa mudança. O corpo chegou na frente novamente, despertando questionamentos, curiosidades e a mudança no olhar de muitas pessoas.</p>
-       <p>Nosso corpo se transformou e continua se transformando. Vou te contar. Nós engordamos 30 quilos, sério! E quer saber? Estamos ótimas! Aliás, peço desculpas pela distopia no olhar e por julgar nosso corpo quando ele só pesava 53 quilinhos. Era lindo! Continua lindo! Nós somos uma mulher, uma bela gostosa com 77 quilos na balança.</p>
-       <p>Nós continuamos construindo um olhar amoroso sobre nós, como uma mulher inteira. Sabe, parte dessa construção é perceber, de maneira consciente, a mesma distopia em tantas mulheres que se olham, na tentativa de se enxergar.</p>`,
-
-      `<p>Talvez, por tudo isso, mesmo que no inconsciente, eu tenha resolvido me envolver com o estudo de gênero. Aliás, nos formamos em psicologia! Demais, não é?!</p>
-       <p class="sem-indent">O que nos move é o aprendizado de nos reconhecermos, nos amando ainda mais como somos, em qualquer tempo. Me percebo nos encontrando dentro da nossa história e dos diferentes corpos que já tivemos, e ainda vamos nos enxergar. Vamos nos compondo e nos complementando. Seguimos, juntas!</p>
-       <p>A profissão que escolhemos faz parte de todo esse entendimento, porque escutar cada mulher complementa a mulher que somos e faz parte da busca da tal da felicidade.</p>`,
-
-      `<p>Aliás, sabe o que nos deixa feliz? Coisas simples, como pisar na areia da praia e colocar um biquini sem a preocupação do olhar das pessoas. Ouvir e fazer parte do autoconhecimento de mulheres, como nós, e lutar para que elas caminhem em segurança e que possam usar a roupa que quiserem, sem medo do julgamento.</p>
-       <p>Somos felizes, Thainá, pela história que você ajudou a construir até aqui.</p>
-       <p>Obrigada.</p>`
-    ]
-  },
-
-  /* ========================================================================
-     BLOCO 07 — CARTA V · Márcia
+     BLOCO 05 — CARTA III · Marcia
      ======================================================================== */
   {
     id: "marcia",
-    numero: "V",
+    numero: "III",
     nome: "Márcia",
     saudacao: "Marcia… Marcinha",
     idade: "54 anos",
@@ -290,96 +226,49 @@ const CARTAS = [
   },
 
   /* ========================================================================
-     BLOCO 08 — CARTA VI · Hosana
+     BLOCO 06 — CARTA IV · Ana
      ======================================================================== */
   {
-    id: "hosana",
-    numero: "VI",
-    nome: "Hosana",
-    saudacao: "Oi, Hosana",
-    idade: "",
-    cidade: "Mauá · SP",
-    foto: "fotos/hosana.jpg",
-    epigrafe: "Desisti de desistir.",
-    assinatura: "Hosana",
+    id: "ana",
+    numero: "IV",
+    nome: "Ana Claudia",
+    saudacao: "Oi, Ana Claudia",
+    idade: "56 anos",
+    cidade: "",
+    foto: "fotos/ana_claudia.jpg",
+    epigrafe: "Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita.",
+    assinatura: "Ana Claudia",
     paginas: [
-      `<p class="sem-indent">Eu poderia cantar a nossa história, com uma melodia completa, dançando entre dramas, potências e conquistas.</p>
-       <p>Embora tantos desafios, nossa vida é uma música harmônica, cheia de rimas, ritmo e vibração.</p>
-       <p>Quando decidimos, aos 11 anos trocar a Igreja pela quadra da escola de samba, ainda não imaginávamos o que vinha pela frente. Respira fundo, vou te contar.</p>
-       <p>Você não imagina a potência de mulher e ser humano no qual nos transformamos, Hosana. A maternidade nos forjou, ainda quando éramos apenas uma criança de 14 anos. Jaque, é o nome da nossa primeira filha, hoje com 31 anos.</p>
-       <p>Somos fruto do que você foi construindo ao longo da vida, com as decisões e personalidade fortes que trilharam o caminho até aqui. Obrigada pela sua coragem.</p>`,
+      `<p class="sem-indent">Quanto tempo a gente não se fala. São 56 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que você está aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
+       <p>Foi uma caminhada longa e sinuosa até aqui, mas repleta de amor e resiliência. Nós acreditamos — e o medo e a confiança caminharam lado a lado, se complementando e se equilibrando durante a jornada que ainda persiste.</p>
+       <p>Agradeço por juntas, termos usado cada emoção que compõe o nosso Ser de forma sábia, sem nunca perder a essência. Desviamos das leis que se transformaram em instrumentos de terror e vingança, em mãos erradas e narcisistas ao longo do caminho.</p>`,
 
-      `<p class="sem-indent">Quando nossos pais chegaram em Mauá em 64, atravessando o mapa em meio a uma ditadura, começaram a marcar uma caminhada que quebraria padrões e ciclos de estereótipos impostos involuntariamente. A Bahia e o Pernambuco fazendo parte da construção da metrópole que serve de palco para desconstruir.</p>
-       <p>Lembra, ainda pequena, nossa mãe se dividindo entre sete filhos? Penso com carinho da espera do momento em que o papai chegava do trabalho e ia preparar o que eu — você — queria comer. Embrutecido pelo sofrimento do sertão do nordeste, ele guardava espaço para cuidar. Foi a base dessa cultura de cuidado que permeia nossa trajetória.</p>`,
+      `<p>Por um desenho genuíno de família — que foi mal interpretado por um olhar tendencioso e parcial, que fragmentou a convivência do afeto. A convivência física, porque o afeto… esse é onipresente.</p>
+       <p class="sem-indent">O Benjamim, hoje com 25 anos, foi desrespeitado como pessoa humana, usado como instrumento de vingança pelo genitor. Mas nós continuamos acreditando no amor, mesmo em meio à desordem social que nos afastou fisicamente por tantos anos.</p>
+       <p>Não recorremos do processo. Não tivemos condições emocionais de lutar com o corpo presente. Atravessamos o oceano, nadando contra tudo o que queríamos, para então chegar à superfície e voltar a respirar. O Benjamim só tinha 10 anos… mas sabíamos que, um dia, ele entenderia. O tempo era necessário.</p>`,
 
-      `<p>Somos mãe. Quatro pessoas humanas às quais dedicamos toda energia, servindo de espelho para que criassem reflexos diferentes dos que recebemos. Negros, periféricos criando a própria realidade, repudiando imposições sociais de manutenção da pobreza e da ignorância.</p>
-       <p>Sabe do melhor? O Pedro. Nós escolhemos o Pedro, junto com nossos filhos, e também fomos escolhidas por ele. Temos uma família linda, potente, que já deu continuidade à linhagem, com um netinho de um ano e meio.</p>
-       <p class="sem-indent">Com a Jaque, quebramos o ciclo de gravidez na adolescência. Criamos e educamos uma mulher que trilha o próprio caminho. Negra, periférica, sem filhos e na universidade, com 31 anos. Vem tranquila, você fez um bom trabalho.</p>`,
+      `<p>Às vezes, é preciso se ausentar de si mesma para conseguir enxergar com clareza e recuperar o oxigênio.<br>Somos corajosas!</p>
+       <p>Aliás, acredito que essa palavra — <em>coragem</em> — atravessa a nossa história. Quando olho para trás e vejo onde estamos agora… Voltamos. Encontramos o Benjamim.</p>
+       <p>Você lembra como foi desafiador tomar essa decisão? A vida estava se ajeitando — porém, sem ele. E a dele estava se desajeitando. Precisava, agora sim, da nossa presença. Corpo presente, cheio de energia e vontade.</p>
+       <p class="sem-indent">Fomos parar na vida noturna, lembra? Somos versáteis. A experiência com produção de eventos se uniu àquela carreira mirim que ainda engatinhava rumo a um objetivo legítimo: trabalhar com o que se ama. Ele estava se formando… DJ com 13 anos.</p>`,
 
-      `<p>Existe algo em nós muito genuíno. Embora a cultura evangélica permeasse nossa infância e educação, a compaixão não foi suficiente para que nos acolhesse enquanto esperávamos a Jaque nascer. Fomos culpabilizadas e responsabilizadas por não termos o esclarecimento que deveríamos ter recebido. A culpa não foi sua, não é nossa.</p>
-       <p>Se prepara, Hosana, vai ser dolorido. Mas vai valer a pena. A maternidade vai te forjar e vai te impulsionar, junto com a Cultura e a Arte que estão na sua alma. Tudo isso vai te dar pulsão de vida.</p>
-       <p>O samba, o estudo e o rap fizeram parte da construção da nossa personalidade. Trabalhamos a nossa autoestima e nunca tivemos vergonha da ancestralidade, da cultura africana e da nossa negritude. A música é uma ferramenta de conexão com o divino que há dentro de nós.</p>`,
+      `<p>Essa LAP — Lei de Alienação Parental — nunca foi capaz de nos Alienar, nunca foi capaz de separar a gente, de verdade. Nunca lapidou os nossos sentimentos. Foi apenas um lapso que, como uma lapiseira, serviu igualmente como instrumento de crescimento. Crescemos. Nos fortalecemos. Juntos.</p>
+       <p>A LAP… a lei que não devia "pegar". Sabe aquela história: "tem lei que não pega"? Pois é, essa pegou.<br>E agora?</p>
+       <p>São muitas outras histórias sendo lapidadas, de muitas outras mulheres, junto com a gente, Ana. Ana Claudia. Anas… Anas Claudias!</p>`,
 
-      `<p class="sem-indent">Só voltamos a estudar com 34 anos, mais ou menos. Viu, nunca é tarde. EJA — Educação de Jovens e Adultos. Foi lá que terminamos os estudos. Nós gostamos de estudar!!!</p>
-       <p>Fomos corajosas, mesmo sem o apoio da família. Nos formamos em Ciências Sociais. Levar para o trabalho o que sempre nos moveu na vida. Cuidar.</p>
-       <p>A primeira coisa mais importante que fizemos, e você me deu coragem pra isso, foi o divórcio. A segunda, foi Deitar pro Santo. O candomblé orienta nossa vida. A africanidade nos dá poder!</p>
-       <p>Quando entramos na faculdade ao mesmo tempo que entramos para o movimento negro de esquerda, tiramos o peso da ignorância e pegamos o peso da responsabilidade de entender e escolher o que fazer com o conhecimento. A resposta foi o engajamento político, não paramos mais de militar.</p>`,
-
-      `<p>Entrei para o PSOL. A política é necessária, mas também é difícil, tentam nos silenciar a todo momento. Embora não tenha sido eleita, fomos a mais bem votada.</p>
-       <p class="sem-indent">Fui aprender a cuidar de mim quando me vi morando sozinha… e isso foi só há três anos, quando nossa filha resolveu cuidar dela mesma e saiu de casa. Eu pensei: Por que agora? Vou ter que cuidar de mim! Tem sido maravilhoso, puro autoconhecimento.</p>
-       <p>Toda nossa base artística, do samba, do black, do rap, a arte negra e africanidade, exalaram pela nossa pele. Planto dessa semente com as crianças do CRAS, como monitora, trabalhando a arte e a música. Sigo fazendo a nossa parte, aprendi a cuidar dos outros sem deixar de cuidar de nós.</p>`,
-
-      `<blockquote class="citacao">Nós quase desistimos, sabia? Houve um tempo sem esperança e quase interrompi nossa trajetória. Mas siga firma porque desisti de desistir.</blockquote>
-       <p>Agora, viver me movimenta como num palco com a nossa música preferida. A nossa música é pra todas e nosso palco é grande, cabe todo mundo.</p>
-       <blockquote class="citacao">Somos diversas, mas não estamos dispersas. Vamos conseguir!<span class="citacao-atribuicao">— Marielle Franco</span></blockquote>
-       <p>Obrigada pela base que nos sustenta, Hosana! Pode vir, estamos bem e seguimos sambando!</p>`
+      `<blockquote class="citacao">Há muitas Anas Claudias que habitam dentro de mim — e uma delas, grita. Grita alto. E há quem escute. Porque esse grito se funde a tantos outros que ecoam, fazendo barulho. Gritamos mais alto que a LAP. Vamos silenciar a LAP. Vamos!</blockquote>
+       <p class="sem-indent">Ana Claudia, você tinha 41 anos. Agora, eu estou com 56. Você também, amadurecemos juntas — e agradeço pelo que você fez por nós.</p>
+       <p>Todas as suas ações nos trouxeram até aqui.</p>
+       <p>Obrigada. Seguimos juntas, como abelhas, como um enxame!!!</p>`
     ]
   },
 
   /* ========================================================================
-     BLOCO 09 — CARTA VII · Marília Martins
-     ======================================================================== */
-  {
-    id: "marilia",
-    numero: "VII",
-    nome: "Marília Martins",
-    saudacao: "Oi, Marília",
-    idade: "37 anos",
-    cidade: "Franca · SP",
-    foto: "fotos/marilia_martins.jpg",
-    epigrafe: "Atrás de uma grande mulher tem sempre outra grande mulher.",
-    assinatura: "Marília",
-    paginas: [
-      `<p class="sem-indent">Nossa, respira fundo. Tem muita coisa pra contar, Ma ou Marília… Faz tanto tempo… São 37 anos de história de páginas escritas por você, na evolução das letrinhas que hoje transmitem a segurança que sempre tivemos nos passos.</p>
-       <p>Passos legítimos de pai e mãe, sapateiros, costurando o nosso caminho, caminho que nos trouxe até aqui, hoje. Somos a união de todas as emoções, conquistas e, preciso admitir, privilégios que acumulamos ao longo de todos esses anos.</p>
-       <p>A vontade de ser livre na nossa essência nos transformou em uma mulher que trabalha com o compromisso de garantir essa liberdade para todas as mulheres que pudermos alcançar.</p>`,
-
-      `<p>Somos circulares, assim como a dança que permeia nossa existência. Fazemos parte de uma transformação genuína e orgânica com raízes que fortalecem a nossa luta, até hoje. Determinação que vem da nossa ancestralidade. A vovó criou sete filhos, viúva, você lembra, né? A menina sapateira de 08 anos se formou professora. O papai, advogado.</p>
-       <p class="sem-indent">Entre letras, eventos e sala de aula, hoje estamos na política. Somos vereadora em Franca pelo PSOL, partido que ajudamos a fundar na cidade, em 2007, 2008. Aposto que você já sabia, afinal crescemos no movimento sindical e no MST.</p>
-       <p>Mas, antes disso, dançamos em lugares diferentes e voamos pra longe. Sabe o tal do privilégio? Então… nos formamos em Planejamento de Eventos Conscientes nos Estados Unidos. Temos uma bagagem rica de planejamento e políticas públicas para servir, agora, tantas mulheres que precisam de rede de apoio.</p>`,
-
-      `<p>Esses momentos me fazem lembrar das 17 vezes que o papai foi cassado e processado pela ditadura militar, na tentativa de promover justiça social. Seguimos os mesmos passos: Educação e política. Dalvinha e Georginho.</p>
-       <p>Também somos professoras. Até criamos uma cartilha: <em>"Vira a Página, Mulher"</em>. Viramos, cada página lida.</p>
-       <p class="sem-indent">Nossa vida política se fortaleceu quando voltamos dos EUA, cansadas da cultura essencialmente capitalista. Com um cachorrinho embaixo dos braços, alugamos uma casa que se transformou em um coletivo de mulheres.</p>
-       <p>Nossa casa ganhou até nome: Confraria Cult. Tantas coisas boas acontecem por lá… meditação, roda de conversas, danças circulares, eventos de humanização e políticas públicas para mulheres e até feiras de mulheres artesãs para promover independência e autonomia financeira. Nossas mulheres artesãs, hoje, até exportam seus materiais. É um projeto lindo, que nasceu antes mesmo de estarmos vereadora.</p>`,
-
-      `<p>Aliás, sempre me recolho, faço meditação e às vezes encontro com você, ainda quando éramos uma menina. Ah, gostamos de menina, e namoro uma mulher incrível que é o nosso grande apoio. Consegue imaginar assumirmos isso aqui em Franca? Pois é, tudo isso faz parte da nossa luta, Marília.</p>
-       <blockquote class="citacao">Atrás de uma grande mulher tem sempre outra grande mulher!</blockquote>
-       <p>Cada plantinha que eu cultivo também estou regando os nossos sonhos e humanizando uma luta que às vezes é dolorida e densa. Precisamos equilibrar o nosso ser, que é holístico.</p>
-       <p>Nossa vida política tem seus riscos e passamos alguns apuros que pegaram fogo, literalmente. Mas, temos vizinhos bacanas e uma rede de apoio imensa que ajudaram a apagar. As autoridades tentam nos desencorajar e, mesmo recuando em alguns momentos, seguimos em frente, menina.</p>`,
-
-      `<p>Nossa luta significa encontrar pessoas dispostas a conversar para a solução de problemas, não só pelo desabafo. Teremos alguns anos pela frente com a nossa voz em volume máximo, <em>"depois, eu ajusto as velas e reavalio"</em>.</p>
-       <p>Obrigada por tudo o que você fez até aqui. Agora, deixa comigo. Vou fazer um bom trabalho!</p>
-       <p>Sinta meu abraço, apertado, e um beijo na bochecha.</p>`
-    ]
-  },
-
-  /* ========================================================================
-     BLOCO 10 — CARTA VIII · Ariane
+     BLOCO 07 — CARTA V · Ariane
      ======================================================================== */
   {
     id: "ariane",
-    numero: "VIII",
+    numero: "V",
     nome: "Ariane",
     saudacao: "Ariane… Ariane pequena",
     idade: "",
@@ -420,6 +309,117 @@ const CARTAS = [
        <blockquote class="citacao">Acabou o gás… mas não acabou a comida.</blockquote>
        <p class="sem-indent">Ali… ali nasceu tudo. E continua nascendo. Continue crescendo, vivendo!</p>
        <p>Com amor,</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 08 — CARTA VI · Thaina
+     ======================================================================== */
+  {
+    id: "thaina",
+    numero: "VI",
+    nome: "Thainá",
+    saudacao: "Oi, Thainá",
+    idade: "29 anos",
+    cidade: "Salvador · BA",
+    foto: "fotos/thaina_britto.jpg",
+    epigrafe: "Esse corpo que abriga a nossa história.",
+    assinatura: "Thainá",
+    paginas: [
+      `<p class="sem-indent">Há quanto tempo não nos falamos. São 29 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita nossa alma, nossa mente e nosso corpo.</p>
+       <p>Corpo. Foi uma caminhada marcada pela construção do entendimento de "corpo", na construção da autoconfiança. A confiança de nos entendermos dentro da nossa existência, como menina, adolescente e mulher. Confiança no que representamos por onde passamos, com quem convivemos e na história que escrevemos, um dia de cada vez. Ainda há muito que caminhar.</p>
+       <p>A nossa história, de menina e mulher baiana, de Salvador, foi permeada, também, pela história da mamãe. E nós, sempre buscando a tal da felicidade. Mas antes de falar sobre a felicidade, quero falar do nosso corpo.</p>`,
+
+      `<p class="sem-indent">Corpo, um substantivo masculino… Masculino como olhar que nos colocou em uma posição precoce, ainda muito cedo.</p>
+       <p>Embora eu enxergasse você como a criança que era, de 10 anos, os nossos seios chegavam antes, sexualizando um corpo que ainda era infantil e não entendia aquilo tudo. Lembra como aquelas situações geravam estranheza? A mamãe percebeu e nos protegeu, hoje eu entendo. Nos protegeu dos olhares do substantivo masculino.</p>
+       <p>Você lembra quando foi que começamos a perceber isso? Na adolescência, quando nosso corpo passava na frente do R.G. Nunca pediram o nosso documento, lembra?</p>
+       <p>A mamãe orquestrou tudo, porque nós não tínhamos o olhar malicioso. Era o nosso corpo, simplesmente o nosso corpo. Esse corpo que abriga a nossa história. Nós não questionávamos suas partes, estava tudo bem pra nós, não é?</p>`,
+
+      `<p>Mas, a mamãe sabia que não estava! Agora, você segue junto comigo, hoje, com seios menores e mais mulher do que antes.</p>
+       <p class="sem-indent">Lembro como foi passar por essa mudança. O corpo chegou na frente novamente, despertando questionamentos, curiosidades e a mudança no olhar de muitas pessoas.</p>
+       <p>Nosso corpo se transformou e continua se transformando. Vou te contar. Nós engordamos 30 quilos, sério! E quer saber? Estamos ótimas! Aliás, peço desculpas pela distopia no olhar e por julgar nosso corpo quando ele só pesava 53 quilinhos. Era lindo! Continua lindo! Nós somos uma mulher, uma bela gostosa com 77 quilos na balança.</p>
+       <p>Nós continuamos construindo um olhar amoroso sobre nós, como uma mulher inteira. Sabe, parte dessa construção é perceber, de maneira consciente, a mesma distopia em tantas mulheres que se olham, na tentativa de se enxergar.</p>`,
+
+      `<p>Talvez, por tudo isso, mesmo que no inconsciente, eu tenha resolvido me envolver com o estudo de gênero. Aliás, nos formamos em psicologia! Demais, não é?!</p>
+       <p class="sem-indent">O que nos move é o aprendizado de nos reconhecermos, nos amando ainda mais como somos, em qualquer tempo. Me percebo nos encontrando dentro da nossa história e dos diferentes corpos que já tivemos, e ainda vamos nos enxergar. Vamos nos compondo e nos complementando. Seguimos, juntas!</p>
+       <p>A profissão que escolhemos faz parte de todo esse entendimento, porque escutar cada mulher complementa a mulher que somos e faz parte da busca da tal da felicidade.</p>`,
+
+      `<p>Aliás, sabe o que nos deixa feliz? Coisas simples, como pisar na areia da praia e colocar um biquini sem a preocupação do olhar das pessoas. Ouvir e fazer parte do autoconhecimento de mulheres, como nós, e lutar para que elas caminhem em segurança e que possam usar a roupa que quiserem, sem medo do julgamento.</p>
+       <p>Somos felizes, Thainá, pela história que você ajudou a construir até aqui.</p>
+       <p>Obrigada.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 09 — CARTA VII · Luiza
+     ======================================================================== */
+  {
+    id: "luiza",
+    numero: "VII",
+    nome: "Luiza",
+    saudacao: "Oi, Luiza",
+    idade: "25 anos",
+    cidade: "Mariana · MG",
+    foto: "fotos/luiza.jpg",
+    epigrafe: "Nós somos grandes, Luiza. Sempre fomos.",
+    assinatura: "Luiza",
+    paginas: [
+      `<p class="sem-indent">Quanto tempo se passou desde a nossa última conversa… Já são 25 anos de jornada compartilhada. Talvez nem tenhamos tido uma conversa profunda ao longo da nossa evolução.</p>
+       <p>Todas nós, lado a lado — com cada emoção sentida no caminho, formamos a Luiza de hoje. Trazemos muitas dentro de nós, não é Luizinha? Hoje, é um alívio e uma alegria poder dar voz a essa história, revisitando cada pedaço que vive em nossa alma, mente e corpo.</p>
+       <p>Lembra quando a mamãe trazia para casa muito mais do que histórias de sala de aula? Ela contava sobre histórias desafiadoras das famílias daquelas crianças que deveriam ter como única preocupação, os estudos.</p>`,
+
+      `<p>Ela fazia isso de forma silenciosa, sem buscar mérito ou reconhecimento pelas articulações movimentando inúmeras pessoas em benefício dos que mais precisavam. Obrigada pela criança determinada e pela menina de Mariana que usou o medo como ferramenta de obter coragem pra encarar de frente um ambiente conservador, no interior de Minas Gerais.</p>
+       <p class="sem-indent">Foi essa menina que, aos 17 anos, mudou de cidade para estudar administração e construiu as bases que sustentam a mulher que somos hoje. Lembra como foi desafiador? O medo, as novidades, a solidão… Mas também quanta coisa a gente colocou na bagagem! Algumas dessas memórias ainda estão na minha mala.</p>`,
+
+      `<p>Você não imagina onde estamos hoje. São Paulo, acredita? Em um festival feito especialmente para nós, mulheres. Tem tanta coisa bonita acontecendo! Agora, seguimos o legado da mamãe: Levar conhecimento onde o conhecimento insiste em não alcançar!</p>
+       <p>São Paulo é uma cidade intensa, aqui tudo está em movimento! Sabe a coragem que você agarrou lá atrás? Hoje vejo que ela começou com a vovó, que foi corajosa e revolucionária para o tempo dela e, junto com o vovô, trabalhou para que os três filhos pudessem estudar, incluindo a mamãe, que é professora e assistente social. Ela varreu muitas ruas abrindo espaço pra gente passar, transformando o lixo em educação.</p>`,
+
+      `<p class="sem-indent">Ah, preciso te contar: em 2020 vivemos uma pandemia. Foi um tempo triste, de muitas perdas. Mas a gente ficou bem. E, justamente nesse período, ganhamos o troféu de Jovens Talentos em Brasília, por um trabalho de comunicação numa campanha política do papai!</p>
+       <p>Tivemos tanto cuidado na nossa família. Cuidar. Cuidar de nós e de quantas pessoas pudermos. Esse festival tem me mostrado isso. São muitas mulheres se movimentando para o cuidado com outras mulheres — precisamos umas das outras.</p>`,
+
+      `<p>Estou criando pontes que servirão de irrigação para as nossas raízes mineiras. O ano passado nasceu o Movimento por Mulheres em Mariana e nós fazemos parte disso e vamos fazer ainda mais. Sabe por quê? Não tivemos nenhuma mulher eleita em 2024. Sem mulheres na política não terão políticas públicas voltadas para mulheres.</p>
+       <p>Enquanto isso, por aqui, o Hamudes me apoia muito. Estamos juntos há 11 meses. Ele é assessor parlamentar e está lado a lado na caminhada rumo aos nossos objetivos. Nossa régua é alta!</p>
+       <p class="sem-indent">Agora, mais do que nunca, quero escancarar as lutas que correm em nosso sangue. A começar pela cor da nossa pele — desafio enfrentado com coragem pela vovó. Uma lição passada com sabedoria.</p>`,
+
+      `<p>Vivemos em uma cidade linda, cheia de história, mas conservadora. Onde vínculos são criados conforme o sobrenome e o saldo bancário. Mas a vovó deu peso à nossa história.</p>
+       <blockquote class="citacao">Nós somos grandes, Luiza. Sempre fomos.</blockquote>
+       <p>Os preconceitos nunca nos pararam. Nem mesmo quando perdemos um emprego por perseguição política. Sempre que duvidam de nós — especialmente quando é um homem, menos capacitado, que ainda assim ganha mais voz — nossa coragem se inflama. E seguimos. Nós sempre conseguimos.</p>
+       <p>Tenho muito orgulho da nossa história, construída com uma rede de apoio gigantesca. E você é a base disso tudo. Uma base firme, que passa por reformas importantes. Reformas que não erguem muros, mas fortalecem a estrutura.</p>
+       <p>Obrigada por tudo o que fez por nós até aqui. Agora, deixa comigo. Eu vou fazer um bom trabalho.</p>`
+    ]
+  },
+
+  /* ========================================================================
+     BLOCO 10 — CARTA VIII · Silvia
+     ======================================================================== */
+  {
+    id: "silvia",
+    numero: "VIII",
+    nome: "Silvia",
+    saudacao: "Oi, Silvia… Silvinha",
+    idade: "57 anos",
+    cidade: "Cachoeirinha",
+    foto: "fotos/silvia_teixeira.jpg",
+    epigrafe: "A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena.",
+    assinatura: "Silvia",
+    paginas: [
+      `<p class="sem-indent">Há quanto tempo a gente não se fala. São 57 anos caminhando juntas — todas nós — com todas as nossas emoções. Que bom que estou aqui para contar a nossa história, lembrando de cada parte que habita dentro da nossa alma, da nossa mente e do nosso corpo.</p>
+       <p>Foi uma caminhada permeada pela busca. Busca por novas oportunidades… Oportunidades que nos deram a liberdade de viver as nossas emoções. Liberdade de ter a chance de proporcionar educação e acesso à tantas pessoas que fazem parte da nossa jornada, sinto que somos responsáveis por isso.</p>`,
+
+      `<p>Sabe por quê? Agora, nós podemos, juntas, sermos essa ponte. Uma ponte de conhecimento, amor e confiança. Assim como toda a nossa bagagem foi, e é, a ponte entre nós… A Silvinha, pequenina e cheia de culpa, e a Silvia, consciente e plena dos meus poderes de hoje.</p>
+       <p>Nós conseguimos, e eu só estou aqui hoje, no MEL, porque você fez tudo o que tinha que ser feito, antes. Agora, eu posso dizer: Nós temos, nós acreditamos, nós pertencemos. Aliás, obrigada por nunca ter deixado de acreditar.</p>`,
+
+      `<p class="sem-indent">Você foi uma criança privilegiada e me transformou na adulta que te agradece hoje. Obrigada, Silvinha. Nós nos formamos professora, sabia? Sabe a culpa de nunca ter chamado a Lorecy de "mãe"? Não existe mais! Nossa trajetória tinha que ser assim, nós tínhamos que ter passado a infância em meio aos nossos primos militantes para colocar a educadora e a militante para trabalhar. Afinal, somos buscadoras.</p>
+       <p>Eu já até me aposentei, da sala de aula, porque continuo vivendo nossa busca com mais energia do que nunca. Aliás, nos desligamos rapidamente do ambiente escolar, porque entendi que a educação estava em outro ambiente, pra nós. Seguimos educando e tocando almas, fazendo com que outras mulheres continuem acreditando, como você e eu.</p>`,
+
+      `<p>Inclusive, estou cheia de orgulho, trago ex-alunas nessa caminhada, na mesma busca de mostrar que sonhos podem ser realizados em qualquer lugar, até mesmo nas periferias. Na busca de levar dignidade para tantas mães, especialmente as atípicas.</p>
+       <p class="sem-indent">Nós lutamos para combater a violência contra as mulheres, sabia? Você adoraria ver isso aqui, o MEL está lindo! Mulher em Lutas! Ah, você está aqui, na verdade, junto comigo, se emocionando comigo e levando tantas bandeiras a serem levantadas em Cachoeirinha, onde há tantas mulheres se sentindo sozinhas e impotentes, nadando em cachoeiras de lágrimas.</p>`,
+
+      `<p>Será que a mamãe, Laci, se sentia assim também enquanto lavava suas roupas? De uma coisa eu tenho certeza. Foi ela que nos ensinou e apontou os caminhos que poderíamos seguir. Foi ela que nos ensinou a nadar e que as lágrimas podem não ser de dor. Foi ela que nos transformou em amor.</p>
+       <p>Por falar em amor, nós temos uma filha e um neto. É a nossa história sendo contada, é a posteridade.</p>
+       <p>Hoje, eu não peço mais desculpas à Lorecy por amar tanto a mamãe e a nossa família. Agora eu entendo, nos libertei dessa culpa. A Loreci foi uma mulher, antes de ser mãe. Ela teve que trabalhar e não pode acompanhar nosso crescimento.</p>
+       <p>Por isso estou aqui hoje, nesse estágio da nossa vida, em meio a um enxame de tantas outras mulheres. É isso que me move!</p>
+       <p>Obrigada por seguirmos juntas, como abelhas, como enxame!</p>`
     ]
   },
 
@@ -479,7 +479,7 @@ const CARTAS = [
     id: "sheila",
     numero: "X",
     nome: "Sheila",
-    saudacao: "Oi, Sheilinha",
+    saudacao: "Oi, Sheila",
     idade: "quase 70 anos",
     cidade: "",
     foto: "fotos/sheila.jpg",
@@ -506,7 +506,7 @@ const CARTAS = [
       `<p>Tiveram perdas que chegaram sem pedir licença. Coisas que escaparam das suas mãos antes mesmo de você conseguir entender. Planos que não se sustentaram, caminhos que não deram certo. E teve também aqueles períodos em que a vida pareceu fechar as portas — literalmente e por dentro.</p>
        <p>Mas, ainda assim, você ficou. Você sustentou e precisou segurar em grades que trancafiavam uma parte de você, por algum tempo… você não virou as costas para o amor. E isso diz mais sobre você do que qualquer dor que tenha atravessado.</p>`,
 
-      `<p class="sem-indent">Você é intensa, Sheilinha. Sempre foi. Ama muito, se entrega muito, espera muito… e quando não encontra do outro lado o que imaginou, se machuca, se fecha, tenta se proteger como pode. Às vezes com julgamento. Às vezes com silêncio. Às vezes guardando aquilo que não conseguiu dizer.</p>
+      `<p class="sem-indent">Você é intensa, Sheila. Sempre foi. Ama muito, se entrega muito, espera muito… e quando não encontra do outro lado o que imaginou, se machuca, se fecha, tenta se proteger como pode. Às vezes com julgamento. Às vezes com silêncio. Às vezes guardando aquilo que não conseguiu dizer.</p>
        <p>Mas olha que coisa bonita — mesmo assim, você nunca deixou de amar. Nunca deixou de rir. Nunca deixou de ser transparente. Nunca deixou de ser você. E isso sustenta muita coisa.</p>
        <p>Você construiu uma relação linda com seus filhos. Uma relação de verdade, sem máscara, sem distância. Eles te conhecem, te enxergam, te amam — e isso não acontece por acaso. Isso é construção sua.</p>`,
 
@@ -520,7 +520,7 @@ const CARTAS = [
        <blockquote class="citacao">E você também é… uma travessia, VIVA.</blockquote>`,
 
       `<p class="sem-indent">Nem sempre do jeito que a gente planeja, nem sempre com a música que a gente escolheria, mas ainda assim… um caminho que segue. E olha só… você atravessou.</p>
-       <p>O Travessia nunca acabou, Sheilinha. Na verdade você nunca perdeu. Porque tudo isso vive, junto com a gente, nas nossas memórias de amor por tudo o que fizemos, por cada passo. Ela só deixou de ser um lugar… pra virar quem você é, quem eu sou, quem nós somos.</p>
+       <p>O Travessia nunca acabou, Sheila. Na verdade você nunca perdeu. Porque tudo isso vive, junto com a gente, nas nossas memórias de amor por tudo o que fizemos, por cada passo. Ela só deixou de ser um lugar… pra virar quem você é, quem eu sou, quem nós somos.</p>
        <p>Obrigada por tudo, até aqui. Agora eu continuo, com a mesma alegria. Prometo!</p>`
     ]
   },

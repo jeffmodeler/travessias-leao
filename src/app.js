@@ -136,7 +136,9 @@ function metaHtml(carta) {
   const partes = [];
   if (carta.idade) partes.push(`<span>${carta.idade}</span>`);
   if (carta.cidade) partes.push(`<span>${carta.cidade}</span>`);
-  partes.push("Por <span>Renata Leão</span>");
+  // Autor por tipo: prefácio é da Nicole; abertura e cartas levam Renata Leão
+  const autor = carta.tipo === "prefacio" ? "Nicole Pelosi" : "Renata Leão";
+  partes.push(`Por <span>${autor}</span>`);
   return partes.join("<br>");
 }
 
