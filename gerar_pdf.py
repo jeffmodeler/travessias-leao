@@ -372,18 +372,23 @@ def montar_estilos() -> dict[str, ParagraphStyle]:
         leading=13, textColor=MEL, alignment=TA_CENTER,
     )
 
-    # Folha de rosto
+    # Folha de rosto — composição centralizada com hierarquia mel
     s["rosto_titulo"] = ParagraphStyle(
-        "rosto_titulo", fontName=FONTE_TITULO_ITAL, fontSize=56,
-        leading=62, textColor=TINTA, alignment=TA_CENTER, spaceAfter=14,
+        "rosto_titulo", fontName=FONTE_TITULO_ITAL, fontSize=64,
+        leading=70, textColor=TINTA, alignment=TA_CENTER, spaceAfter=10,
     )
     s["rosto_subtitulo"] = ParagraphStyle(
         "rosto_subtitulo", fontName=FONTE_TITULO_ITAL, fontSize=18,
-        leading=24, textColor=TERRA, alignment=TA_CENTER, spaceAfter=60,
+        leading=24, textColor=TERRA, alignment=TA_CENTER, spaceAfter=4,
+    )
+    s["rosto_por"] = ParagraphStyle(
+        "rosto_por", fontName=FONTE_META_BOLD, fontSize=9,
+        leading=14, textColor=MEL, alignment=TA_CENTER,
+        spaceBefore=4,
     )
     s["rosto_autora"] = ParagraphStyle(
-        "rosto_autora", fontName=FONTE_META, fontSize=12,
-        leading=18, textColor=CARVAO, alignment=TA_CENTER,
+        "rosto_autora", fontName=FONTE_TITULO_ITAL, fontSize=20,
+        leading=26, textColor=MEL, alignment=TA_CENTER,
     )
 
     # Ficha técnica
@@ -730,16 +735,38 @@ def _build_uma_passada(
     story.append(Paragraph("VOLUME 01 · 2025", styles["capa_ano"]))
     story.append(PageBreak())
 
-    # -------- 2. FOLHA DE ROSTO --------
+    # -------- 2. FOLHA DE ROSTO (centralizada vertical/horizontalmente) --------
     story.append(NextPageTemplate("pretextual"))
     _ctx["mostrar_numero"] = False
-    story.append(Spacer(1, 70 * mm))
-    story.append(Paragraph("Travessias", styles["rosto_titulo"]))
-    story.append(Paragraph("cartas de mulheres reais", styles["rosto_subtitulo"]))
-    story.append(Spacer(1, 40 * mm))
-    story.append(Paragraph("Por", styles["rosto_autora"]))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph("<b>RENATA LEÃO</b>", styles["rosto_autora"]))
+
+    # Frame útil para centralização (igual ao usado no separador/colofão)
+    rosto_frame_h = PG_H - MARGIN_TOP - MARGIN_BOTTOM
+
+    rosto_bloco = [
+        Paragraph("Travessias", styles["rosto_titulo"]),
+        Paragraph("cartas de mulheres reais", styles["rosto_subtitulo"]),
+        HRFlowable(
+            width="22%", thickness=0.6, color=MEL,
+            hAlign="CENTER", spaceBefore=28, spaceAfter=26,
+        ),
+        Paragraph("POR", styles["rosto_por"]),
+        Paragraph("Renata Leão", styles["rosto_autora"]),
+    ]
+
+    rosto_table = Table(
+        [[rosto_bloco]],
+        rowHeights=[rosto_frame_h],
+        colWidths=[PG_W - MARGIN_INNER - MARGIN_OUTER],
+    )
+    rosto_table.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ]))
+    story.append(rosto_table)
     story.append(PageBreak())
 
     # -------- 3. FICHA TÉCNICA --------
