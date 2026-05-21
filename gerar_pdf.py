@@ -69,7 +69,7 @@ PAGINAS_FORCADAS: dict[str, int] = {
     "marcia":   3,
     "hosana":   3,
     "marilia":  3,
-    "ariane":   2,
+    "ariane":   3,
     "paula":    3,
     "sheila":   3,
 }
