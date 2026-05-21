@@ -359,22 +359,21 @@ def texto_da_carta(
 def montar_estilos() -> dict[str, ParagraphStyle]:
     s: dict[str, ParagraphStyle] = {}
 
-    # Capa
-    s["capa_marca"] = ParagraphStyle(
-        "capa_marca", fontName=FONTE_META_BOLD, fontSize=10,
-        leading=14, textColor=MEL, alignment=TA_CENTER, spaceAfter=10,
-    )
+    # Capa — IDÊNTICA ao hero do index.html (TRAVESSIAS maiúsculo
+    # com letter-spacing + subtítulo italic mel + fio + texto-intro)
     s["capa_titulo"] = ParagraphStyle(
-        "capa_titulo", fontName=FONTE_TITULO_ITAL, fontSize=80,
-        leading=86, textColor=CREME, alignment=TA_CENTER, spaceAfter=18,
+        "capa_titulo", fontName=FONTE_TITULO, fontSize=68,
+        leading=74, textColor=CREME, alignment=TA_CENTER,
+        spaceAfter=14, charSpace=5,
     )
-    s["capa_autora"] = ParagraphStyle(
-        "capa_autora", fontName=FONTE_META, fontSize=11,
-        leading=15, textColor=CREME, alignment=TA_CENTER,
+    s["capa_subtitulo"] = ParagraphStyle(
+        "capa_subtitulo", fontName=FONTE_TITULO_ITAL, fontSize=18,
+        leading=24, textColor=MEL, alignment=TA_CENTER,
     )
-    s["capa_ano"] = ParagraphStyle(
-        "capa_ano", fontName=FONTE_META_BOLD, fontSize=9,
-        leading=13, textColor=MEL, alignment=TA_CENTER,
+    s["capa_intro"] = ParagraphStyle(
+        "capa_intro", fontName=FONTE_TEXTO_ITAL, fontSize=12,
+        leading=20, textColor=CREME, alignment=TA_CENTER,
+        spaceBefore=12,
     )
 
     # Folha de rosto — composição centralizada com hierarquia mel
@@ -745,26 +744,41 @@ def _build_uma_passada(
 
     story: list = []
 
-    # -------- 1. CAPA --------
+    # -------- 1. CAPA — idêntica ao hero do index.html --------
+    # Composição: TRAVESSIAS (uppercase letter-spaced) + subtítulo italic
+    # mel + fio + texto-intro italic. Centralizada via Table VALIGN MIDDLE.
     story.append(NextPageTemplate("capa"))
     _ctx["mostrar_numero"] = False
-    story.append(Spacer(1, 26 * mm))
-    story.append(Paragraph("CARTAS DE MULHERES REAIS", styles["capa_marca"]))
-    story.append(Spacer(1, 10 * mm))
-    story.append(Paragraph("Travessias", styles["capa_titulo"]))
 
-    foto_renata = _foto_existe("fotos/renata_leao.jpg")
-    if foto_renata:
-        img = Image(foto_renata, width=90 * mm, height=120 * mm)
-        img.hAlign = "CENTER"
-        story.append(img)
-        story.append(Spacer(1, 18 * mm))
-    else:
-        story.append(Spacer(1, 80 * mm))
-
-    story.append(Paragraph("Por <b>RENATA LEÃO</b>", styles["capa_autora"]))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph("VOLUME 01 · 2025", styles["capa_ano"]))
+    capa_frame_h = PG_H - 2 * MARGIN_TOP
+    capa_inner = [
+        Paragraph("TRAVESSIAS", styles["capa_titulo"]),
+        Paragraph("cartas de mulheres reais", styles["capa_subtitulo"]),
+        HRFlowable(
+            width="8%", thickness=0.6, color=MEL,
+            hAlign="CENTER", spaceBefore=14, spaceAfter=14,
+        ),
+        Paragraph(
+            "Dez mulheres escrevem para si mesmas.<br/>"
+            "Cartas sobre memória, corpo, ancestralidade,<br/>"
+            "coragem — e o caminho coletivo de quem atravessa junto.",
+            styles["capa_intro"],
+        ),
+    ]
+    capa_table = Table(
+        [[capa_inner]],
+        rowHeights=[capa_frame_h],
+        colWidths=[PG_W - MARGIN_INNER - MARGIN_OUTER],
+    )
+    capa_table.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ]))
+    story.append(capa_table)
     story.append(PageBreak())
 
     # -------- 2. FOLHA DE ROSTO (centralizada vertical/horizontalmente) --------
@@ -928,10 +942,6 @@ def _build_uma_passada(
         ),
         Spacer(1, 28 * mm),
         Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]),
-        # Espaço "fantasma" abaixo: com a célula em VALIGN MIDDLE, este
-        # spacer torna o bloco mais alto, deslocando o conteúdo visível
-        # para CIMA dentro do frame. Pedido editorial.
-        Spacer(1, 56 * mm),
     ]
     # Envolve em Table de altura total do frame, com VALIGN MIDDLE
     colofao_table = Table(
