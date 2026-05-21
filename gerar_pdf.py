@@ -44,6 +44,7 @@ from reportlab.platypus import (
     Frame,
     HRFlowable,
     Image,
+    KeepTogether,
     NextPageTemplate,
     PageBreak,
     PageTemplate,
@@ -52,6 +53,15 @@ from reportlab.platypus import (
     Table,
     TableStyle,
 )
+
+
+# Cartas que devem ter distribuição FORÇADA em N páginas (pedido editorial)
+PAGINAS_FORCADAS: dict[str, int] = {
+    "marilia": 3,
+    "silvia":  3,
+    "paula":   3,
+    "sheila":  3,
+}
 
 
 # ==========================================================================
@@ -233,10 +243,19 @@ def texto_da_carta(
     carta: Carta,
     styles: dict[str, ParagraphStyle],
 ) -> list:
-    """Concatena todas as paginas[] da carta como um único fluxo, sem
-    forçar quebras de página entre elas. Reportlab pagina naturalmente."""
+    """Concatena todas as paginas[] da carta como flowables.
+
+    Se a carta estiver em PAGINAS_FORCADAS, redistribui o conteúdo em
+    N páginas com PageBreaks balanceados por peso (proxy: tamanho do
+    texto). Caso contrário, reportlab pagina naturalmente.
+    """
     flow: list = []
+    pesos: list[int] = []
     primeiro_paragrafo = True
+
+    def _adicionar(fl, peso: int = 0) -> None:
+        flow.append(fl)
+        pesos.append(peso)
 
     for pHtml in carta.paginas:
         blocos = re.split(r"(?=<(?:p|blockquote|div)[\s>])", pHtml)
@@ -256,16 +275,27 @@ def texto_da_carta(
                 atribuicao = atrib_m.group(1).strip() if atrib_m else ""
                 if atrib_m:
                     inner = inner.replace(atrib_m.group(0), "").strip()
-                flow.append(Paragraph(_limpar_inline(inner), styles["citacao"]))
+                texto_clean = _limpar_inline(inner)
+                _adicionar(
+                    Paragraph(texto_clean, styles["citacao"]),
+                    len(texto_clean) * 2,  # citação ocupa mais espaço por leading maior
+                )
                 if atribuicao:
-                    flow.append(Paragraph(_limpar_inline(atribuicao), styles["atribuicao"]))
+                    _adicionar(
+                        Paragraph(_limpar_inline(atribuicao), styles["atribuicao"]),
+                        20,
+                    )
                 continue
 
             # dialogo
             if re.match(r'<div[^>]*class="dialogo"', blk):
                 inner = re.sub(r"<div[^>]*>", "", blk, count=1)
                 inner = re.sub(r"</div>\s*$", "", inner)
-                flow.append(Paragraph(_limpar_inline(inner), styles["dialogo"]))
+                texto_clean = _limpar_inline(inner)
+                _adicionar(
+                    Paragraph(texto_clean, styles["dialogo"]),
+                    len(texto_clean),
+                )
                 continue
 
             # parágrafo
@@ -280,9 +310,31 @@ def texto_da_carta(
                     primeiro_paragrafo = False
 
                 style = styles["p_sem_indent"] if sem_indent else styles["p"]
-                flow.append(Paragraph(conteudo, style))
+                _adicionar(Paragraph(conteudo, style), len(conteudo))
 
-    return flow
+    # Se a carta está em PAGINAS_FORCADAS, redistribui em N páginas balanceadas
+    target = PAGINAS_FORCADAS.get(carta.id)
+    if not target or target <= 1 or len(flow) < target:
+        return flow
+
+    total_peso = sum(pesos)
+    peso_por_pagina = total_peso / target
+
+    redistribuido: list = []
+    peso_atual = 0
+    paginas_abertas = 1
+    for f, p in zip(flow, pesos):
+        # Se já passou do target da página atual e ainda temos páginas
+        # a abrir, força PageBreak antes desse flowable
+        if (paginas_abertas < target and
+            peso_atual >= peso_por_pagina * 0.92 and
+            peso_atual > 0):
+            redistribuido.append(PageBreak())
+            paginas_abertas += 1
+            peso_atual = 0
+        redistribuido.append(f)
+        peso_atual += p
+    return redistribuido
 
 
 # ==========================================================================
@@ -704,15 +756,31 @@ def _build_uma_passada(
 
     # -------- 5. CADA ENTRADA --------
     # Ordenação correta: NextPageTemplate define o template DO NEXT page;
-    # o PageBreak imediato aplica e move pra essa página, então o conteúdo
-    # flowi no template certo.
+    # o PageBreak imediato aplica e move pra essa página.
+    # Frame útil para centralização vertical:
+    frame_h = PG_H - MARGIN_TOP - MARGIN_BOTTOM
+
     for carta in cartas:
-        # 5a · Separador (fundo creme — anúncio dramático)
+        # 5a · Separador (fundo creme — texto centralizado vertical e
+        # horizontalmente em uma célula que ocupa o frame inteiro)
         story.append(NextPageTemplate("separador"))
         story.append(PageBreak())
         story.append(PageMarker(carta.id, registry))
-        story.append(Spacer(1, PG_H * 0.42))  # centro vertical do papel
-        story.append(Paragraph(carta.rotulo.upper(), styles["sep_rotulo"]))
+
+        sep_table = Table(
+            [[Paragraph(carta.rotulo.upper(), styles["sep_rotulo"])]],
+            rowHeights=[frame_h],
+            colWidths=[PG_W - MARGIN_INNER - MARGIN_OUTER],
+        )
+        sep_table.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+            ("TOPPADDING", (0, 0), (-1, -1), 0),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+        ]))
+        story.append(sep_table)
 
         # 5b · Retrato (fundo tinta — foto + nome + epígrafe + filete + meta)
         # Sem saudação acima da foto (era ruidoso e duplicava o nome).
@@ -752,39 +820,62 @@ def _build_uma_passada(
         story.append(PageBreak())
         story.extend(texto_da_carta(carta, styles))
 
-        # 5d · Fechamento (na mesma página onde o texto termina, se couber)
-        story.append(Paragraph("· · ·", styles["ornamento"]))
-        story.append(Paragraph(carta.assinatura, styles["assinatura"]))
+        # 5d · Fechamento — KeepTogether garante que ornamento + assinatura
+        # + meta NUNCA se separem em páginas diferentes (assinatura deve
+        # estar SEMPRE na mesma página que o ornamento e, idealmente,
+        # com o texto que a antecede).
         if carta.eh_carta:
             meta_ass = "Abril · 2025<br/>Por Renata Leão"
         elif carta.tipo == "prefacio":
             meta_ass = "2025<br/>Por Nicole Pelosi"
         else:
             meta_ass = "2025"
-        story.append(Paragraph(meta_ass, styles["assinatura_meta"]))
+
+        story.append(KeepTogether([
+            Paragraph("· · ·", styles["ornamento"]),
+            Paragraph(carta.assinatura, styles["assinatura"]),
+            Paragraph(meta_ass, styles["assinatura_meta"]),
+        ]))
         # Sem PageBreak aqui — a próxima carta começa com seu próprio
         # NextPageTemplate("separador") + PageBreak.
 
-    # -------- 6. COLOFÃO FINAL --------
+    # -------- 6. COLOFÃO FINAL (centralizado verticalmente) --------
     story.append(NextPageTemplate("pretextual"))
     story.append(PageBreak())
-    story.append(Spacer(1, 100 * mm))
-    story.append(Paragraph("· · ·", styles["ornamento"]))
-    story.append(Spacer(1, 16 * mm))
-    story.append(Paragraph(
-        "Travessias é sobre mulheres que seguem,<br/>"
-        "que atravessam a própria vida.",
-        styles["colofao_citacao"],
-    ))
-    story.append(Spacer(1, 8 * mm))
-    story.append(Paragraph(
-        "<i>Mulheres que sustentam outras mulheres.<br/>"
-        "Mulheres que, juntas, criam abrigo<br/>"
-        "enquanto buscam abrigo em outras travessias.</i>",
-        styles["colofao_citacao"],
-    ))
-    story.append(Spacer(1, 40 * mm))
-    story.append(Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]))
+
+    colofao_inner = [
+        Paragraph("· · ·", styles["ornamento"]),
+        Spacer(1, 14 * mm),
+        Paragraph(
+            "Travessias é sobre mulheres que seguem,<br/>"
+            "que atravessam a própria vida.",
+            styles["colofao_citacao"],
+        ),
+        Spacer(1, 6 * mm),
+        Paragraph(
+            "<i>Mulheres que sustentam outras mulheres.<br/>"
+            "Mulheres que, juntas, criam abrigo<br/>"
+            "enquanto buscam abrigo em outras travessias.</i>",
+            styles["colofao_citacao"],
+        ),
+        Spacer(1, 32 * mm),
+        Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]),
+    ]
+    # Envolve em Table de altura total do frame, com VALIGN MIDDLE
+    colofao_table = Table(
+        [[colofao_inner]],
+        rowHeights=[frame_h],
+        colWidths=[PG_W - MARGIN_INNER - MARGIN_OUTER],
+    )
+    colofao_table.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ]))
+    story.append(colofao_table)
 
     doc.build(story)
 
