@@ -73,8 +73,9 @@ const CARTAS = [
     paginas: [
       `<p class="sem-indent">Ver a trajetória da Renata de perto, desde a infância, é testemunhar uma busca constante por sentido, sensibilidade e verdade. Sempre existiu nela um olhar atento para o outro e, ao mesmo tempo, uma profunda curiosidade em compreender a si mesma e as camadas mais sutis da alma feminina.</p>
        <p>Ao longo dos anos, essa busca interior se transformou em propósito. Com sua escuta generosa e seu olhar sensível, Renata passou a criar espaços onde outras mulheres também podem se enxergar com mais clareza, acolher suas histórias e reconhecer a força que existe dentro de si.</p>
-       <p class="sem-indent">Neste e-book, Renata une duas de suas maiores potências: a fotografia e a palavra. A partir de conversas íntimas com cada mulher retratada, ela escreve textos como se fossem cartas para suas crianças interiores — um gesto de acolhimento, cura e reconexão.</p>
-       <p>Cada imagem e cada texto revelam histórias de dor, superação, amor e renascimento. Histórias que nos lembram que, mesmo depois das experiências mais difíceis, é possível florescer e transbordar.</p>
+       <p class="sem-indent">Neste e-book, Renata une duas de suas maiores potências: a fotografia e a palavra. A partir de conversas íntimas com cada mulher retratada, ela escreve textos como se fossem cartas para suas crianças interiores — um gesto de acolhimento, cura e reconexão.</p>`,
+
+      `<p class="sem-indent">Cada imagem e cada texto revelam histórias de dor, superação, amor e renascimento. Histórias que nos lembram que, mesmo depois das experiências mais difíceis, é possível florescer e transbordar.</p>
        <p>Este trabalho é um convite para olhar para dentro com mais gentileza e para reconhecer a beleza e a potência que existem em cada mulher.</p>
        <blockquote class="citacao">Porque, quando uma mulher se reconecta com sua essência, ela não apenas se transforma — ela transborda e inspira outras a fazerem o mesmo.</blockquote>`
     ]
