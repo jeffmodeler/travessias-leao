@@ -526,12 +526,30 @@ def _filete(c, x1: float, x2: float, y: float, cor=MEL, espessura: float = 0.4) 
 
 
 def fundo_capa(c, _doc) -> None:
+    """Capa do livro: fundo tinta + DOIS filetes editoriais
+    equidistantes do topo e da base (espelho perfeito)."""
     c.saveState()
     c.setFillColor(TINTA)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
-    _filete(c, MARGIN_OUTER, PG_W - MARGIN_OUTER, PG_H - 40 * mm)
-    _filete(c, PG_W / 2 - 22 * mm, PG_W / 2 + 22 * mm, 26 * mm)
+
+    # Filetes a 26mm das bordas (topo e base) — espelho perfeito
+    pos_filete = 26 * mm
+
+    # Filete superior (largura cheia entre margens)
+    _filete(
+        c,
+        MARGIN_OUTER, PG_W - MARGIN_OUTER,
+        PG_H - pos_filete,
+        MEL, 0.6,
+    )
+    # Filete inferior (mesma largura, mesma distância da base)
+    _filete(
+        c,
+        MARGIN_OUTER, PG_W - MARGIN_OUTER,
+        pos_filete,
+        MEL, 0.6,
+    )
 
 
 def fundo_separador(c, _doc) -> None:
@@ -908,8 +926,12 @@ def _build_uma_passada(
             "enquanto buscam abrigo em outras travessias.</i>",
             styles["colofao_citacao"],
         ),
-        Spacer(1, 32 * mm),
+        Spacer(1, 28 * mm),
         Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]),
+        # Espaço "fantasma" abaixo: com a célula em VALIGN MIDDLE, este
+        # spacer torna o bloco mais alto, deslocando o conteúdo visível
+        # para CIMA dentro do frame. Pedido editorial.
+        Spacer(1, 56 * mm),
     ]
     # Envolve em Table de altura total do frame, com VALIGN MIDDLE
     colofao_table = Table(
