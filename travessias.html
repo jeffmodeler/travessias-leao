@@ -427,6 +427,52 @@ body {
   border-bottom-color: var(--terra);
 }
 
+
+/* ==========================================================================
+   BLOCO 09 — Botão "Baixar PDF" no rodapé (mobile + desktop)
+   --------------------------------------------------------------------------
+   Botão discreto com ícone de download em SVG inline. Aparece nos rodapés
+   das duas telas. Border mel sutil, fica destaque ao passar o cursor.
+   ========================================================================== */
+
+.baixar-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 9px 14px;
+  border: 1px solid rgba(200, 155, 74, 0.45);
+  border-radius: 3px;
+  background: rgba(200, 155, 74, 0.06);
+  color: var(--mel);
+  font-family: var(--fonte-meta);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s, transform 0.15s;
+}
+
+.baixar-pdf:hover {
+  background: rgba(200, 155, 74, 0.18);
+  border-color: var(--mel);
+}
+.baixar-pdf:active { transform: scale(0.98); }
+
+.baixar-pdf svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--mel);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.baixar-pdf:hover svg { stroke: var(--mel); }
+
 /* ==========================================================================
    TRAVESSIAS — versão MOBILE (< 960px)
    ========================================================================== */
@@ -1690,6 +1736,15 @@ body {
   <footer class="lista-rodape">
     Volume 01 · 2025<br>
     Por <span>Renata Leão</span>
+    <a class="baixar-pdf" href="travessias.pdf" download="travessias.pdf"
+       aria-label="Baixar o livro completo em PDF">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span>Baixar PDF</span>
+    </a>
   </footer>
 </div>
 
@@ -1746,6 +1801,15 @@ body {
     <div class="lateral-rodape">
       Volume 01 · 2025<br>
       Por <span>Renata Leão</span>
+      <a class="baixar-pdf" href="travessias.pdf" download="travessias.pdf"
+         aria-label="Baixar o livro completo em PDF">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Baixar PDF</span>
+      </a>
     </div>
   </aside>
 
