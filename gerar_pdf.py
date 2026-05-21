@@ -84,10 +84,15 @@ CARVAO = HexColor("#3A3A3A")
 CINZA = HexColor("#8A8578")
 
 PG_W, PG_H = A4  # 210 × 297 mm
+# Margens SIMÉTRICAS verticais — texto centralizado em relação à página.
 MARGIN_TOP = 28 * mm
-MARGIN_BOTTOM = 25 * mm
+MARGIN_BOTTOM = 28 * mm
 MARGIN_INNER = 28 * mm  # lombada — margem interna mais generosa
 MARGIN_OUTER = 22 * mm
+
+# Posição do header e footer (distância igual das bordas — equilíbrio
+# editorial: o que sobe encima sobe igual em baixo).
+HEADER_FOOTER_Y = 14 * mm  # de cada uma das bordas (topo e base)
 
 # Fontes Times/Helvetica embutidas no reportlab — sem dependências
 FONTE_TITULO = "Times-Roman"
@@ -540,41 +545,48 @@ def fundo_separador(c, _doc) -> None:
 
 
 def fundo_creme_simples(c, _doc) -> None:
-    """Folhas creme sem header (rosto, ficha, sumário, retrato)."""
+    """Folhas creme sem header (rosto, ficha, sumário, retrato).
+    Filete decorativo equidistante do topo (HEADER_FOOTER_Y + 3mm).
+    Footer com número de página à mesma distância da base."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
-    _filete(c, PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm, PG_H - 22 * mm, MEL, 0.3)
+    _filete(
+        c,
+        PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
+        PG_H - (HEADER_FOOTER_Y + 4 * mm), MEL, 0.3,
+    )
     if _ctx.get("mostrar_numero"):
         c.saveState()
         c.setFont(FONTE_META, 8)
         c.setFillColor(CINZA)
-        c.drawCentredString(PG_W / 2, 14 * mm, str(c.getPageNumber()))
+        c.drawCentredString(PG_W / 2, HEADER_FOOTER_Y, str(c.getPageNumber()))
         c.restoreState()
 
 
 def fundo_texto(c, _doc) -> None:
-    """Páginas de corpo de carta: header com 'TRAVESSIAS' apenas + footer
-    com número de página."""
+    """Páginas de corpo de carta: header 'TRAVESSIAS' + footer com
+    número de página, AMBOS à mesma distância das bordas (simetria
+    vertical em relação à página)."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
 
-    # Header: somente "TRAVESSIAS" (sem nome da carta — convenção de coletânea)
+    # Header: "TRAVESSIAS" centralizado, equidistante do topo do papel
     c.setFont(FONTE_META_BOLD, 8)
     c.setFillColor(MEL)
-    c.drawCentredString(PG_W / 2, PG_H - 18 * mm, "TRAVESSIAS")
+    c.drawCentredString(PG_W / 2, PG_H - HEADER_FOOTER_Y, "TRAVESSIAS")
     _filete(
         c,
         PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
-        PG_H - 21 * mm, MEL, 0.3,
+        PG_H - (HEADER_FOOTER_Y + 4 * mm), MEL, 0.3,
     )
 
-    # Footer: número de página
+    # Footer: número de página equidistante da base
     c.setFont(FONTE_META, 8)
     c.setFillColor(CINZA)
-    c.drawCentredString(PG_W / 2, 14 * mm, str(c.getPageNumber()))
+    c.drawCentredString(PG_W / 2, HEADER_FOOTER_Y, str(c.getPageNumber()))
 
     c.restoreState()
 
@@ -695,7 +707,9 @@ def _build_uma_passada(
         PG_W - MARGIN_INNER - MARGIN_OUTER,
         PG_H - MARGIN_TOP - MARGIN_BOTTOM,
         leftPadding=0, rightPadding=0,
-        topPadding=8 * mm, bottomPadding=4 * mm,
+        # Padding interno SIMÉTRICO (texto centralizado verticalmente
+        # no espaço útil entre filete superior e número de página).
+        topPadding=6 * mm, bottomPadding=6 * mm,
         id="texto",
     )
 
