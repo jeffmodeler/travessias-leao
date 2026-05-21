@@ -563,12 +563,13 @@ def fundo_separador(c, _doc) -> None:
 
 def fundo_creme_simples(c, _doc) -> None:
     """Folhas creme sem header (rosto, ficha, sumário, retrato).
-    Filete decorativo equidistante do topo (HEADER_FOOTER_Y + 3mm).
-    Footer com número de página à mesma distância da base."""
+    Filete decorativo equidistante do topo + filete-espelho equidistante
+    da base (mesma largura). Footer com número de página."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
     c.restoreState()
+    # Filete superior (espelho com o inferior)
     _filete(
         c,
         PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
@@ -576,6 +577,12 @@ def fundo_creme_simples(c, _doc) -> None:
     )
     if _ctx.get("mostrar_numero"):
         c.saveState()
+        # Filete inferior — mesma largura e distância da borda
+        _filete(
+            c,
+            PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
+            HEADER_FOOTER_Y + 4 * mm, MEL, 0.3,
+        )
         c.setFont(FONTE_META, 8)
         c.setFillColor(CINZA)
         c.drawCentredString(PG_W / 2, HEADER_FOOTER_Y, str(c.getPageNumber()))
@@ -584,13 +591,13 @@ def fundo_creme_simples(c, _doc) -> None:
 
 def fundo_texto(c, _doc) -> None:
     """Páginas de corpo de carta: header 'TRAVESSIAS' + footer com
-    número de página, AMBOS à mesma distância das bordas (simetria
-    vertical em relação à página)."""
+    número de página, ambos com filetes-espelho à mesma distância
+    das bordas (simetria vertical em relação à página)."""
     c.saveState()
     c.setFillColor(CREME)
     c.rect(0, 0, PG_W, PG_H, fill=1, stroke=0)
 
-    # Header: "TRAVESSIAS" centralizado, equidistante do topo do papel
+    # Header: "TRAVESSIAS" + filete equidistantes do topo
     c.setFont(FONTE_META_BOLD, 8)
     c.setFillColor(MEL)
     c.drawCentredString(PG_W / 2, PG_H - HEADER_FOOTER_Y, "TRAVESSIAS")
@@ -600,7 +607,12 @@ def fundo_texto(c, _doc) -> None:
         PG_H - (HEADER_FOOTER_Y + 4 * mm), MEL, 0.3,
     )
 
-    # Footer: número de página equidistante da base
+    # Footer: filete-espelho + número de página equidistantes da base
+    _filete(
+        c,
+        PG_W / 2 - 18 * mm, PG_W / 2 + 18 * mm,
+        HEADER_FOOTER_Y + 4 * mm, MEL, 0.3,
+    )
     c.setFont(FONTE_META, 8)
     c.setFillColor(CINZA)
     c.drawCentredString(PG_W / 2, HEADER_FOOTER_Y, str(c.getPageNumber()))
