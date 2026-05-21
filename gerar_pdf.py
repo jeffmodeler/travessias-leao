@@ -797,6 +797,9 @@ def _build_uma_passada(
         ),
         Paragraph("POR", styles["rosto_por"]),
         Paragraph("Renata Leão", styles["rosto_autora"]),
+        # Spacer-fantasma: com VALIGN MIDDLE, aumenta a altura do bloco
+        # para deslocar o conteúdo visível para CIMA.
+        Spacer(1, 90 * mm),
     ]
 
     rosto_table = Table(
