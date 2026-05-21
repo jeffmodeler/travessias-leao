@@ -14,6 +14,21 @@
 <meta name="description" content="Travessias — dez cartas escritas a partir da escuta de mulheres reais. Por Renata Leão.">
 <title>Travessias — cartas de mulheres reais</title>
 
+<!-- Open Graph / cards de compartilhamento -->
+<meta property="og:title" content="Travessias — cartas de mulheres reais">
+<meta property="og:description" content="Dez mulheres escrevem para si mesmas. Por Renata Leão.">
+<meta property="og:type" content="book">
+<meta property="og:image" content="fotos/renata_leao.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Travessias — cartas de mulheres reais">
+<meta name="twitter:description" content="Dez mulheres escrevem para si mesmas. Por Renata Leão.">
+
+<!-- Preload das fontes críticas (corpo de texto + saudação) -->
+<link rel="preload" href="fonts/lora-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/lora-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/caveat-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+
 <style>
 /* ==========================================================================
    TRAVESSIAS — cartas de mulheres reais
@@ -32,29 +47,31 @@
    BLOCO 01 — @font-face
    ========================================================================== */
 
-@font-face { font-family: 'Caveat'; font-weight: 400; src: url('../fonts/caveat-latin-400-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Caveat'; font-weight: 500; src: url('../fonts/caveat-latin-500-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Caveat'; font-weight: 600; src: url('../fonts/caveat-latin-600-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Caveat'; font-weight: 700; src: url('../fonts/caveat-latin-700-normal.woff2') format('woff2'); font-display: block; }
+/* Caveat — só peso 500 (usado na saudação). Pesos 400/600/700 removidos
+   por não serem referenciados em nenhuma regra. */
+@font-face { font-family: 'Caveat'; font-weight: 500; src: url('../fonts/caveat-latin-500-normal.woff2') format('woff2'); font-display: swap; }
 
-@font-face { font-family: 'Fraunces'; font-weight: 300; src: url('../fonts/fraunces-latin-300-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 400; src: url('../fonts/fraunces-latin-400-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 400; font-style: italic; src: url('../fonts/fraunces-latin-400-italic.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 500; src: url('../fonts/fraunces-latin-500-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 500; font-style: italic; src: url('../fonts/fraunces-latin-500-italic.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-600-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Fraunces'; font-weight: 700; src: url('../fonts/fraunces-latin-700-normal.woff2') format('woff2'); font-display: block; }
+/* Fraunces — usado em títulos e saudações. swap para evitar FOIT em conexões lentas. */
+@font-face { font-family: 'Fraunces'; font-weight: 300; src: url('../fonts/fraunces-latin-300-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; src: url('../fonts/fraunces-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 400; font-style: italic; src: url('../fonts/fraunces-latin-400-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; src: url('../fonts/fraunces-latin-500-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 500; font-style: italic; src: url('../fonts/fraunces-latin-500-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-600-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Fraunces'; font-weight: 700; src: url('../fonts/fraunces-latin-700-normal.woff2') format('woff2'); font-display: swap; }
 
-@font-face { font-family: 'Lora'; font-weight: 400; src: url('../fonts/lora-latin-400-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Lora'; font-weight: 400; font-style: italic; src: url('../fonts/lora-latin-400-italic.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Lora'; font-weight: 500; src: url('../fonts/lora-latin-500-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Lora'; font-weight: 500; font-style: italic; src: url('../fonts/lora-latin-500-italic.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Lora'; font-weight: 600; src: url('../fonts/lora-latin-600-normal.woff2') format('woff2'); font-display: block; }
+/* Lora — corpo de texto. swap = mostra texto imediatamente em Georgia, troca quando carregar. */
+@font-face { font-family: 'Lora'; font-weight: 400; src: url('../fonts/lora-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Lora'; font-weight: 400; font-style: italic; src: url('../fonts/lora-latin-400-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Lora'; font-weight: 500; src: url('../fonts/lora-latin-500-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Lora'; font-weight: 500; font-style: italic; src: url('../fonts/lora-latin-500-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Lora'; font-weight: 600; src: url('../fonts/lora-latin-600-normal.woff2') format('woff2'); font-display: swap; }
 
-@font-face { font-family: 'Inter'; font-weight: 300; src: url('../fonts/inter-latin-300-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Inter'; font-weight: 400; src: url('../fonts/inter-latin-400-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Inter'; font-weight: 500; src: url('../fonts/inter-latin-500-normal.woff2') format('woff2'); font-display: block; }
-@font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-600-normal.woff2') format('woff2'); font-display: block; }
+/* Inter — meta/legendas. swap. */
+@font-face { font-family: 'Inter'; font-weight: 300; src: url('../fonts/inter-latin-300-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('../fonts/inter-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('../fonts/inter-latin-500-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-600-normal.woff2') format('woff2'); font-display: swap; }
 
 
 /* ==========================================================================
@@ -1515,90 +1532,6 @@ body {
     background: var(--cinza-claro); border-radius: 3px;
   }
 
-  /* ------------------------------------------------------------------
-     COVER PAGE (idx 0) — entrada estilo "Sobre a autora"
-     Aparece como primeira página de toda carta no painel desktop.
-     Ao clicar "Ler carta →" avança para a 1ª página de texto.
-     ------------------------------------------------------------------ */
-  .pagina-desktop.pagina-cover {
-    background-color: var(--tinta);
-    background-image: var(--tinta-textura);
-    padding: 0 64px;
-    display: flex;
-    align-items: center;
-    color: var(--creme);
-  }
-  .cover-inner {
-    width: 100%;
-    max-width: 460px;
-  }
-  .cover-rotulo {
-    font-family: var(--fonte-meta);
-    font-size: 11px;
-    letter-spacing: 0.34em;
-    text-transform: uppercase;
-    color: var(--mel);
-    font-weight: 600;
-    margin-bottom: 22px;
-  }
-  .cover-saudacao {
-    font-family: var(--fonte-titulo);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 52px;
-    line-height: 1.02;
-    letter-spacing: 0.005em;
-    color: var(--creme);
-    margin-bottom: 24px;
-  }
-  .cover-fio {
-    width: 56px;
-    height: 1px;
-    background: var(--mel);
-    opacity: 0.55;
-    margin-bottom: 28px;
-  }
-  .cover-epigrafe {
-    font-family: var(--fonte-titulo);
-    font-style: italic;
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--creme);
-    opacity: 0.85;
-    margin-bottom: 36px;
-  }
-  .cover-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0;
-    background: transparent;
-    border: none;
-    font-family: var(--fonte-meta);
-    font-size: 11px;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--mel);
-    font-weight: 600;
-    cursor: pointer;
-    transition: gap 0.25s, color 0.2s;
-  }
-  .cover-cta:hover {
-    color: var(--terra);
-    gap: 18px;
-  }
-  .cover-cta span { font-size: 14px; }
-
-  /* Variante prefácio na cover — sutilmente diferente (terra) */
-  .pagina-cover.pagina-prefacio .cover-rotulo,
-  .painel-prefacio .pagina-cover .cover-rotulo {
-    color: var(--terra);
-  }
-
-  /* Quando a cover está ativa, esconde info sobre a foto (sem duplicação) */
-  .painel.painel-cover-ativa .painel-info { opacity: 0; }
-  .painel-info { transition: opacity 0.3s; }
-
   .pagina-desktop p { margin-bottom: 1em; }
   .pagina-desktop p + p { text-indent: 1.6em; margin-top: 0; }
   .pagina-desktop p.sem-indent { text-indent: 0 !important; }
@@ -1814,13 +1747,14 @@ body {
   <!-- Coluna lateral · índice de cartas -->
   <aside class="lateral">
     <div class="lateral-header">
-      <h1 class="lateral-titulo">Travessias</h1>
-      <div class="lateral-subtitulo">cartas de mulheres reais</div>
+      <!-- Decorativo: o <h1> único da página vive na tela mobile (#tela-lista) -->
+      <p class="lateral-titulo" aria-hidden="true">Travessias</p>
+      <div class="lateral-subtitulo" aria-hidden="true">cartas de mulheres reais</div>
       <div class="lateral-fio"></div>
     </div>
 
     <!-- Lista renderizada por BLOCO 06 -->
-    <ol class="cartas-lista" id="cartas-lista"></ol>
+    <ul class="cartas-lista" id="cartas-lista"></ul>
 
     <!-- BLOCO 04b — Trigger "Faça parte" (abre modal ao clicar) -->
     <button type="button" class="participar-trigger" id="abrir-participar">
@@ -1950,7 +1884,8 @@ body {
       div.className   = "card" + classeBase(c);
       div.dataset.id  = c.id;
       div.innerHTML = `
-        <img class="card-foto" src="${c.foto}" alt="${c.nome}">
+        <img class="card-foto" src="${c.foto}" alt="${c.nome}"
+             width="112" height="140" loading="lazy" decoding="async">
         <div class="card-info">
           <div>
             <div class="card-numero">${rotuloNumero(c)}</div>
@@ -1982,7 +1917,8 @@ body {
       div.dataset.id = c.id;
       div.innerHTML = `
         <div class="preview-inner">
-          <img class="preview-foto" src="${c.foto}" alt="${c.nome}">
+          <img class="preview-foto" src="${c.foto}" alt="${c.nome}"
+               width="340" height="480" loading="lazy" decoding="async">
           <div class="preview-texto">
             <div class="preview-carta">${rotuloNumero(c)}</div>
             <div class="preview-nome">${c.saudacao}</div>
@@ -2072,19 +2008,16 @@ const CARTAS = [
     idade: "",
     cidade: "",
     foto: "fotos/renata_leao.jpg",
-    epigrafe: "Texto provisório — o prefácio definitivo será inserido em breve.",
-    assinatura: "Travessias",
+    epigrafe: "Quando uma mulher se reconecta com sua essência, ela transborda e inspira outras a fazerem o mesmo.",
+    assinatura: "Nicole Pelosi",
     paginas: [
-      `<div class="aviso-provisorio">
-         <span class="aviso-tag">Texto provisório</span>
-         <span class="aviso-msg">Este prefácio é um placeholder. O texto definitivo será inserido em breve.</span>
-       </div>
-       <p class="sem-indent">Há livros que começam por um motivo, e este é um deles. <em>Travessias</em> surge do encontro entre escuta, fotografia e palavra — e antes que qualquer carta seja lida, vale dizer alguma coisa sobre como ele nasceu, por que existe, e o cuidado tomado com cada voz reunida nestas páginas.</p>
-       <p>As cartas que vêm a seguir não foram inventadas. Foram colhidas em conversas longas, escutadas duas, três vezes, transcritas com pausas, dúvidas, silêncios. O que está escrito aqui é o que essas mulheres escolheram dizer para si mesmas, depois de tudo.</p>`,
+      `<p class="sem-indent">Ver a trajetória da Renata de perto, desde a infância, é testemunhar uma busca constante por sentido, sensibilidade e verdade. Sempre existiu nela um olhar atento para o outro e, ao mesmo tempo, uma profunda curiosidade em compreender a si mesma e as camadas mais sutis da alma feminina.</p>
+       <p>Ao longo dos anos, essa busca interior se transformou em propósito. Com sua escuta generosa e seu olhar sensível, Renata passou a criar espaços onde outras mulheres também podem se enxergar com mais clareza, acolher suas histórias e reconhecer a força que existe dentro de si.</p>`,
 
-      `<p>Travessia, no plural, não é figura de linguagem. É o que cada uma destas dez vidas conta de modo diferente: o passo que se dá quando o chão treme, a margem que se alcança quando ninguém mais espera, a beira que se cruza calada para que outra mulher cruze depois.</p>
-       <p>Que este livro seja, antes de tudo, um abrigo. Que cada carta encontre, no leitor ou na leitora, a escuta que ela mereceu desde o começo. E que, ao terminar, fique a sensação de que nenhuma travessia se faz sozinha.</p>
-       <blockquote class="citacao">[Aqui entrará o trecho definitivo escolhido para abrir o livro.]</blockquote>`
+      `<p class="sem-indent">Neste e-book, Renata une duas de suas maiores potências: a fotografia e a palavra. A partir de conversas íntimas com cada mulher retratada, ela escreve textos como se fossem cartas para suas crianças interiores — um gesto de acolhimento, cura e reconexão.</p>
+       <p>Cada imagem e cada texto revelam histórias de dor, superação, amor e renascimento. Histórias que nos lembram que, mesmo depois das experiências mais difíceis, é possível florescer e transbordar.</p>
+       <p>Este trabalho é um convite para olhar para dentro com mais gentileza e para reconhecer a beleza e a potência que existem em cada mulher.</p>
+       <blockquote class="citacao">Porque, quando uma mulher se reconecta com sua essência, ela não apenas se transforma — ela transborda e inspira outras a fazerem o mesmo.</blockquote>`
     ]
   },
 
@@ -2592,35 +2525,44 @@ function inicializar() {
 }
 
 // Trocar de layout se a janela for redimensionada cruzando o breakpoint
+// (debounced para não thrashar layout durante drag-resize)
 let layoutAnterior = null;
+let resizeTimer = null;
 window.addEventListener("resize", () => {
-  const novoLayout = layoutAtual();
-  if (novoLayout !== layoutAnterior) {
-    layoutAnterior = novoLayout;
-    estado.layout = novoLayout;
-    fecharTudo();
-  }
-  // Re-medir overflow quando a janela muda de tamanho
-  if (estado.cartaAtiva) {
-    requestAnimationFrame(() => {
-      detectarOverflow("#paginas-track-desktop .pagina-desktop");
-      detectarOverflow("#paginas-viewport-mobile .pagina-mobile");
-    });
-  }
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const novoLayout = layoutAtual();
+    if (novoLayout !== layoutAnterior) {
+      layoutAnterior = novoLayout;
+      estado.layout = novoLayout;
+      fecharTudo();
+    }
+    if (estado.cartaAtiva) {
+      requestAnimationFrame(() => {
+        detectarOverflow("#paginas-track-desktop .pagina-desktop");
+        detectarOverflow("#paginas-viewport-mobile .pagina-mobile");
+      });
+    }
+  }, 120);
 });
 
 /* ==========================================================================
    BLOCO 03 — Utilitários compartilhados
    ========================================================================== */
 
-/* Fechamento padrão de uma carta — sempre carrega "Por Renata Leão", alinhado à direita */
+/* Fechamento padrão de uma carta — alinhado à direita.
+   - Cartas regulares: assinatura da protagonista + "Por Renata Leão"
+   - Abertura (Renata): só assinatura (ela é a autora)
+   - Prefácio (Nicole): só assinatura (autora externa convidada) */
 function fechamentoHtml(carta) {
   const data = carta.numero ? "Abril · 2025" : "2025";
+  const ehCarta = !!carta.numero;
+  const linhaAutora = ehCarta ? "<br>Por Renata Leão" : "";
   return `
     <div class="fechamento">
       <div class="fechamento-ornamento">· · ·</div>
       <div class="assinatura">${carta.assinatura}</div>
-      <div class="assinatura-meta"><span>${data}</span><br>Por Renata Leão</div>
+      <div class="assinatura-meta"><span>${data}</span>${linhaAutora}</div>
     </div>`;
 }
 
@@ -2930,6 +2872,7 @@ function abrirPainel(id) {
     String(total).padStart(2, "0");
 
   atualizarPaginaDesktop();
+  requestAnimationFrame(() => detectarOverflow("#paginas-track-desktop .pagina-desktop"));
 
   // Destaque lateral
   document.querySelectorAll(".carta-item").forEach((el) =>

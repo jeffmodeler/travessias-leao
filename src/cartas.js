@@ -69,19 +69,16 @@ const CARTAS = [
     idade: "",
     cidade: "",
     foto: "fotos/renata_leao.jpg",
-    epigrafe: "Texto provisório — o prefácio definitivo será inserido em breve.",
-    assinatura: "Travessias",
+    epigrafe: "Quando uma mulher se reconecta com sua essência, ela transborda e inspira outras a fazerem o mesmo.",
+    assinatura: "Nicole Pelosi",
     paginas: [
-      `<div class="aviso-provisorio">
-         <span class="aviso-tag">Texto provisório</span>
-         <span class="aviso-msg">Este prefácio é um placeholder. O texto definitivo será inserido em breve.</span>
-       </div>
-       <p class="sem-indent">Há livros que começam por um motivo, e este é um deles. <em>Travessias</em> surge do encontro entre escuta, fotografia e palavra — e antes que qualquer carta seja lida, vale dizer alguma coisa sobre como ele nasceu, por que existe, e o cuidado tomado com cada voz reunida nestas páginas.</p>
-       <p>As cartas que vêm a seguir não foram inventadas. Foram colhidas em conversas longas, escutadas duas, três vezes, transcritas com pausas, dúvidas, silêncios. O que está escrito aqui é o que essas mulheres escolheram dizer para si mesmas, depois de tudo.</p>`,
+      `<p class="sem-indent">Ver a trajetória da Renata de perto, desde a infância, é testemunhar uma busca constante por sentido, sensibilidade e verdade. Sempre existiu nela um olhar atento para o outro e, ao mesmo tempo, uma profunda curiosidade em compreender a si mesma e as camadas mais sutis da alma feminina.</p>
+       <p>Ao longo dos anos, essa busca interior se transformou em propósito. Com sua escuta generosa e seu olhar sensível, Renata passou a criar espaços onde outras mulheres também podem se enxergar com mais clareza, acolher suas histórias e reconhecer a força que existe dentro de si.</p>`,
 
-      `<p>Travessia, no plural, não é figura de linguagem. É o que cada uma destas dez vidas conta de modo diferente: o passo que se dá quando o chão treme, a margem que se alcança quando ninguém mais espera, a beira que se cruza calada para que outra mulher cruze depois.</p>
-       <p>Que este livro seja, antes de tudo, um abrigo. Que cada carta encontre, no leitor ou na leitora, a escuta que ela mereceu desde o começo. E que, ao terminar, fique a sensação de que nenhuma travessia se faz sozinha.</p>
-       <blockquote class="citacao">[Aqui entrará o trecho definitivo escolhido para abrir o livro.]</blockquote>`
+      `<p class="sem-indent">Neste e-book, Renata une duas de suas maiores potências: a fotografia e a palavra. A partir de conversas íntimas com cada mulher retratada, ela escreve textos como se fossem cartas para suas crianças interiores — um gesto de acolhimento, cura e reconexão.</p>
+       <p>Cada imagem e cada texto revelam histórias de dor, superação, amor e renascimento. Histórias que nos lembram que, mesmo depois das experiências mais difíceis, é possível florescer e transbordar.</p>
+       <p>Este trabalho é um convite para olhar para dentro com mais gentileza e para reconhecer a beleza e a potência que existem em cada mulher.</p>
+       <blockquote class="citacao">Porque, quando uma mulher se reconecta com sua essência, ela não apenas se transforma — ela transborda e inspira outras a fazerem o mesmo.</blockquote>`
     ]
   },
 

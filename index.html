@@ -14,6 +14,21 @@
 <meta name="description" content="Travessias — dez cartas escritas a partir da escuta de mulheres reais. Por Renata Leão.">
 <title>Travessias — cartas de mulheres reais</title>
 
+<!-- Open Graph / cards de compartilhamento -->
+<meta property="og:title" content="Travessias — cartas de mulheres reais">
+<meta property="og:description" content="Dez mulheres escrevem para si mesmas. Por Renata Leão.">
+<meta property="og:type" content="book">
+<meta property="og:image" content="fotos/renata_leao.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Travessias — cartas de mulheres reais">
+<meta name="twitter:description" content="Dez mulheres escrevem para si mesmas. Por Renata Leão.">
+
+<!-- Preload das fontes críticas (corpo de texto + saudação) -->
+<link rel="preload" href="fonts/lora-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/lora-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/caveat-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+
 <link rel="stylesheet" href="src/tokens.css">
 <link rel="stylesheet" href="src/mobile.css">
 <link rel="stylesheet" href="src/desktop.css">
@@ -94,13 +109,14 @@
   <!-- Coluna lateral · índice de cartas -->
   <aside class="lateral">
     <div class="lateral-header">
-      <h1 class="lateral-titulo">Travessias</h1>
-      <div class="lateral-subtitulo">cartas de mulheres reais</div>
+      <!-- Decorativo: o <h1> único da página vive na tela mobile (#tela-lista) -->
+      <p class="lateral-titulo" aria-hidden="true">Travessias</p>
+      <div class="lateral-subtitulo" aria-hidden="true">cartas de mulheres reais</div>
       <div class="lateral-fio"></div>
     </div>
 
     <!-- Lista renderizada por BLOCO 06 -->
-    <ol class="cartas-lista" id="cartas-lista"></ol>
+    <ul class="cartas-lista" id="cartas-lista"></ul>
 
     <!-- BLOCO 04b — Trigger "Faça parte" (abre modal ao clicar) -->
     <button type="button" class="participar-trigger" id="abrir-participar">
@@ -231,7 +247,8 @@
       div.className   = "card" + classeBase(c);
       div.dataset.id  = c.id;
       div.innerHTML = `
-        <img class="card-foto" src="${c.foto}" alt="${c.nome}">
+        <img class="card-foto" src="${c.foto}" alt="${c.nome}"
+             width="112" height="140" loading="lazy" decoding="async">
         <div class="card-info">
           <div>
             <div class="card-numero">${rotuloNumero(c)}</div>
@@ -263,7 +280,8 @@
       div.dataset.id = c.id;
       div.innerHTML = `
         <div class="preview-inner">
-          <img class="preview-foto" src="${c.foto}" alt="${c.nome}">
+          <img class="preview-foto" src="${c.foto}" alt="${c.nome}"
+               width="340" height="480" loading="lazy" decoding="async">
           <div class="preview-texto">
             <div class="preview-carta">${rotuloNumero(c)}</div>
             <div class="preview-nome">${c.saudacao}</div>

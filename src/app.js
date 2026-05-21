@@ -52,35 +52,44 @@ function inicializar() {
 }
 
 // Trocar de layout se a janela for redimensionada cruzando o breakpoint
+// (debounced para não thrashar layout durante drag-resize)
 let layoutAnterior = null;
+let resizeTimer = null;
 window.addEventListener("resize", () => {
-  const novoLayout = layoutAtual();
-  if (novoLayout !== layoutAnterior) {
-    layoutAnterior = novoLayout;
-    estado.layout = novoLayout;
-    fecharTudo();
-  }
-  // Re-medir overflow quando a janela muda de tamanho
-  if (estado.cartaAtiva) {
-    requestAnimationFrame(() => {
-      detectarOverflow("#paginas-track-desktop .pagina-desktop");
-      detectarOverflow("#paginas-viewport-mobile .pagina-mobile");
-    });
-  }
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const novoLayout = layoutAtual();
+    if (novoLayout !== layoutAnterior) {
+      layoutAnterior = novoLayout;
+      estado.layout = novoLayout;
+      fecharTudo();
+    }
+    if (estado.cartaAtiva) {
+      requestAnimationFrame(() => {
+        detectarOverflow("#paginas-track-desktop .pagina-desktop");
+        detectarOverflow("#paginas-viewport-mobile .pagina-mobile");
+      });
+    }
+  }, 120);
 });
 
 /* ==========================================================================
    BLOCO 03 — Utilitários compartilhados
    ========================================================================== */
 
-/* Fechamento padrão de uma carta — sempre carrega "Por Renata Leão", alinhado à direita */
+/* Fechamento padrão de uma carta — alinhado à direita.
+   - Cartas regulares: assinatura da protagonista + "Por Renata Leão"
+   - Abertura (Renata): só assinatura (ela é a autora)
+   - Prefácio (Nicole): só assinatura (autora externa convidada) */
 function fechamentoHtml(carta) {
   const data = carta.numero ? "Abril · 2025" : "2025";
+  const ehCarta = !!carta.numero;
+  const linhaAutora = ehCarta ? "<br>Por Renata Leão" : "";
   return `
     <div class="fechamento">
       <div class="fechamento-ornamento">· · ·</div>
       <div class="assinatura">${carta.assinatura}</div>
-      <div class="assinatura-meta"><span>${data}</span><br>Por Renata Leão</div>
+      <div class="assinatura-meta"><span>${data}</span>${linhaAutora}</div>
     </div>`;
 }
 
@@ -390,6 +399,7 @@ function abrirPainel(id) {
     String(total).padStart(2, "0");
 
   atualizarPaginaDesktop();
+  requestAnimationFrame(() => detectarOverflow("#paginas-track-desktop .pagina-desktop"));
 
   // Destaque lateral
   document.querySelectorAll(".carta-item").forEach((el) =>
