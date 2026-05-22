@@ -878,8 +878,13 @@ def _build_uma_passada(
         story.append(PageBreak())
         story.append(PageMarker(carta.id, registry))
 
+        # Conteúdo + Spacer fantasma abaixo: com VALIGN MIDDLE, sobe o
+        # texto "CARTA X" alguns pontos acima do centro geométrico.
         sep_table = Table(
-            [[Paragraph(carta.rotulo.upper(), styles["sep_rotulo"])]],
+            [[[
+                Paragraph(carta.rotulo.upper(), styles["sep_rotulo"]),
+                Spacer(1, 16),  # ~8pt de deslocamento visual para cima
+            ]]],
             rowHeights=[frame_h],
             colWidths=[PG_W - MARGIN_INNER - MARGIN_OUTER],
         )
@@ -994,7 +999,7 @@ def _build_uma_passada(
     doc.build(story)
 
 
-def construir_pdf(cartas: list[Carta], saida: str = "travessias.pdf") -> str:
+def construir_pdf(cartas: list[Carta], saida: str = "Travessias - Renata Leao.pdf") -> str:
     """Two-pass build: predição + correção via PageMarker.
 
     Escreve sempre em um arquivo temp e renomeia ao final, evitando
@@ -1027,7 +1032,7 @@ def construir_pdf(cartas: list[Carta], saida: str = "travessias.pdf") -> str:
 
 def main() -> int:
     cartas = extrair_cartas("src/cartas.js")
-    saida = construir_pdf(cartas, "travessias.pdf")
+    saida = construir_pdf(cartas, "Travessias - Renata Leao.pdf")
     sz_kb = os.path.getsize(saida) // 1024
 
     print(f"{'rótulo':12}  {'nome':24}  páginas paginas[]")
