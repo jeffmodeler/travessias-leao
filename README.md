@@ -10,7 +10,8 @@ O nome do projeto vem da carta da Sheila: *"O Travessia nunca acabou, Sheilinha.
 
 ## Acessar
 
-- **Site interativo**: [travessias na web](https://github.com/jeffmodeler/travessias-leao)
+- **Site interativo**: [jeffmodeler.github.io/travessias-leao](https://jeffmodeler.github.io/travessias-leao/)
+- **Repositório**: [github.com/jeffmodeler/travessias-leao](https://github.com/jeffmodeler/travessias-leao)
 - **Livro em PDF**: [`Travessias - Renata Leao.pdf`](Travessias%20-%20Renata%20Leao.pdf) — 668 KB · 58 páginas A4
 - **Página única standalone (HTML+CSS+JS inline)**: [`travessias.html`](travessias.html) — 141 KB
 
