@@ -852,6 +852,7 @@ def _build_uma_passada(
         ("Idealização", "Renata Leão"),
         ("Fotografia e palavra", "Renata Leão"),
         ("Prefácio", "Nicole Pelosi"),
+        ("Diagramação", "Jefferson Borges de Lima"),
         ("Origem", "Entrevistas realizadas durante a 1ª edição do Festival MEL — Mulheres em Lutas, em 2025."),
         ("Contato", "@renataleaofotografia<br/>renataleaofotografia@gmail.com"),
     ], styles))
@@ -976,6 +977,8 @@ def _build_uma_passada(
         ),
         Spacer(1, 28 * mm),
         Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]),
+        Spacer(1, 4 * mm),
+        Paragraph("DIAGRAMAÇÃO · JEFFERSON BORGES DE LIMA", styles["colofao_credito"]),
         # Spacer-fantasma: aumenta a altura do bloco para que a VALIGN
         # MIDDLE empurre o conteúdo visível para cima do frame.
         Spacer(1, 90 * mm),

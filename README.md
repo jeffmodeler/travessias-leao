@@ -118,6 +118,7 @@ Saída: `Travessias - Renata Leao.pdf` — 58 páginas A4, com capa, folha de ro
 
 - **Idealização, fotografia e palavra**: Renata Leão
 - **Prefácio**: Nicole Pelosi
+- **Diagramação**: Jefferson Borges de Lima
 - **Contato**: [@renataleaofotografia](https://instagram.com/renataleaofotografia) · renataleaofotografia@gmail.com
 
 Por *Renata Leão* · Volume 01 · 2025
