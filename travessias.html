@@ -375,6 +375,33 @@ body {
   font-weight: 600;
 }
 
+.modal-instagram {
+  display: block;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(138, 133, 120, 0.25);
+  font-family: var(--fonte-meta);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--cinza);
+  text-align: center;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+.modal-instagram strong {
+  color: var(--terra);
+  font-weight: 600;
+}
+.modal-instagram:hover,
+.modal-instagram:focus-visible {
+  color: var(--tinta);
+}
+.modal-instagram:focus-visible {
+  outline: 2px solid var(--mel);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 
 /* ==========================================================================
    BLOCO 08 — Compartilhado · bloco de contato (no fim de cada carta)
@@ -1886,12 +1913,10 @@ body {
   <h2 class="modal-titulo" id="modal-titulo">Sua história importa</h2>
   <p class="modal-texto">
     Travessias nasce da escuta. Se você tem uma carta — para si mesma ou
-    para outra mulher — converse comigo no Instagram.
+    para outra mulher — me escreva no WhatsApp.
   </p>
 
-  <form class="modal-form"
-        action="https://instagram.com/renataleaofotografia"
-        method="get"
+  <form class="modal-form" id="modal-form-participar"
         target="_blank"
         aria-label="Quero fazer parte de Travessias">
     <label class="modal-campo">
@@ -1904,9 +1929,12 @@ body {
                 placeholder="conte um pouco do que te trouxe aqui — vou ler com cuidado"></textarea>
     </label>
     <button type="submit" class="modal-submit">
-      Continuar no Instagram <span aria-hidden="true">→</span>
+      Continuar no WhatsApp <span aria-hidden="true">→</span>
     </button>
-    <div class="modal-nota">você será levada para <strong>@renataleaofotografia</strong></div>
+    <div class="modal-nota">você será levada com sua mensagem já pronta</div>
+    <a class="modal-instagram" href="https://instagram.com/renataleaofotografia" target="_blank" rel="noopener">
+      ou prefere o Instagram? <strong>@renataleaofotografia</strong> <span aria-hidden="true">→</span>
+    </a>
   </form>
 </aside>
 
@@ -2981,6 +3009,25 @@ function inicializarModalParticipar() {
   overlay.addEventListener("click", fechar);
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("aberto")) fechar();
+  });
+
+  // WhatsApp aceita só um parâmetro `text`. Combina nome + mensagem
+  // em uma string única e abre wa.me já preenchido.
+  const WPP_NUMERO = "5511987875018";
+  const form = document.getElementById("modal-form-participar");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nome     = form.elements.nome?.value.trim() || "";
+    const mensagem = form.elements.mensagem?.value.trim() || "";
+    const saudacao = nome
+      ? `Oi, Renata! Sou ${nome}.`
+      : "Oi, Renata!";
+    const corpo = mensagem
+      ? `${saudacao}\n\n${mensagem}`
+      : `${saudacao}\n\nVi o Travessias e gostaria de fazer parte.`;
+    const url = `https://wa.me/${WPP_NUMERO}?text=${encodeURIComponent(corpo)}`;
+    window.open(url, "_blank", "noopener");
+    fechar();
   });
 }
 

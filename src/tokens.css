@@ -334,6 +334,33 @@ body {
   font-weight: 600;
 }
 
+.modal-instagram {
+  display: block;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(138, 133, 120, 0.25);
+  font-family: var(--fonte-meta);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--cinza);
+  text-align: center;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+.modal-instagram strong {
+  color: var(--terra);
+  font-weight: 600;
+}
+.modal-instagram:hover,
+.modal-instagram:focus-visible {
+  color: var(--tinta);
+}
+.modal-instagram:focus-visible {
+  outline: 2px solid var(--mel);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 
 /* ==========================================================================
    BLOCO 08 — Compartilhado · bloco de contato (no fim de cada carta)

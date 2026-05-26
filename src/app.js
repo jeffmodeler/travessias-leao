@@ -480,6 +480,25 @@ function inicializarModalParticipar() {
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("aberto")) fechar();
   });
+
+  // WhatsApp aceita só um parâmetro `text`. Combina nome + mensagem
+  // em uma string única e abre wa.me já preenchido.
+  const WPP_NUMERO = "5511987875018";
+  const form = document.getElementById("modal-form-participar");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nome     = form.elements.nome?.value.trim() || "";
+    const mensagem = form.elements.mensagem?.value.trim() || "";
+    const saudacao = nome
+      ? `Oi, Renata! Sou ${nome}.`
+      : "Oi, Renata!";
+    const corpo = mensagem
+      ? `${saudacao}\n\n${mensagem}`
+      : `${saudacao}\n\nVi o Travessias e gostaria de fazer parte.`;
+    const url = `https://wa.me/${WPP_NUMERO}?text=${encodeURIComponent(corpo)}`;
+    window.open(url, "_blank", "noopener");
+    fechar();
+  });
 }
 
 /* ==========================================================================
