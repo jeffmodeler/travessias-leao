@@ -1020,8 +1020,6 @@ def _build_uma_passada(
         ),
         Spacer(1, 28 * mm),
         Paragraph("RENATA LEÃO · VOLUME 01 · 2025", styles["colofao_credito"]),
-        Spacer(1, 4 * mm),
-        Paragraph("DIAGRAMAÇÃO · JEFFERSON BORGES DE LIMA", styles["colofao_credito"]),
         # Spacer-fantasma: aumenta a altura do bloco para que a VALIGN
         # MIDDLE empurre o conteúdo visível para cima do frame.
         Spacer(1, 90 * mm),
