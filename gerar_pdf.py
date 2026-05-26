@@ -31,7 +31,10 @@ import os
 import re
 import sys
 from dataclasses import dataclass
+from io import BytesIO
 from typing import Optional
+
+from PIL import Image as PILImage
 
 from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT, TA_RIGHT
@@ -643,6 +646,46 @@ def _foto_existe(caminho: str) -> Optional[str]:
     return caminho if caminho and os.path.exists(caminho) else None
 
 
+# DPI alvo para os retratos. 200 DPI em 82×114mm dá ~645×897px —
+# qualidade de impressão profissional, mantendo o PDF leve.
+FOTO_DPI = 200
+FOTO_JPEG_QUALITY = 85
+
+
+def _retrato_otimizado(caminho: str, largura_mm: float, altura_mm: float) -> Image:
+    """Lê a foto original, faz center-crop para o aspect-ratio do alvo
+    (uniformizando o enquadramento entre todos os retratos) e gera um
+    JPEG em memória dimensionado pra ~FOTO_DPI. O arquivo original
+    em fotos/ fica intacto — a otimização vive só dentro do PDF."""
+    src = PILImage.open(caminho)
+    if src.mode != "RGB":
+        src = src.convert("RGB")
+
+    aspect_alvo = largura_mm / altura_mm
+    src_w, src_h = src.size
+    aspect_src = src_w / src_h
+
+    # Center-crop: corta laterais OU topo/base para casar com o aspect
+    # do retângulo do PDF — evita esticar a foto.
+    if aspect_src > aspect_alvo:
+        novo_w = int(src_h * aspect_alvo)
+        off = (src_w - novo_w) // 2
+        src = src.crop((off, 0, off + novo_w, src_h))
+    elif aspect_src < aspect_alvo:
+        nova_h = int(src_w / aspect_alvo)
+        off = (src_h - nova_h) // 2
+        src = src.crop((0, off, src_w, off + nova_h))
+
+    alvo_w_px = int(largura_mm / 25.4 * FOTO_DPI)
+    alvo_h_px = int(altura_mm / 25.4 * FOTO_DPI)
+    src = src.resize((alvo_w_px, alvo_h_px), PILImage.LANCZOS)
+
+    buf = BytesIO()
+    src.save(buf, format="JPEG", quality=FOTO_JPEG_QUALITY, optimize=True)
+    buf.seek(0)
+    return Image(buf, width=largura_mm * mm, height=altura_mm * mm)
+
+
 def _tabela_ficha(linhas: list[tuple[str, str]], styles: dict[str, ParagraphStyle]) -> Table:
     data = []
     for label, valor in linhas:
@@ -907,7 +950,7 @@ def _build_uma_passada(
 
         foto = _foto_existe(carta.foto)
         if foto:
-            img = Image(foto, width=82 * mm, height=114 * mm)
+            img = _retrato_otimizado(foto, 82, 114)
             img.hAlign = "CENTER"
             story.append(img)
             story.append(Spacer(1, 12 * mm))
