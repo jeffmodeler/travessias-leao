@@ -12,3 +12,10 @@ node_modules/
 # Dependências pesadas que não precisam de versionamento
 *.zip
 *.docx
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
